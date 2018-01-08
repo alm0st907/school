@@ -17,3 +17,14 @@ date syllabus 1-8:
         EVERYTHING BUILDS ON PREVIOUS ASSIGNMENT
             TEST EVERYTHING
                 OBJECT ORIENTED
+
+    CODE MUST BUILD, MORE IMPORTANT THAN FULL FEATURE ASSIGNMENT
+        10% PER DAY LATE WORK REDUCTION, BUT LATE WORK IS ACCEPTED
+    
+    DONT CHECK IN PRE COMPILED BINARIES, ITS LAZY
+    
+    CHECK GRADES
+
+    there might be code on exams; RIP
+
+    practice practice practice; and if youre not practicing you should be practicing
