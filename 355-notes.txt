@@ -41,7 +41,10 @@ DATE 1-8 lecture notes:
         when it is interpreted
 
     what makes a GOOD prog language
+        balance between power/control vs ease of use
+        interpreted code is slower than code compiled to machine code (python slower than c/c++ for instance)
 
+        
     what makes a language successful
 
         
