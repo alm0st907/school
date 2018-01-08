@@ -30,4 +30,20 @@ DATE 1-8 lecture notes:
     programming language
         instructuions that can be translated to machine code
     
+    what makes a prog language a language/what do you typically find in instructuions
+        interpreters/compilers, functions
+
+    what is a (computer) program
+        some strings are programs
+        programs == data == programs
+
+    when does data become a program
+        when it is interpreted
+
+    what makes a GOOD prog language
+
+    what makes a language successful
+
+        
+
     
