@@ -1,3 +1,19 @@
 date syllabus 1-8:
     321 notes
+    c# is pretty cool by crandall standards
+    book is a reference manual more than anything
+    google is our friend
+
+    READ THE syllabus
+
+    TA is the primary point of contact
+    Shivam Goel shivam.goel@wsu.edu
+    subject line of emails CptS321 + the rest of the title
+
+    write maintainable code or else youre fucked
+        the goal is lots of code reuse that is easy to understand
     
+    NAME AND SCHOOL ID ON TOP OF CODE FILES
+        EVERYTHING BUILDS ON PREVIOUS ASSIGNMENT
+            TEST EVERYTHING
+                OBJECT ORIENTED
