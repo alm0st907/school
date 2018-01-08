@@ -1,7 +1,33 @@
 notes for 355
 
-shakira
+DATE sylly notes 1-8:
 
-eme b57
-office hours mon,wed 330-5pm
-            tus thurs, 12-1pm
+    shakira
+
+    eme b57
+    office hours mon,wed 330-5pm
+                tus thurs, 12-1pm
+
+    blackboard and email for stuff all the time
+
+    python 3 is the main version for the class
+
+    no major textbook need
+    take notes and try code as we go, attendance taken
+
+    submission through blackboard
+    no team projects
+
+    late penalty of 5% per day
+
+    will have to write some of your own test code 
+        look for edge cases, this is the most important test code
+    
+    MOSS IS USED, fuck that shit
+    
+
+DATE 1-8 lecture notes:
+    programming language
+        instructuions that can be translated to machine code
+    
+    
