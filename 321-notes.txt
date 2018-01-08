@@ -28,3 +28,5 @@ date syllabus 1-8:
     there might be code on exams; RIP
 
     practice practice practice; and if youre not practicing you should be practicing
+
+    tags are what we use to submit, not git hashes, use git to its potential as you see fit
