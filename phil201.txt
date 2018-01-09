@@ -33,7 +33,19 @@ Date 1-9:
     issue: a claim up for dispute
 
     argument: just a set of sentances (conclusion/premises)
-            conclusion supported by the premises
+              conclusion supported by the premises
+
+        deductive arguments (good arguments)
+            do the premises adequately support the conclusion
+
+
+        examples:
+            1) if its raining then the streets are wet
+            2) its raining
+            ------------------------------------------
+            (conclusion) [therefore] the streets are wet
+
+            this is a good deductive argument
 
     sentance: a set of symbols that expresses a proposition
 
@@ -59,7 +71,7 @@ Date 1-9:
         you can believe something, but it doesnt change its truth or falseness
     
 
-    
+
 
     
 
