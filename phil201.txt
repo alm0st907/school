@@ -22,5 +22,39 @@ syllabus day:
 
     "see me" doesnt mean deep shit
 
+
+Date 1-9:
+    notes
+    argumentative reasoning
+
+    logos:
+        root for logic, ancient greek word. Means
+
+    issue: a claim up for dispute
+
+    argument: just a set of sentances (conclusion/premises)
+            conclusion supported by the premises
+
+    sentance: a set of symbols that expresses a proposition
+
+    proposition: something that is true or false
+        if its neither, not a proposition
+        you dont have to know the answer for it to be a proposition
+
     
+        example: 
+            Where's my beer? (not a proposition)
+            This is my beer. (proposition)
+            Drink this beer. (not a proposition)
+    
+
+    
+
+
+
+    
+
+    
+    
+
 
