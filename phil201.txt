@@ -46,6 +46,19 @@ Date 1-9:
             Where's my beer? (not a proposition)
             This is my beer. (proposition)
             Drink this beer. (not a proposition)
+            2+2=4 (proposition) True
+            2+2=5 (proposition) false
+            2+3   (not a proposition) without the equals sign, does not equate to a proposition, merely just a statement
+
+    Doxastic: logic/reasoning about beliefs
+        we all have Doxastic attitudes (we believe a claim/ we believe the denial of a claim)
+
+    assume the correspondance theory of truth
+
+    believe/deny/suspend
+        you can believe something, but it doesnt change its truth or falseness
+    
+
     
 
     
