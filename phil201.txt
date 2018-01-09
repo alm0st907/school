@@ -38,6 +38,18 @@ Date 1-9:
         deductive arguments (good arguments)
             do the premises adequately support the conclusion
 
+        property of validty
+            validy is reserved for arguments
+            is it valid or invalid
+                sentances are true or false
+                arguments are valid or invalid
+
+            propositions = truthfullness
+            arguments = validty
+
+        validty is used in deductive arguments
+            an argument is valid if and only if the conclusion is true if the premises are true
+        
 
         examples:
             1) if its raining then the streets are wet
