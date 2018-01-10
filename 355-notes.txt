@@ -86,6 +86,8 @@ DATE 1-10:
     by studying programming lanugages, you can better understand many programming lanuages in generally
     helps teach strengths and weaknesses
     
+    LANGUAGES:
+
     fortran:
         designed for mathematical problems, ideal for use for purely mathematical problems
 
@@ -123,6 +125,22 @@ DATE 1-10:
     
     scheme: 
         multi paradigm programming language in lisp family.
+
+    programming paradigm (style or way of programming)
+
+        imperative:
+            perform tasks, track changes in state
+
+        functional:
+            what info is desired and what transformations are required
+
+        declarative:
+            what outcome the program should have rather than how should it be done
+
+    examples:
+        python is object oriented & imperative
+        ml is functional
+
     
 
 
