@@ -48,6 +48,26 @@ DATE 1-8 lecture notes:
     what makes a language successful
 
 DATE 1-10:
+    recessitation is optional, but provide time if you want to go
+
+    what makes a good programming language:
+        easy to learn: basic, pascal, scheme
+        powerful- easy to use once fluent (c++,common lisp, perl)
+        easy to implement- basic, python
+        clean and quick compiled code- fortran
+        exceptionally good for a certain task- php, ruby on rails, R
+        backing of a powerful sponsor- colbol, ada, visual basic, c#
+
+    why are there so many programming languages:
+        evolution- getting better over time/adjusting to use cases
+        orientation for special purposes
+        orientation for special hardware
+            ML is special language written for making proofs for theorems?
+        personal preferences
+        socio-economic factors: proprietary interests, commerical advantages
+
     
 
+    
+        
     
