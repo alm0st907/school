@@ -3,6 +3,9 @@ notes for 355
 KEY NOTE: INSTALL STANDARD ML NJ with
     sudo apt-get install smlnj
 
+    running ml code:
+    http://pages.cs.wisc.edu/~fischer/cs538.s08/sml/sml.html
+
 DATE sylly notes 1-8:
 
     shakira
@@ -120,6 +123,7 @@ DATE 1-10:
     
     scheme: 
         multi paradigm programming language in lisp family.
+    
 
 
         
