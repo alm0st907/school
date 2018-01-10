@@ -140,9 +140,9 @@ DATE 1-10:
     examples:
         python is object oriented & imperative
         ml is functional
-
+        sql is declarative
     
-
+    modern languages are multi paradigm
 
         
     
