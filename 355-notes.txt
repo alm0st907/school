@@ -1,5 +1,8 @@
 notes for 355
 
+KEY NOTE: INSTALL STANDARD ML NJ with
+    sudo apt-get install smlnj
+
 DATE sylly notes 1-8:
 
     shakira
@@ -65,8 +68,19 @@ DATE 1-10:
             ML is special language written for making proofs for theorems?
         personal preferences
         socio-economic factors: proprietary interests, commerical advantages
-
     
+    "functional programming"
+        ml for finding list length:
+
+            fun listLength(L) = if L = [] then 0
+                else listLength( tl [L]) +1;
+
+        -this is recursive with the base condition of 0
+        -compared to a procedural program like the c/c++ equiv, its much more "natural"
+        -shortness of code (generally) == easier to read
+
+
+
 
     
         
