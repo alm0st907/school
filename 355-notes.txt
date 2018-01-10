@@ -80,8 +80,47 @@ DATE 1-10:
         -shortness of code (generally) == easier to read
 
 
-
-
+    by studying programming lanugages, you can better understand many programming lanuages in generally
+    helps teach strengths and weaknesses
     
+    fortran:
+        designed for mathematical problems, ideal for use for purely mathematical problems
+
+    colbol:
+        designed to help solve business data or form storage and manipulation
+
+    c:
+        designed to aid in operating system implementation. where speed really matters C is great
+
+    c++:
+        designed to add object oriented programming support to c. c++ is complex but super fast. great for intensive tasks
+    
+    java:
+        object oriented, platform independent. compiles to byte code. auto garbage collection for memory management
+    
+    c#: 
+        microsoft's java more or less
+
+    python:
+        gap between shell and c. quick and dirty solutions
+
+    ruby:
+        true object oriented scripting language- websites like this
+    
+    javascript:
+        scripting language used in many web related areas
+    
+    php:
+        html embedded scripting language. serverside web dev for dynamic web pages
+
+
+    ml:
+        created to develop proof tactics inthe lcf theorem prover.
+            call by value evaluation strategy. auto memory management.
+    
+    scheme: 
+        multi paradigm programming language in lisp family.
+
+
         
     
