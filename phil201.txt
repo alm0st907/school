@@ -84,10 +84,64 @@ Date 1-9:
     
 
 
+Date 1-11:
+    mike likes beer  (this is a proposition)
+        many to one relationship
+        many to many relationship?
+    
+    sometimes a sentances has more than one proposition
+        "propstitutes appeal to pope"
+            theres two meanings to this- ambiguity
+                does the pope like whores or are they making a "legal" appeal
+        "childs stool- great for gardening"
 
+
+    (1) conclusion
+    (2) set of premises
+
+
+    WHAT MAKES A GOOD ARGUMENT
+        1) do the premises (if true) support the conclusion
+        2) are the premises true?
+
+    philosophers are the smartest in the humanities
+
+    NOTE: USING *** as conclusion denotation; IFF means if and only it
+
+    mike and hillary are here today
+    -------------------------------
+    ***hillary is here today
+
+        this is a boring argument but it is valid and sound for the sake of example
+        the argument has two properties
+            the argument has validity - an argument is valid iff imposible to have true premises and false conclusion
+
+
+    hopalicious is a good beer per the professor
+
+    Mike does not like any beer
+    hopalicious is a beer
+    ---------------------------
+    ***mike doesnt like hopalicious
+
+        this argument is valid even though it is false, because the premises would support the conclusion (mike actually loves beer)
+            there is a false premise therefore a false conclusion
     
 
+    Everyday of recorded history the sun has risen in the east
+    ----------------------------------------------------------
+    *** tomorrow the sun will rise in the east
 
+        argument is "true" but invalid, this is deductive rather than an argument. There is a possibility that tomorrow the sun could not rise in the east, however unlikely
+
+
+    FRIENDLY NEIGHBORHOOD PRINCE OF DARKNESS
+
+
+    valid argument because false false:
+        2+2=5
+        -----------------
+        MIKE is your FNPOD
 
     
 
