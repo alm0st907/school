@@ -152,4 +152,4 @@ Date 1-11:
 
 
 
-    study counter examples
+    study counter examples- just prove the conclusion could be false
