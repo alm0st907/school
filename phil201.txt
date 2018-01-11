@@ -143,9 +143,9 @@ Date 1-11:
         -----------------
         MIKE is your FNPOD
 
-    
-
-    
-    
 
 
+    Mike teaches at WSU or he teaches at madision (1)
+    mike does not teach at madision               (2)
+    ---------------------------------------------
+    ***mike teaches at WSU
