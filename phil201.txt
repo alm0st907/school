@@ -149,3 +149,7 @@ Date 1-11:
     mike does not teach at madision               (2)
     ---------------------------------------------
     ***mike teaches at WSU
+
+
+
+    study counter examples
