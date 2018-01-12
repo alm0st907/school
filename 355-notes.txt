@@ -26,16 +26,16 @@ DATE sylly notes 1-8:
 
     late penalty of 5% per day
 
-    will have to write some of your own test code 
+    will have to write some of your own test code
         look for edge cases, this is the most important test code
-    
+
     MOSS IS USED, fuck that shit
-    
+
 
 DATE 1-8 lecture notes:
     programming language
         instructuions that can be translated to machine code
-    
+
     what makes a prog language a language/what do you typically find in instructuions
         interpreters/compilers, functions
 
@@ -50,7 +50,7 @@ DATE 1-8 lecture notes:
         balance between power/control vs ease of use
         interpreted code is slower than code compiled to machine code (python slower than c/c++ for instance)
 
-        
+
     what makes a language successful
 
 DATE 1-10:
@@ -71,7 +71,7 @@ DATE 1-10:
             ML is special language written for making proofs for theorems?
         personal preferences
         socio-economic factors: proprietary interests, commerical advantages
-    
+
     "functional programming"
         ml for finding list length:
 
@@ -85,7 +85,7 @@ DATE 1-10:
 
     by studying programming lanugages, you can better understand many programming lanuages in generally
     helps teach strengths and weaknesses
-    
+
     LANGUAGES:
 
     fortran:
@@ -99,11 +99,11 @@ DATE 1-10:
 
     c++:
         designed to add object oriented programming support to c. c++ is complex but super fast. great for intensive tasks
-    
+
     java:
         object oriented, platform independent. compiles to byte code. auto garbage collection for memory management
-    
-    c#: 
+
+    c#:
         microsoft's java more or less
 
     python:
@@ -111,10 +111,10 @@ DATE 1-10:
 
     ruby:
         true object oriented scripting language- websites like this
-    
+
     javascript:
         scripting language used in many web related areas
-    
+
     php:
         html embedded scripting language. serverside web dev for dynamic web pages
 
@@ -122,8 +122,8 @@ DATE 1-10:
     ml:
         created to develop proof tactics inthe lcf theorem prover.
             call by value evaluation strategy. auto memory management.
-    
-    scheme: 
+
+    scheme:
         multi paradigm programming language in lisp family.
 
     programming paradigm (style or way of programming)
@@ -141,8 +141,26 @@ DATE 1-10:
         python is object oriented & imperative
         ml is functional
         sql is declarative
-    
+
     modern languages are multi paradigm
 
-        
-    
+
+DATE 1-12:
+    programming languages concepts
+        partial functions vs total functions
+        computibility
+
+        dynamic type checking - check at runtime
+            much easier to debug generally speaking
+            overhead of runtime check is higher
+        static type checking -done at compile time
+            done only once, memory intensive. finds type errors better
+
+    dynamic and static scoping
+        global variables vs within the scope of a function
+        global variable takes the priority
+
+
+    performance of interpreted vs compiled code
+      compiled is generally faster than interpreted, however it is fastest when compiled to machine code
+      
