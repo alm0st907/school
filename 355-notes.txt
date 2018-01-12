@@ -162,5 +162,8 @@ DATE 1-12:
 
 
     performance of interpreted vs compiled code
-      compiled is generally faster than interpreted, however it is fastest when compiled to machine code
-      
+        compiled is generally faster than interpreted, however it is fastest when compiled to machine code
+
+    define functions
+        partial functions?
+    
