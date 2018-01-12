@@ -165,5 +165,9 @@ DATE 1-12:
         compiled is generally faster than interpreted, however it is fastest when compiled to machine code
 
     define functions
-        partial functions?
+        partial functions - doesnt produce output for all inputs, or doesnt halt for a given input
+            undefined behavior
+        more notes?
+        
+    THE MOST BORING LECTURE SO FAR
     
