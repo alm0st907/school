@@ -1,5 +1,5 @@
 bio 140 notes section 2
-nutririon
+nutrition
 
 sylly day:
 
@@ -15,4 +15,51 @@ sylly day:
     phone # 335-0412 emergencies
 
     
+date 1-16:
+    chapter 1:nutrition   
 
+    attendance code 2337
+    
+    nutrient - substance in foods for use by the body for energy, maintenance
+        regulation of chem processes
+        nutrient classifications - essential, non essential, conditionally essential
+            organic or inorganic
+                organic - contains carbon and hydrogen
+            
+            macro or micro nutrient
+
+    organic doesnt really mean much
+        certified organic, 100% organic, etc
+
+    organic prodcuts arent inheriently any more nutritous
+        differences are insignificant
+    
+    phytochemical - plantbased nutrient that is beneficial to people
+    zoonutrient - animal nutrient beneficial to people
+
+    functional foods
+        nutritional scientists dont like the term
+        its a fairly logical term however
+            it is disliked because most food is to some extent functional
+
+    carbohydrates
+        CH2O
+            glucose to cells (ATP)
+            fiber promotes digestive health
+
+    proteins
+        source of energy
+        composes most structures of the body
+        allows us to move and stuff
+    
+    lipids - fats
+        dense energy source
+        composes structure of cell membranes
+        "keto-acidosus"
+
+    water
+        important
+        ~60% of body weight on average
+
+    ENERGY IS NOT A NUTRIENT (exam question)
+        capacity of a physical system to do work
