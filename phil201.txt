@@ -153,3 +153,56 @@ Date 1-11:
 
 
     study counter examples- just prove the conclusion could be false
+
+date 1-16:
+    homeworks are graded easier than exams sort of
+        dont take this as false confidence for the exams
+
+    first exam in two weeks
+
+    1) rex is a hot dog
+    2) hot dogs taste great with mustard and relish 
+    -----------------------------------------------
+    rex tastes great with mustard and relish
+
+        big problem is ambiguity in terminology, non equivocating on hot dog(s)
+
+    natural language is semi ambigious in nature and relies on context to convey meanings properly
+        its best to avoid ambiguity in arguments as much as possible
+
+        "formal language" - the language of logic generally fits into certain forms
+    
+
+    modus ponens
+
+        1) if its raining streets are wet
+        2) its raining
+        -----------------------------
+        streets are therefore wet
+
+    sentance variables
+        P,Q,R,S,T
+
+    atomic sentance is a simple sentace that expresses an idea
+        only simple sentances get a letter?
+
+    connectives
+        & is our and symbol in here
+        v is the or symbol
+        antecedent -> consequivent 
+        biconditional <--> biconditional
+        ~ is the not symbol
+
+    puncuation
+
+    WFF
+        acronym for WELL FORMED FORMULA - *KNOW THIS*
+
+        1)a sentances variable by itself is a WFF
+        2)if [] is a WFF then ~[] is a WFF
+        3)if [] and (triangle) are WFF, then [] & (triangle) is a WFF
+        4)[] and (triangle) are WFFs, then 
+            bunch of other shit I wont write down
+    i am dying; plz send help
+
+
