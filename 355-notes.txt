@@ -176,5 +176,19 @@ DATE 1-17:
     computable functions != total functions
 
     halting problem is not computable
+        halting problem is complete because no undefined behavior
 
+        halting problem proven non computable by contradiction
     
+    why do we care about computibility and the halting problem in a programming language class?
+        has to deal withe the nature of compilers
+        A compiler cant be built that accepts programs that will accept all and only only programs that always halt
+
+        a compiler generally cant tell whether a execution reaches a specific point in a programs
+            dead code elimination
+                we want compilers to do as much of this as possible
+
+        static garbage collection
+            a compiler cant tell whether allocated mem space wont be needed any more
+                programming languages have support for dynamic garbage collection
+        
