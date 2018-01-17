@@ -170,4 +170,11 @@ DATE 1-12:
         more notes?
         
     THE MOST BORING LECTURE SO FAR
+
+DATE 1-17:
+    computable functions != partial functions
+    computable functions != total functions
+
+    halting problem is not computable
+
     
