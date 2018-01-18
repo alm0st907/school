@@ -222,3 +222,5 @@ date 1-18
     ~h & ~m  [ also correct]
     ~(h & m) [wrong]
     ~h v ~m [wrong]
+
+    but is and
