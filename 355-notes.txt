@@ -191,4 +191,6 @@ DATE 1-17:
         static garbage collection
             a compiler cant tell whether allocated mem space wont be needed any more
                 programming languages have support for dynamic garbage collection
+
+        
         

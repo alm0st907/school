@@ -205,4 +205,20 @@ date 1-16:
             bunch of other shit I wont write down
     i am dying; plz send help
 
+date 1-18
+    necessary vs sufficient condtions
+        truth of p guaruntees truth of Q
 
+    translate arguments, provide a key with them
+
+    logical operations
+
+    neither hilary nor  mike is a professor (yet)
+    
+    h= hillary is a professor
+    m= mike is a professor
+
+    ~(h v m) [this is the correct translation]
+    ~h & ~m  [ also correct]
+    ~(h & m) [wrong]
+    ~h v ~m [wrong]
