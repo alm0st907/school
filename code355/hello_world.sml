@@ -15,3 +15,15 @@ print (String.concatWith" " list);
 val list = rev list;
 print (String.concatWith" " list);
 
+val x = 2;
+val y=3;
+val z= x+y;
+val z = z * 20;
+
+
+(*this is the class code*)
+
+fun f x = x*2; (*declaring a function named f*)
+val absofx = if x < 0 then 0 - x else x;
+
+val x = (~2); (*tilde is the negative sign declaration for a number);

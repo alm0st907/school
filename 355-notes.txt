@@ -196,7 +196,16 @@ DATE 1-17:
         
 DATE 1-19:
 
+    download poly ml as well
     ML:
         static typing
         type inference
-        
+
+        must always use val identifier for values
+        compiler will type check expressions
+        will infer types on its own
+
+        you can evaluate code in real time, one statement at a time for debugging
+
+        val x = e ;
+            keyword val, x is variable, e is the expression
