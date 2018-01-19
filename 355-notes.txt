@@ -209,3 +209,13 @@ DATE 1-19:
 
         val x = e ;
             keyword val, x is variable, e is the expression
+
+        tuples can be different types ()
+            tuples have a specific size
+            you can make a list of tuples to have a list of combined types
+            #number tuplename; returns at position in tuple
+
+        lists must be the same type []
+            unordered collection of values
+            you can put lists inside lists, but sublists must be of a consistent type
+
