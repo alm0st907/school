@@ -194,3 +194,9 @@ DATE 1-17:
 
         
         
+DATE 1-19:
+
+    ML:
+        static typing
+        type inference
+        

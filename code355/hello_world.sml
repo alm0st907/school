@@ -11,3 +11,7 @@ printList test; (* printint the test list*)
 val list = ["ab","cd","ef","gh"];
 printStringList list;
 print (String.concatWith" " list);
+
+val list = rev list;
+print (String.concatWith" " list);
+
