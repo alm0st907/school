@@ -214,8 +214,14 @@ DATE 1-19:
             tuples have a specific size
             you can make a list of tuples to have a list of combined types
             #number tuplename; returns at position in tuple
+                    *'s denote tuples
 
         lists must be the same type []
             unordered collection of values
             you can put lists inside lists, but sublists must be of a consistent type
+            -> denotes lists?
 
+        functions
+            fun name type_input = expression;
+            loops are generally done recursively;
+            ML DOES NOT HAVE LOOPS;
