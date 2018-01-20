@@ -1,16 +1,25 @@
-(*This is leftover from hello world, just a reference*)
-val test = [1,2,3,4];
-print "Hello World, this is my first SML program!!!";
+(*
+Garrett Rudisill
+WSU ID 11461816
+HW 1 for CptS 355
+*)
 
-(*function to print out our test*)
-fun printList stuff = print(String.concatWith","(map Int.toString stuff)); 
-fun printStringList stuff = print(String.concatWith", "stuff);
-printList test;
-val test = rev test; (* re assinging test to be reversed*)
-printList test; (* printint the test list*)
-val list = ["ab","cd","ef","gh"];
-printStringList list;
-print (String.concatWith" " list);
+(*inList problem*)
+val list = [1,2,3,4,5,6];
+val strings = ["a","b","c"];
+val list_length = List.length list;
+val problemData = (1,list);
+val temp = List.nth (list,5); (* accesses the list value at n+1 position since they're 0 based*)
+val temp2= List.nth (list,4); (* I can use nth to iterate through list values recursively*)
+val pos = 0;
 
-val list = rev list;
-print (String.concatWith" " list);
+fun inList (ck,vallist,pos) =
+    if ck = List.nth (vallist,pos) then true
+    else if pos+1 = List.length vallist then false
+    else inList(ck,vallist,pos+1);
+
+inList(7,list,pos);
+        
+val pos = 0;
+inList("d",strings,pos);
+
