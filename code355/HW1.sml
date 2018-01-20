@@ -13,13 +13,13 @@ val temp = List.nth (list,5); (* accesses the list value at n+1 position since t
 val temp2= List.nth (list,4); (* I can use nth to iterate through list values recursively*)
 val pos = 0;
 
-fun inList (ck,vallist,pos) =
+fun inList (ck,vallist) =
     if ck = List.nth (vallist,pos) then true
+    else if pos+1 = List.length vallist then pos = 0
     else if pos+1 = List.length vallist then false
-    else inList(ck,vallist,pos+1);
+    else if pos+1 < List.length vallist then pos = pos +1
+    else inList(ck,vallist);
 
-inList(7,list,pos);
-        
-val pos = 0;
-inList("d",strings,pos);
+inList(7,list);
+inList("a",strings);
 
