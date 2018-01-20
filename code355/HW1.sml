@@ -23,3 +23,8 @@ fun inList (ck,vallist) =
 inList(7,list);
 inList("a",strings);
 
+(*remove duplicates problem*)
+
+val rmd = [1,2,3,3,4];
+
+(*fun duplicates dup_list = *)
