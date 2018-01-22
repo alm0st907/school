@@ -46,3 +46,13 @@ val test = temp;
 val testlist = rmd; (*is returned unmodified*)
 val test = comp::temp; (*concat value to beginning of list)*)
 val test = test @ [comp]; (*concat list to to end*)
+
+(*somewhat helpful code, just need to clean*)
+fun delete(x,[]) = []
+    | delete(x,y::l) = if x=y then delete(x,l) else y::delete(x,l);
+
+fun remove_dup [] = []
+    | remove_dup (x::l) = x::remove_dup(delete(x,l)); 
+
+remove_dup(test);
+remove_dup(rmd);
