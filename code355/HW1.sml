@@ -19,7 +19,10 @@ fun inList (ck,vallist) =
     else inList(ck,List.drop (vallist,1));
 
 inList(7,list);
+inList(6,list);
 inList("a",strings);
+inList("d",strings);
+
 
 (*remove duplicates problem*)
 
