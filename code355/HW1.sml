@@ -24,8 +24,15 @@ inList("a",strings);
 inList("d",strings);
 
 
+
 (*remove duplicates problem*)
 
 val rmd = [1,2,3,3,4];
+val rmd = rmd @[2,4]; (*appends this list*)
 
+fun test list = 
+    if inList(7, list) = true then print "Hello World, this is my first SML program!!!"
+    else print "false";
+    (**)
+test (list);
 (*fun duplicates dup_list = *)
