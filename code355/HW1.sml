@@ -9,15 +9,13 @@ val list = [1,2,3,4,5,6];
 val strings = ["a","b","c"];
 val list_length = List.length list;
 val problemData = (1,list);
-val temp = List.nth (list,5); (* accesses the list value at n+1 position since they're 0 based*)
-val temp2= List.nth (list,4); (* I can use nth to iterate through list values recursively*)
 val pos = 0;
 
 fun inList (ck,vallist) =
     if vallist = [] then false
     else if ck = List.nth (vallist,pos) then true
     else inList(ck,List.drop (vallist,1));
-
+    
 inList(7,list);
 inList(6,list);
 inList("a",strings);
@@ -28,11 +26,23 @@ inList("d",strings);
 (*remove duplicates problem*)
 
 val rmd = [1,2,3,3,4];
-val rmd = rmd @[2,4]; (*appends this list*)
 
 fun test list = 
     if inList(7, list) = true then print "Hello World, this is my first SML program!!!"
     else print "false";
     (**)
-test (list);
-(*fun duplicates dup_list = *)
+
+
+fun rm_dup list =
+    print "compile it";
+    val temp = List.drop (list,1);
+    val comp = List.nth (list,0);
+    val list = comp::temp;
+
+    
+
+rm_dup(rmd);
+val test = temp;
+val testlist = rmd; (*is returned unmodified*)
+val test = comp::temp; (*concat value to beginning of list)*)
+val test = test @ [comp]; (*concat list to to end*)

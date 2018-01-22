@@ -225,3 +225,6 @@ DATE 1-19:
             fun name type_input = expression;
             loops are generally done recursively;
             ML DOES NOT HAVE LOOPS;
+DATE 1-22
+    currying
+        a function taking multiple arguments can be written as a series of higher order functions taking one argument
