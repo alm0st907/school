@@ -14,11 +14,9 @@ val temp2= List.nth (list,4); (* I can use nth to iterate through list values re
 val pos = 0;
 
 fun inList (ck,vallist) =
-    if ck = List.nth (vallist,pos) then true
-    else if pos+1 = List.length vallist then pos = 0
-    else if pos+1 = List.length vallist then false
-    else if pos+1 < List.length vallist then pos = pos +1
-    else inList(ck,vallist);
+    if vallist = [] then false
+    else if ck = List.nth (vallist,pos) then true
+    else inList(ck,List.drop (vallist,1));
 
 inList(7,list);
 inList("a",strings);
