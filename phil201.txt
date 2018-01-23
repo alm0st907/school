@@ -224,3 +224,60 @@ date 1-18
     ~h v ~m [wrong]
 
     but is and
+    
+date 1-23
+    exam next thursday
+    homework next tuesday
+    try not to dispute
+
+    look at translation schemes
+
+    truth tables
+
+    denial of a sentance is just adding or removing a tilde (~)
+
+    true -> false IS ALWAYS FALSE
+    false -> true is nearly always true
+
+    truth tables
+
+    3 atomic sentances TT
+
+    can nearly always drop the outside parenthesis
+
+    main connectives are generally the one with least parenthesis after dropping
+    choose the least binding if more than one in same general area
+
+    P Q R |(P->R) & (RvQ)   |
+-----------------------------------
+    t t t |  t    t    t    |
+    t t f |  t    t    t    |
+    t f t |  f    f    t    |
+    t f f |  f    f    f    |
+    f t t |  t    t    t    |
+    f t f |  t    t    t    |
+    f f t |  t    t    t    |
+    f f f |  t    f    f    |
+
+     the main connective determines the overall truth of the statement
+
+
+    arrow is the main connective
+
+    P Q  | P    -> Q v ~Q
+    t t  | t    t  t t  f
+    t f  | t    t  f t  t
+    f t  | f    t  t t  f
+    f f  | f    t  f t  t
+
+
+    this is a tautology (always true)
+
+    sentace that is always false is a contradiction
+
+    contingent can be either
+       
+    READ THE BOOK
+
+    turn style symbol |-- (syntactic entailment, everything on the left is true, everything then on the right is true)
+
