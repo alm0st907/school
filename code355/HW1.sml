@@ -43,3 +43,18 @@ val test_tup = ([1,2,3],[4,5,6]);
 
 val el1 = #1 test_tup;
 val el2 = #2 test_tup;
+
+
+fun intersection(L1, L2) =
+    let
+      fun help(L1, [], result) = result 
+        | help([], L2, result) = result 
+        | help(cur :: rest, L2, result) =
+            if inList(cur, L2)
+            andalso inList(cur, result) = false
+              then help(rest, L2, cur :: result)
+              else help(rest, L2, result)
+    in
+      help(L1, L2, [])
+    end
+
