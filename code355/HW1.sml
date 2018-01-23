@@ -26,23 +26,20 @@ inList("d",strings);
 (*remove duplicates problem*)
 
 val rmd = [1,2,3,3,4];
+(*val test = comp::temp; (*concat value to beginning of list)*)*)
+(*val test = test @ [comp]; (*concat list to to end*)*)
 
-fun test list = 
-    if inList(7, list) = true then print "Hello World, this is my first SML program!!!"
-    else print "false";
-    (**)
+(*somewhat helpful code, just need to clean*)
+fun delete(x,[]) = []
+    | delete(x,y::l) = if x=y then delete(x,l) else y::delete(x,l);
 
+fun remove_dup [] = []
+    | remove_dup (x::l) = x::remove_dup(delete(x,l)); 
 
-fun rm_dup list =
-    print "compile it";
-    val temp = List.drop (list,1);
-    val comp = List.nth (list,0);
-    val list = comp::temp;
+remove_dup(rmd);
 
-    
+(*list intersect problem*)
+val test_tup = ([1,2,3],[4,5,6]);
 
-rm_dup(rmd);
-val test = temp;
-val testlist = rmd; (*is returned unmodified*)
-val test = comp::temp; (*concat value to beginning of list)*)
-val test = test @ [comp]; (*concat list to to end*)
+val el1 = #1 test_tup;
+val el2 = #2 test_tup;
