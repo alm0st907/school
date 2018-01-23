@@ -111,3 +111,76 @@ DATE 1-18:
 
         diabetes is from "nutritional advancment" lol okay.
         
+date 1-23:
+    prevalence of t2 diabetes
+    once of prevention is worth a pound of the cure
+
+    CHAPTER 2 nutritional assessment
+
+    primary malnutrition
+        inadequate diet
+    secondary malnutrition
+        due to illness, drug interaction, etc
+            celiac disease is a secondary malnutrition
+    anthropometric measurements
+        weight, height, distribution of fat, lean mass, minerals
+        advantages of these measurements:
+            easy and inexpensive
+        disadvantages
+            not a diagnostic by itself
+            nutritional factors make it dificult to interpret
+
+    BMI
+        equal to weight/height
+        18.5-24.9 kg/m^2 is healthy
+
+    biochemical measurements
+        blood, urine, etc
+
+    clinical assessment
+        medical history
+            weight loss/gain
+            surgeries
+            medications
+            fam history
+        
+        symptops assessed
+
+    retrospective vs prospective
+        prospective is current
+        restro is past
+
+    DRI - dietary reference intakes
+        EAR- estimated average requirements
+        RDA-recommended dietary allowances
+        AI- adequate intake leveles
+        UL- tolerable upper intake levels
+    
+    Energy evaluation
+        estimated energy requirement (EER)
+        acceptable macronutrient distribution ranges
+            AMDR
+
+
+    DRI's are different for everybody
+        differs for
+            age
+            physiological conditions
+            sex
+            10 groups for men, 16 for women
+
+    
+    DRA 19430-> DRI 1994
+
+    EAR meets about 50% of population?
+
+    RDA is 97%
+    AI is a firect measure
+
+    EER- estimated energy requirement
+        age
+        weight
+        height
+        sex
+        physical activity level
+        
