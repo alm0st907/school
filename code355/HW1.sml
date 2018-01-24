@@ -39,10 +39,8 @@ fun remove_dup [] = []
 remove_dup(rmd);
 
 (*list intersect problem*)
-val test_tup = ([1,2,3],[4,5,6]);
-
-val el1 = #1 test_tup;
-val el2 = #2 test_tup;
+val inter_list = [1,2,3,4,5,7,8,9,10];
+val inter_list_2 = [3,4,5,22,2];
 
 
 fun intersection(L1, L2) =
@@ -56,5 +54,7 @@ fun intersection(L1, L2) =
               else help(rest, L2, result)
     in
       help(L1, L2, [])
-    end
+    end;
 
+
+intersection(inter_list, inter_list_2);
