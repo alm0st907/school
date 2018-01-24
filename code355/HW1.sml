@@ -63,10 +63,11 @@ intersection(inter_list, inter_list_2);
 (* range problem*)
 
 fun range((x:int), (y:int), (z:int)) = 
-    if (x+y)>z then []
+    if (x+y)>z then x::[]
     else x::range(x+y, y, z);
 
 range(0,5,30);
-
+range(~1,5,30);
+range(0,1,30);
 
         

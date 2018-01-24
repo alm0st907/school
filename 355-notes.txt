@@ -228,3 +228,6 @@ DATE 1-19:
 DATE 1-22
     currying
         a function taking multiple arguments can be written as a series of higher order functions taking one argument
+
+DATE 1-24
+    
