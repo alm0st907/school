@@ -184,3 +184,9 @@ date 1-23:
         sex
         physical activity level
         
+date 1-25
+    this class sucks ass
+    regular vs qualified claim
+        regular is verified
+        qualified is less so
+        
