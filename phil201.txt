@@ -286,3 +286,4 @@ date 1-25
     there have been no meaningful notes today, not really sure what to write here
     we just did a bunch of truth tables for practice
 
+    
