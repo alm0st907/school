@@ -20,8 +20,7 @@ inList(7,list);
 inList(6,list);
 inList("a",strings);
 inList("d",strings);
-
-
+inList("A",[]);
 
 (*remove duplicates problem*)
 
@@ -72,4 +71,39 @@ range(~1,5,30);
 range(0,1,30);
 range(5, ~1, ~1);
 range(5, ~2, ~1);
-        
+
+fun groupNleft N L =
+    let
+      fun transfer i [] [] = [[]] 
+        | transfer i (dCur :: dRest) [] = [[]] 
+        | transfer i [] (dCur :: dRest) = dCur :: dRest
+        | transfer i (sCur :: sRest) (dCur :: dRest) = 
+            if i > 0
+              then transfer (i - 1) sRest ((sCur :: dCur) :: dRest)
+              else transfer N (sCur :: sRest) ([] :: dCur :: dRest)
+    in
+      if N > 0
+        then transfer N (List.rev(L)) [[]]
+        else [[]]
+    end;
+
+val grouptest = groupNl 2 [1,2,3,4,5];
+
+fun groupNright N L =
+    let
+      fun transfer i [] [] = [[]] 
+        | transfer i (dCur :: dRest) [] = [[]] 
+        | transfer i [] (dCur :: dRest) = List.rev (dCur) :: dRest
+        | transfer i (sCur :: sRest) (dCur :: dRest) = 
+            if i > 0
+              then transfer (i - 1) sRest 
+                            ((sCur :: dCur) :: dRest)
+              else transfer N (sCur :: sRest) 
+                            ([] :: List.rev(dCur) :: dRest)
+    in
+      if N > 0
+        then List.rev (transfer N L [[]])
+        else [[]]
+    end;
+
+groupNr 2 [1,2,3,4,5];
