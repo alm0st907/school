@@ -30,3 +30,10 @@ fun reverse [] = []
 
 fun revappend ([],L) = L
     | revappend((x::rest),L)= revappend(rest,x::L);
+
+fun reverse2 L= revappend (L, []);
+
+fun nthElement [] n = "n/a"
+    | nthElement (x::rest) 0 = x
+        | nthElement(x::rest) = nthElement
+    
