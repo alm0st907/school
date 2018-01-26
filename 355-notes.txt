@@ -230,4 +230,7 @@ DATE 1-22
         a function taking multiple arguments can be written as a series of higher order functions taking one argument
 
 DATE 1-24
+    INCLUDE TEST FUNCTIONS IN THE HOMEWORK
+        WRITE 3 OR 4 TESTS FOR EACH FUNCTION
+
     
