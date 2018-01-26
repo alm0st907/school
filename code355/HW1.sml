@@ -9,6 +9,7 @@ val list = [1,2,3,4,5,6];
 val strings = ["a","b","c"];
 val list_length = List.length list;
 val problemData = (1,list);
+val pos = 0;
 
 fun inList (ck,vallist) =
     if vallist = [] then false
@@ -71,6 +72,9 @@ range(0,1,30);
 range(5, ~1, ~1);
 range(5, ~2, ~1);
 
+
+
+(*groupNleft group Nright stuff*)
 fun groupNleft N L =
     let
       fun transfer i [] [] = [[]] 
@@ -86,7 +90,7 @@ fun groupNleft N L =
         else [[]]
     end;
 
-val grouptest = groupNl 2 [1,2,3,4,5];
+val grouptest = groupNleft 2 [1,2,3,4,5];
 
 fun groupNright N L =
     let
@@ -105,4 +109,4 @@ fun groupNright N L =
         else [[]]
     end;
 
-groupNr 2 [1,2,3,4,5];
+groupNright 2 [1,2,3,4,5];
