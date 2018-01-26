@@ -8,12 +8,7 @@ HW 1 for CptS 355
 val list = [1,2,3,4,5,6];
 val strings = ["a","b","c"];
 val list_length = List.length list;
-val problemData = (1,list);fun delete(x,[]) = []
-    | delete(x,y::l) = if x=y then delete(x,l) else y::delete(x,l);
-
-fun remove_dup [] = []
-    | remove_dup (x::l) = x::remove_dup(delete(x,l)); 
-val pos = 0;
+val problemData = (1,list);
 
 fun inList (ck,vallist) =
     if vallist = [] then false
