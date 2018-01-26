@@ -25,6 +25,8 @@ fun append ([],L)=L (* lets us set return type, then bar is what is evaluate*)
     |append(x::rest,L) = x::append(rest,L);
 
 fun reverse [] = []
-    |reverse(x::rest) = append(reverse rest,x::[]);
+    |reverse(x::rest) = append(reverse (rest),x::[]);
                         (*append (reverse rest,[x]*)
 
+fun revappend ([],L) = L
+    | revappend((x::rest),L)= revappend(rest,x::L);
