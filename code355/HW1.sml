@@ -79,16 +79,16 @@ intersection(inter_list, inter_list_2);
 
 (* range problem*)
 
-fun range((x:int), (y:int), (z:int)) = 
-    if y>0 andalso (x+y)>=z then x::[]
+fun range (x:int) (y:int) (z:int) =
+    if y>0 andalso ((x+y)>=z) then x::[]
     else if y<0 andalso ((x+y)<=z) then x::[]
-    else x::range((x+y), y, z);
+    else (x::range (x+y) y z);
 
-range(0,5,31);
-range(~1,5,30);
-range(0,1,30);
-range(5, ~1, ~1);
-range(5, ~2, ~1);
+range 0 5 31;
+range ~1 5 30;
+range 0 1 30;
+range 5 ~1 ~1;
+range 5 ~2 ~1;
 
 (*numbers to sum*)
 
