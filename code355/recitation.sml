@@ -33,7 +33,16 @@ fun revappend ([],L) = L
 
 fun reverse2 L= revappend (L, []);
 
-fun nthElement [] n = "n/a"
-    | nthElement (x::rest) 0 = x
-        | nthElement(x::rest) = nthElement
+
     
+fun remdup [] = []
+    | remdup (l as x::xs) = 
+        let fun delete (x,[]) = []
+            | delete (x, l as y::ys) = if x = y 
+                then delete(x,ys) else y::delete(x,ys)
+        in
+            x::remdup(delete(x,xs))
+        end;
+    
+fun alt_remdup [] = []
+    | alt_remdup(x::xs) = x::alt_remdup(List.filter (fn y => y <>x)xs);

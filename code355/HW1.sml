@@ -4,6 +4,12 @@ WSU ID 11461816
 HW 1 for CptS 355
 *)
 
+(*TODO*)
+(*
+NUM2SUM
+REPLACE
+*)
+
 (*inList problem*)
 val list = [1,2,3,4,5,6];
 val strings = ["a","b","c"];
@@ -34,6 +40,18 @@ fun delete(x,[]) = []
 
 fun remove_dup [] = []
     | remove_dup (x::l) = x::remove_dup(delete(x,l)); 
+
+fun remdup [] = []
+    | remdup (l as x::xs) = 
+        let fun delete (x,[]) = []
+            | delete (x, l as y::ys) = if x = y 
+                then delete(x,ys) else y::delete(x,ys)
+        in
+            x::remdup(delete(x,xs))
+        end;
+    
+fun alt_remdup [] = []
+    | alt_remdup(x::xs) = x::alt_remdup(List.filter (fn y => y <>x)xs);
 
 remove_dup(rmd);
 
@@ -72,6 +90,9 @@ range(0,1,30);
 range(5, ~1, ~1);
 range(5, ~2, ~1);
 
+(*numbers to sum*)
+
+(*replace*)
 
 
 (*groupNleft group Nright stuff*)
