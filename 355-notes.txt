@@ -234,5 +234,11 @@ DATE 1-24
         WRITE 3 OR 4 TESTS FOR EACH FUNCTION
 
 Date 1-29
-    
-    
+    let expressions
+        a let expression can be used anywhere within the function?
+
+        fun unitList [] = [[]]
+            |unitList (x::rest)=[x]::(unitList rest)
+
+    tail recursion
+        recursion is expensive, how can we improve it
