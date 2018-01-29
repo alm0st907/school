@@ -91,7 +91,18 @@ range 5 ~2 ~1;
 
 (*numbers to sum*)
 
-(*replace*)
+(*replace
+
+does not crash if i is greater than the list, but will return an empty list if less than 0
+*)
+fun replace i v [] = []
+    | replace 0 v (x::xs) = v::xs
+    | replace i v (x::xs) = if i < 0 then [] else x::replace (i-1) v xs;
+
+
+replace 3 40 [1, 2, 3, 4, 5, 6];
+replace 0 "X" ["a", "b", "c", "c", "d"];
+replace 4 false [true, false, true, true, true];
 
 
 (*groupNleft group Nright stuff*)
