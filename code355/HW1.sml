@@ -15,12 +15,11 @@ val list = [1,2,3,4,5,6];
 val strings = ["a","b","c"];
 val list_length = List.length list;
 val problemData = (1,list);
-val pos = 0;
 
 fun inList (ck,vallist) =
     if vallist = [] then false
-    else if ck = List.nth (vallist,pos) then true
-    else inList(ck,List.drop (vallist,1));
+    else if ck = List.hd vallist then true
+    else inList(ck,List.tl vallist);
     
 inList(7,list);
 inList(6,list);
