@@ -1,20 +1,34 @@
-fun numTosum (num:int) list = 
-    if (List.null list) = true then []
-    else List.hd list::[];
+(*groupNleft group Nright stuff*)
+fun groupNleft N L =
+    let
+      fun transfer i [] [] = [[]] 
+        | transfer i (dCur :: dRest) [] = [[]] 
+        | transfer i [] (dCur :: dRest) = dCur :: dRest
+        | transfer i (sCur :: sRest) (dCur :: dRest) = 
+            if i > 0
+              then transfer (i - 1) sRest ((sCur :: dCur) :: dRest)
+              else transfer N (sCur :: sRest) ([] :: dCur :: dRest)
+    in
+      if N > 0
+        then transfer N (List.rev(L)) [[]]
+        else [[]]
+    end;
 
-numTosum 1 [2];
+val grouptest = groupNleft 2 [1,2,3,4,5];
 
-(*)
-fun replace index replace list =
-    if index <> 0 then (List.hd list)::replace (index-1) replace list
-    else if index = 0 then replace:: *)
-    
-
-fun replace i v [] = []
-    | replace 0 v (x::xs) = v::xs
-    | replace i v (x::xs) = if i < 0 then [] else x::replace (i-1) v xs;
-
-
-replace ~3 40 [1, 2, 3, 4, 5, 6];
-replace 0 "X" ["a", "b", "c", "c", "d"];
-replace 4 false [true, false, true, true, true];
+fun groupNright N L =
+    let
+      fun transfer i [] [] = [[]] 
+        | transfer i (dCur :: dRest) [] = [[]] 
+        | transfer i [] (dCur :: dRest) = List.rev (dCur) :: dRest
+        | transfer i (sCur :: sRest) (dCur :: dRest) = 
+            if i > 0
+              then transfer (i - 1) sRest 
+                            ((sCur :: dCur) :: dRest)
+              else transfer N (sCur :: sRest) 
+                            ([] :: List.rev(dCur) :: dRest)
+    in
+      if N > 0
+        then List.rev (transfer N L [[]])
+        else [[]]
+    end;
