@@ -190,3 +190,6 @@ date 1-25
         regular is verified
         qualified is less so
         
+date 1-30
+    test next tuesday
+    active transport requires energy to move substances across cell membranes
