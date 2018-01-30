@@ -287,3 +287,24 @@ date 1-25
     we just did a bunch of truth tables for practice
 
     
+date 1-30
+    EXAM NOTES FOR EXAM 1 ON THURSDAY 
+
+    IF THERE IS NO KEY MAKE ONE
+        why is part 2, num 4 b?
+
+        binding of connectives
+            most to least
+            ~
+            & V
+            ->
+            <-->
+
+             only if, arrow goes as sentance flows
+             if reverses the conditions
+
+
+            (a & b ) ->  ~(e v f)
+
+    
+
