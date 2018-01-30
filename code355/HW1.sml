@@ -7,8 +7,7 @@ HW 1 for CptS 355
 
 (*
 TODO
-NUMBERS2SUM
-
+comments, testing
 *)
 
 (*inList code*)
@@ -47,7 +46,17 @@ fun replace i v [] = []
     | replace i v (x::xs) = if i < 0 then [] else x::replace (i-1) v xs;
 
 
-(*NUMBERS TO SUM*)
+(*NUMBERS TO desSum*)
+fun numbersToSum desSum L = 
+    let
+    	fun num2sumHelp(desSum, [], curSum, newList) = newList
+	| num2sumHelp(desSum, x::rest, curSum, newList) = 
+		(if curSum+x >= desSum then newList    (* checking if the current sum is < desired sum *)
+		else num2sumHelp(desSum, rest, curSum+x, rev(x::rev(newList))))
+    in
+	num2sumHelp(desSum, L, 0, [])        (* 0 works only for positive numbers *)
+    end;
+
 
 (*group left/right problems*)
 
