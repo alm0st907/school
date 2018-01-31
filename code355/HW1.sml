@@ -37,8 +37,9 @@ fun listIntersect(L1, L2) =
               then help(rest, L2, cur :: result)
               else help(rest, L2, result)
     in
-        help(L1, L2, [])
+        rev(help(L1, L2, [])) (*reverse our final results*)
     end;
+    
 
 (*Range problem*)
 (*recursively adding to the list based on condition
@@ -139,10 +140,10 @@ val _ = removeDuplicatesTest();
 fun listIntersectTest() =
     let
 	val test1 = (listIntersect ([1],[1])) = [1]
-	val test2 = (listIntersect ([1,2,3],[1,1,2])) = [2,1]
+	val test2 = (listIntersect ([1,2,3],[1,1,2])) = [1,2]
 	val test3 = (listIntersect ([[2,3],[1,2],[2,3]],[[1],[2,3]])) = [[2,3]]
-	val test4 = (listIntersect ([],[[1],[2,3]])) = []
-	val test5 = (listIntersect (["a","a","a","a","a","b","b","b"],["a","b","c","a","b","c"])) = ["b","a"]
+	val test4 = (listIntersect ([],[[1,4,5],[2,3,6]])) = []
+	val test5 = (listIntersect (["a","a","b","b"],["a","b","c","a","b","c"])) = ["a","b"]
     in
 	print("\n----------------\nlistIntersectTest:\n" ^
               "test1: " ^ Bool.toString(test1) ^ "\n" ^
@@ -161,10 +162,10 @@ fun rangeTest() =
 	val test2 = (range 10 1 10) = []
 	val test3 = (range 5 ~1 0) = [5,4,3,2,1]
 	val test4 = (range 1 ~1 10) = []
-	val test5 = (range 20 ~20 0) = [20]
+	val test5 = (range 10 ~10 0) = [10]
     in
 	print("\n----------------\nrangeTest:\n" ^
-              "test1: " ^ Bool.toString(test1) ^ "\n" ^
+            "test1: " ^ Bool.toString(test1) ^ "\n" ^
 	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
 	      "test3: " ^ Bool.toString(test3) ^ "\n" ^
 	      "test4: " ^ Bool.toString(test4) ^ "\n" ^
