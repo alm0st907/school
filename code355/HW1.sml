@@ -102,5 +102,150 @@ fun groupNright N L =
     end;
   
 
-  (* testing area*)
+(* testing area*)
 
+fun inListTest () =
+    let
+        val inListT1 = ( inList(8,[7]) = false )
+        val inListT2 = ( inList("one",["two","one"]) = true )
+        val inListT3 = ( inList(true,[false,false]) = false )
+    in
+        print ("\n------------- \n inList:\n" ^
+        "test1: " ^ Bool.toString(inListT1) ^ "\n" ^
+        "test2: " ^ Bool.toString(inListT2) ^ "\n" ^
+        "test3: " ^ Bool.toString(inListT3) ^ "\n")
+    end;
+val _ = inListTest();
+
+fun removeDuplicatesTest() =
+    let
+	val test1 = (removeDuplicates([1,2,3,4,5]) = [1,2,3,4,5])
+	val test2 = (removeDuplicates([1,1,2,2,1,1,2,2,1]) = [1,2])
+	val test3 = (removeDuplicates([12, 12, 12, 12, 12, 12, 12]) = [12])
+	val test4 = (removeDuplicates([~100, 50, 60, 75645, ~100, 23, 74, 60]) = [~100, 50, 60, 75645, 23, 74])
+	val test5 = (removeDuplicates([]) = [])
+    in
+	print("\n----------------\nremoveDuplicatesTest:\n" ^
+              "test1: " ^ Bool.toString(test1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(test3) ^ "\n" ^
+	      "test4: " ^ Bool.toString(test4) ^ "\n" ^
+	      "test5: " ^ Bool.toString(test5) ^
+	      "\n----------------\n")
+    end;
+
+val _ = removeDuplicatesTest();
+
+fun listIntersectTest() =
+    let
+	val test1 = (listIntersect ([1],[1])) = [1]
+	val test2 = (listIntersect ([1,2,3],[1,1,2])) = [2,1]
+	val test3 = (listIntersect ([[2,3],[1,2],[2,3]],[[1],[2,3]])) = [[2,3]]
+	val test4 = (listIntersect ([],[[1],[2,3]])) = []
+	val test5 = (listIntersect (["a","a","a","a","a","b","b","b"],["a","b","c","a","b","c"])) = ["b","a"]
+    in
+	print("\n----------------\nlistIntersectTest:\n" ^
+              "test1: " ^ Bool.toString(test1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(test3) ^ "\n" ^
+	      "test4: " ^ Bool.toString(test4) ^ "\n" ^
+	      "test5: " ^ Bool.toString(test5) ^
+	      "\n----------------\n")
+    end;
+
+val _ = listIntersectTest();
+
+fun rangeTest() =
+    let
+	val test1 = (range 0 5 30) = [0,5,10,15,20,25]
+	val test2 = (range 10 1 10) = []
+	val test3 = (range 5 ~1 0) = [5,4,3,2,1]
+	val test4 = (range 1 ~1 10) = []
+	val test5 = (range 20 ~20 0) = [20]
+    in
+	print("\n----------------\nrangeTest:\n" ^
+              "test1: " ^ Bool.toString(test1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(test3) ^ "\n" ^
+	      "test4: " ^ Bool.toString(test4) ^ "\n" ^
+	      "test5: " ^ Bool.toString(test5) ^
+	      "\n----------------\n")
+    end;
+
+val _ = rangeTest();
+
+fun numbersToSumTest() =
+    let
+	val test1 = (numbersToSum 100 [10, 20, 30, 40] = [10,20,30])
+	val test2 = (numbersToSum 30 [5, 4, 6, 10, 4, 2, 1, 5] = [5,4,6,10,4])
+	val test3 = (numbersToSum 1 [2] = [])
+	val test4 = (numbersToSum 1 [] = [])
+	val test5 = (numbersToSum 5 [1,1,1,1,1] = [1,1,1,1])
+    in
+	print("\n----------------\nnumbersToSumTest:\n" ^
+              "test1: " ^ Bool.toString(test1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(test3) ^ "\n" ^
+	      "test4: " ^ Bool.toString(test4) ^ "\n" ^
+	      "test5: " ^ Bool.toString(test5) ^
+	      "\n----------------\n")
+    end;
+
+val _ = numbersToSumTest();
+
+fun replaceTest() =
+    let
+	val test1 = (replace 3 40 [1, 2, 3, 4, 5, 6]) = [1,2,3,40,5,6]
+	val test2 = (replace 0 "X" ["a", "b", "c", "d"]) = ["X","b","c","d"]
+	val test3 = (replace 4 false [true, false, true, true, true]) = [true,false,true,true,false]
+	val test4 = (replace 0 20 [7]) = [20]
+	val test5 = (replace 0 "X" ["a", "b", "c", "d"]) = ["X","b","c","d"]
+    in
+	print("\n----------------\nreplaceTest:\n" ^
+              "test1: " ^ Bool.toString(test1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(test3) ^ "\n" ^
+	      "test4: " ^ Bool.toString(test4) ^ "\n" ^
+	      "test5: " ^ Bool.toString(test5) ^
+	      "\n----------------\n")
+    end;
+
+    val _ = replaceTest();
+
+    fun groupNrightTest() =
+    let
+	val test1 = (groupNright 2 [1, 2, 3, 4, 5]) = [[1, 2], [3, 4], [5]]
+	val test2 = (groupNright 3 [1, 2, 3, 4, 5]) = [[1, 2, 3], [4, 5]]
+	val test3 = (groupNright 3 ["yo", "hey", "hola", "a", "b", "Z", "X"]) = [["yo", "hey", "hola"], ["a", "b", "Z"], ["X"]]
+	val test4 = (groupNright 5 []) = [[]]
+	val test5 = (groupNright 2 [0, 0, 1, 1]) = [[0, 0], [1, 1]]
+    in
+	print("\n----------------\ngroupNrightTest:\n" ^
+              "test1: " ^ Bool.toString(test1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(test3) ^ "\n" ^
+	      "test4: " ^ Bool.toString(test4) ^ "\n" ^
+	      "test5: " ^ Bool.toString(test5) ^
+	      "\n----------------\n")
+    end;
+
+val _ = groupNrightTest();
+
+fun groupNleftTest() =
+    let
+	val test1 = (groupNleft 2 [1, 2, 3, 4, 5]) = [[1], [2, 3], [4, 5]]
+	val test2 = (groupNleft 3 [1, 2, 3, 4, 5]) = [[1, 2], [3, 4, 5]]
+	val test3 = (groupNleft 1 [1, 2, 3, 4, 5]) = [[1], [2], [3], [4], [5]]
+	val test4 = (groupNleft 5 ["a", "b", "c", "d", "e"]) = [["a", "b", "c", "d", "e"]]
+	val test5 = (groupNleft 7 [0, 1, 2, 3, 4, 5, 6, 7]) = [[0], [1, 2, 3, 4, 5, 6, 7]]
+    in
+	print("\n----------------\ngroupNleftTest:\n" ^
+              "test1: " ^ Bool.toString(test1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(test3) ^ "\n" ^
+	      "test4: " ^ Bool.toString(test4) ^ "\n" ^
+	      "test5: " ^ Bool.toString(test5) ^
+	      "\n----------------\n")
+    end;
+
+val _ = groupNleftTest();
