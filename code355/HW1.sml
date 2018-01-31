@@ -7,11 +7,6 @@ Ran on ubuntu 17.10 using SMLNJ
 *)
 
 
-(*
-TODO
-comments, testing
-*)
-
 (*inList code*)
 (*This function takes in a tuple with a comparing value, and a list to find it in*)
 (*the type is ''a * ''a list because it is templated for any comparable type, with a list of comparable types*)
@@ -56,14 +51,16 @@ fun range (x:int) (y:int) (z:int) =
     else (x::range (x+y) y z);
 
 (*NUMBERS TO desSum*)
+(* take in the desired sum and a list of numbers
+   returns a list of numbers, such that n elements of the list are < desired sum, but n+1 elements would be the sum *)
 fun numbersToSum desSum L = 
     let
-    	fun num2sumHelp(desSum, [], curSum, newList) = newList
-	        | num2sumHelp(desSum, x::rest, curSum, newList) = 
-		    (if curSum+x >= desSum then newList    (* checking if the current sum is < desired sum *)
-		    else num2sumHelp(desSum, rest, curSum+x, rev(x::rev(newList))))
-    in
-	    num2sumHelp(desSum, L, 0, [])        (* 0 works only for positive numbers *)
+      fun addup [] = 0
+        | addup (x::rest) = (x + addup rest)
+    in   
+        if ((addup L) < desSum andalso L <> []) then L (* the list is already the answer*)
+        else if (addup L>= desSum) then numbersToSum desSum (rev(tl(rev L))) (*recursively trim our list*)
+        else [] (*otherwise return an empty list*)
     end;
 
 (*replace problem*)
@@ -73,34 +70,36 @@ fun replace i v [] = []
     | replace i v (x::rest) = if i < 0 then [] else x::replace (i-1) v rest;
 
 (*group left/right problems*)
+(* these functions group N elements of L list together, and returns a list of lists*)
+(*uses pattern matching to handle the cases of input*)
 
 fun groupNleft N L =
     let
-      fun transfer i [] [] = [[]] 
-        | transfer i (dCur :: dRest) [] = [[]] 
-        | transfer i [] (dCur :: dRest) = dCur :: dRest
-        | transfer i (sCur :: sRest) (dCur :: dRest) = 
+      fun grouping i [] [] = [[]] 
+        | grouping i (thiscur :: thisrest) [] = [[]] 
+        | grouping i [] (thiscur :: thisrest) = thiscur :: thisrest
+        | grouping i (thatcur :: thatrest) (thiscur :: thisrest) = 
             if i > 0
-              then transfer (i - 1) sRest ((sCur :: dCur) :: dRest)
-              else transfer N (sCur :: sRest) ([] :: dCur :: dRest)
+              then grouping (i - 1) thatrest ((thatcur :: thiscur) :: thisrest)
+              else grouping N (thatcur :: thatrest) ([] :: thiscur :: thisrest)
     in
       if N > 0
-        then transfer N (List.rev(L)) [[]]
+        then grouping N (List.rev(L)) [[]]
         else [[]]
     end;
 
 fun groupNright N L =
     let
-      fun transfer i [] [] = [[]] 
-        | transfer i (dCur :: dRest) [] = [[]] 
-        | transfer i [] (dCur :: dRest) = List.rev (dCur) :: dRest
-        | transfer i (sCur :: sRest) (dCur :: dRest) = 
+      fun grouping i [] [] = [[]] 
+        | grouping i (thiscur :: thisrest) [] = [[]] 
+        | grouping i [] (thiscur :: thisrest) = List.rev (thiscur) :: thisrest
+        | grouping i (thatcur :: thatrest) (thiscur :: thisrest) = 
             if i > 0
-              then transfer (i - 1) sRest ((sCur :: dCur) :: dRest)
-              else transfer N (sCur :: sRest) ([] :: List.rev(dCur) :: dRest)
+              then grouping (i - 1) thatrest ((thatcur :: thiscur) :: thisrest)
+              else grouping N (thatcur :: thatrest) ([] :: List.rev(thiscur) :: thisrest)
     in
       if N > 0
-        then List.rev (transfer N L [[]])
+        then List.rev (grouping N L [[]])
         else [[]]
     end;
   
@@ -112,11 +111,20 @@ fun inListTest () =
         val inListT1 = ( inList(8,[7]) = false )
         val inListT2 = ( inList("one",["two","one"]) = true )
         val inListT3 = ( inList(true,[false,false]) = false )
+        val inListT4 = ( inList(false,[]) = false)
+        val inListT5 = ( inList(1,[]) = false)
+        val inListT6 = ( inList("a",[]) = false)
+        val inListT7 = ( inList(8,[7,9,10]) = false )
     in
         print ("\n------------- \n inList:\n" ^
         "test1: " ^ Bool.toString(inListT1) ^ "\n" ^
         "test2: " ^ Bool.toString(inListT2) ^ "\n" ^
-        "test3: " ^ Bool.toString(inListT3) ^ "\n")
+        "test3: " ^ Bool.toString(inListT3) ^ "\n" ^
+        "test4: " ^ Bool.toString(inListT4) ^ "\n" ^
+        "test5: " ^ Bool.toString(inListT5) ^ "\n" ^
+        "test6: " ^ Bool.toString(inListT6) ^ "\n" ^
+        "test7: " ^ Bool.toString(inListT7) ^ "\n" )
+
     end;
 val _ = inListTest();
 
@@ -219,7 +227,7 @@ fun replaceTest() =
     let
 	val test1 = (groupNright 2 [1, 2, 3, 4, 5]) = [[1, 2], [3, 4], [5]]
 	val test2 = (groupNright 3 [1, 2, 3, 4, 5]) = [[1, 2, 3], [4, 5]]
-	val test3 = (groupNright 3 ["yo", "hey", "hola", "a", "b", "Z", "X"]) = [["yo", "hey", "hola"], ["a", "b", "Z"], ["X"]]
+	val test3 = (groupNright 3 ["phrase", "other", "words", "a", "b", "Z", "X"]) = [["phrase", "other", "words"], ["a", "b", "Z"], ["X"]]
 	val test4 = (groupNright 5 []) = [[]]
 	val test5 = (groupNright 2 [0, 0, 1, 1]) = [[0, 0], [1, 1]]
     in
