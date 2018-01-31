@@ -243,3 +243,5 @@ Date 1-29
     tail recursion
         recursion is expensive, how can we improve it
         
+date 1-31
+    tail recursion allows us to use a single stack frame
