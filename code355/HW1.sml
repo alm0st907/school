@@ -59,11 +59,11 @@ fun range (x:int) (y:int) (z:int) =
 fun numbersToSum desSum L = 
     let
     	fun num2sumHelp(desSum, [], curSum, newList) = newList
-	| num2sumHelp(desSum, x::rest, curSum, newList) = 
-		(if curSum+x >= desSum then newList    (* checking if the current sum is < desired sum *)
-		else num2sumHelp(desSum, rest, curSum+x, rev(x::rev(newList))))
+	        | num2sumHelp(desSum, x::rest, curSum, newList) = 
+		    (if curSum+x >= desSum then newList    (* checking if the current sum is < desired sum *)
+		    else num2sumHelp(desSum, rest, curSum+x, rev(x::rev(newList))))
     in
-	num2sumHelp(desSum, L, 0, [])        (* 0 works only for positive numbers *)
+	    num2sumHelp(desSum, L, 0, [])        (* 0 works only for positive numbers *)
     end;
 
 (*replace problem*)
