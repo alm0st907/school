@@ -2,6 +2,8 @@
 Garrett Rudisill
 WSU ID 11461816
 HW 1 for CptS 355
+
+Ran on ubuntu 17.10 using SMLNJ
 *)
 
 
