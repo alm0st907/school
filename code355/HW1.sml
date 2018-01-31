@@ -46,8 +46,10 @@ x is start point, y is the increment, and z is the condition x must be less than
 we add x to the output, then continually add x+y while x+y<z, or >z if a negative being added and we decrement
 *)
 fun range (x:int) (y:int) (z:int) =
-    if y>0 andalso ((x+y)>=z) then x::[]
-    else if y<0 andalso ((x+y)<=z) then x::[]
+    if x = z then []
+    else if y<0 andalso (x<=z) then []
+    else if y>0 andalso ((x+y)>=z) then x::[]
+    else if y<0 andalso ((x+y)<=z) then x::[] 
     else (x::range (x+y) y z);
 
 (*NUMBERS TO desSum*)
@@ -99,3 +101,6 @@ fun groupNright N L =
         else [[]]
     end;
   
+
+  (* testing area*)
+
