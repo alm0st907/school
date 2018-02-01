@@ -216,3 +216,28 @@ date 2-1
     notes n shit
     GLUTEN
     CELIAC DISEASE
+
+
+    exam
+      c1
+        nutrients
+        micro macro essential
+        chemicals
+        functional foods
+        read the chapters more or less
+        calories vs Calories vs kcal
+        calculate calories in food
+        different studies
+        placebo effect
+        blind vs double blind
+        nutritional claims
+        morbidity rate/mortality rate
+
+      c2
+        different malnutrition
+        overnutrition
+        nutritional adequacy
+        know about nutritonal status assesment
+        different measurements and diagnostics
+        bmi calculation
+        eri, ear, rda, ai, ul, EER, amdr
