@@ -14,18 +14,18 @@ sylly day:
 
     phone # 335-0412 emergencies
 
-    
+
 date 1-16:
-    chapter 1:nutrition   
+    chapter 1:nutrition
 
     attendance code 2337
-    
+
     nutrient - substance in foods for use by the body for energy, maintenance
         regulation of chem processes
         nutrient classifications - essential, non essential, conditionally essential
             organic or inorganic
                 organic - contains carbon and hydrogen
-            
+
             macro or micro nutrient
 
     organic doesnt really mean much
@@ -33,7 +33,7 @@ date 1-16:
 
     organic prodcuts arent inheriently any more nutritous
         differences are insignificant
-    
+
     phytochemical - plantbased nutrient that is beneficial to people
     zoonutrient - animal nutrient beneficial to people
 
@@ -51,7 +51,7 @@ date 1-16:
         source of energy
         composes most structures of the body
         allows us to move and stuff
-    
+
     lipids - fats
         dense energy source
         composes structure of cell membranes
@@ -82,7 +82,7 @@ date 1-16:
 
 DATE 1-18:
     something something, close to lowest answer for calorie calculation for homework.
-        cengage has an error so just roll with it    
+        cengage has an error so just roll with it
 
     simple vs complex relationships
 
@@ -91,10 +91,10 @@ DATE 1-18:
     researcher bias
 
     control group
-    
+
     random assignment
         minimizes experimental error
-    
+
     blinding
 
     hawthorne effect
@@ -110,7 +110,7 @@ DATE 1-18:
         nutrition transition
 
         diabetes is from "nutritional advancment" lol okay.
-        
+
 date 1-23:
     prevalence of t2 diabetes
     once of prevention is worth a pound of the cure
@@ -143,7 +143,7 @@ date 1-23:
             surgeries
             medications
             fam history
-        
+
         symptops assessed
 
     retrospective vs prospective
@@ -155,7 +155,7 @@ date 1-23:
         RDA-recommended dietary allowances
         AI- adequate intake leveles
         UL- tolerable upper intake levels
-    
+
     Energy evaluation
         estimated energy requirement (EER)
         acceptable macronutrient distribution ranges
@@ -169,7 +169,7 @@ date 1-23:
             sex
             10 groups for men, 16 for women
 
-    
+
     DRA 19430-> DRI 1994
 
     EAR meets about 50% of population?
@@ -183,25 +183,25 @@ date 1-23:
         height
         sex
         physical activity level
-        
+
 date 1-25
     this class sucks ass
     regular vs qualified claim
         regular is verified
         qualified is less so
-        
+
 date 1-30
     test next tuesday
     active transport requires energy to move substances across cell membranes
     segmentation- mixin yo shit up
-    peristalsis - waaavyyy movements 
+    peristalsis - waaavyyy movements
     cephalic phase- thought smell and sight of food stimulates CNS
     gastric - the food in yo shit
         digestive secretions and motility in stomach
     intestinal phase
         release of food into small intestine
         motility and secretions in stomach decrease
-    
+
     mastication
         begins digestion
     secretions of saliva
@@ -211,3 +211,8 @@ date 1-30
         salty,sour,sweet, bitter, umami
     olfactory cells
         sense of smell is 80% of your taste
+
+date 2-1
+    notes n shit
+    GLUTEN
+    CELIAC DISEASE
