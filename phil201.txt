@@ -308,3 +308,17 @@ date 1-30
 
     
 
+date 2-6-18
+    assumption set is denoted as a number for each line
+    A is an ASSUMPTION
+
+    wedge introduction
+
+    3 RULES WE LEARNIN
+        ASSUMPTION
+        & ELIMINATION
+        WEDGE INTRODUCTION
+        & INTRODUCTION
+
+        
+    
