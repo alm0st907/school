@@ -314,7 +314,7 @@ date 2-6-18
 
     wedge introduction
 
-    3 RULES WE LEARNIN
+    4 RULES WE LEARNIN
         ASSUMPTION
         & ELIMINATION
         WEDGE INTRODUCTION
@@ -322,3 +322,6 @@ date 2-6-18
 
         
     
+date 2-8-18
+    assume all your premises    
+    pg 28 exercise 1.4.2    
