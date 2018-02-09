@@ -20,8 +20,12 @@ fun countInList list n =
     in
         if list = [] then 0
         else if inList(n,list)=false then 0 + countInList (tl list) n else 1 + countInList (tl list) n
-    end
+    end;
 
+
+countInList ["3","5","5","-","4","5","1"] "5";
+countInList [] "5";
+countInList [true, false, false, false, true, true, true] true;
     (*zipTail - *)
 
     (*Histogram*)
