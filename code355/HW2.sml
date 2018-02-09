@@ -12,6 +12,16 @@ countInList, zipTail, histogram
 
     (*count in list, pass a list and a variable to be scanned for. Return how many instances exist in the list*)
 
+fun countInList list n = 
+    let
+        fun inList (n,[]) = false
+            | inList(n,x::rest) = if n=x then true else inList(n,rest)
+            
+    in
+        if list = [] then 0
+        else if inList(n,list)=false then 0 + countInList (tl list) n else 1 + countInList (tl list) n
+    end
+
     (*zipTail - *)
 
     (*Histogram*)
