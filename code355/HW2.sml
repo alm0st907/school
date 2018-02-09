@@ -31,3 +31,7 @@ Problem 4 zip
 (*
 Problem 5 findMin/FindMax/minMaxTree
 *)
+
+
+
+(*TEST ZONE*)
