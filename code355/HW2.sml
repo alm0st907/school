@@ -22,15 +22,33 @@ countInList [1, 2, 3, 5, 5, 4] 5;
 countInList ["3","5","5","-","4","5","1"] "5";
 countInList [] "5";
 countInList [true, false, false, false, true, true, true] true;
+
     (*zipTail - *)
 
 fun zipTail aList bList =
     let
-      fun accum aList bList rest = ()
-
+    fun myzip  nil l = nil
+        |   myzip  l   nil  = nil
+        |   myzip (a::la) (b::lb)  = (a,b)::(myzip la lb) 
+        
     in
-        zipTail aList bList
+        zipTail [] []
     end;
+
+
+fun zip nil l = nil
+    | zip l nil = nil
+    | zip (a::la) (b::lb) = (a,b)::(zip la lb) ;
+
+    zip [1,2,3] ["one", "two"];
+
+fun unzip l = 
+  case l
+    of nil => (nil, nil)
+     | (a,b)::tl => 
+        let val (l1, l2) = unzip tl
+        in (a::l1, b::l2) end;
+   
 
     (*Histogram*)
 
