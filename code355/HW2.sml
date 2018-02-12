@@ -5,6 +5,21 @@ HW2 for ML
 Coded on Ubuntu 17.10/Windows 10 with SMLNJ
 *)
 
+(*higher order functions*)
+fun zip nil l = nil
+    | zip l nil = nil
+    | zip (a::la) (b::lb) = (a,b)::(zip la lb) ;
+
+    zip [1,2,3] ["one", "two"];
+
+fun unzip l = 
+  case l
+    of nil => (nil, nil)
+     | (a,b)::tl => 
+        let val (l1, l2) = unzip tl
+        in (a::l1, b::l2) end;
+   
+
 (*
 Problem 1
 countInList, zipTail, histogram
@@ -36,19 +51,7 @@ fun zipTail aList bList =
     end;
 
 
-fun zip nil l = nil
-    | zip l nil = nil
-    | zip (a::la) (b::lb) = (a,b)::(zip la lb) ;
 
-    zip [1,2,3] ["one", "two"];
-
-fun unzip l = 
-  case l
-    of nil => (nil, nil)
-     | (a,b)::tl => 
-        let val (l1, l2) = unzip tl
-        in (a::l1, b::l2) end;
-   
 
     (*Histogram*)
 
