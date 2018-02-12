@@ -10,7 +10,15 @@ fun zip nil l = nil
     | zip l nil = nil
     | zip (a::la) (b::lb) = (a,b)::(zip la lb) ;
 
-    zip [1,2,3] ["one", "two"];
+zip [1,2,3] ["one", "two"];
+
+fun tail_zip l1 l2 =
+    let
+        fun zip' (a::list1) (b::list2) list = zip' list1 list2 ((a,b)::list) (*accumulating function for tail recursion*)
+            | zip' [] [] list = rev list (* reversing the list on a null l1/l2 matching case*)
+    in
+        zip' l1 l2 []
+    end;
 
 fun unzip l = 
   case l
