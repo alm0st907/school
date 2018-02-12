@@ -9,22 +9,7 @@ Coded on Ubuntu 17.10/Windows 10 with SMLNJ
 fun zip nil l = nil
     | zip l nil = nil
     | zip (a::la) (b::lb) = (a,b)::(zip la lb) ;
-
-zip [1,2,3] ["one", "two"];
-
-
-fun tail_zip l1 l2 =
-    let
-        fun zip' (a::list1) (b::list2) list = zip' list1 list2 ((a,b)::list) (*accumulating function for tail recursion*)
-            | zip' list1 [] list = (List.rev list)
-            | zip' [] list2 list = (List.rev list)
-         (* reversing the list on a null l1/l2 matching case*)
-
-    in
-        zip' l1 l2 []
-    end;
-
-tail_zip [1,2,3] ["one", "two"];
+zip[1,2,3] ["one", "two"];
 
 fun unzip l = 
   case l
@@ -32,6 +17,10 @@ fun unzip l =
      | (a,b)::tl => 
         let val (l1, l2) = unzip tl
         in (a::l1, b::l2) end;
+
+fun unzip2 [] = ([], [])
+  | unzip2 ((x,y)::xys)  =
+      let val (xs,ys) = unzip2 xys in (x::xs,y::ys) end;
 
 fun map f [] = []
     | map f (x::rest) = (f x)::(map f rest);
@@ -63,18 +52,23 @@ countInList [true, false, false, false, true, true, true] true;
 
     (*zipTail - *)
 
-fun zipTail aList bList =
+fun zipTail l1 l2 =
     let
-    fun myzip  nil l = nil
-        |   myzip  l   nil  = nil
-        |   myzip (a::la) (b::lb)  = (a,b)::(myzip la lb) 
-        
+        fun sub_zip (a::list1) (b::list2) list = sub_zip list1 list2 ((a,b)::list) (*accumulating function for tail recursion*)
+            | sub_zip list1 [] list = (List.rev list)
+            | sub_zip [] list2 list = (List.rev list)           
+         (* reversing the list on a null l1/l2 matching case*)
+
     in
-        zipTail [] []
+        sub_zip l1 l2 []
     end;
 
+zipTail [1,2,3] ["one", "two"];
+zipTail [1] [1,2,3,4];
+zipTail [] [1,2,3,4];
 
-
+unzip (zipTail [1,2,3] ["one", "two"]);
+unzip2 (zipTail [1,2,3] ["one", "two"]);
 
     (*Histogram*)
 
@@ -87,8 +81,7 @@ Problem 3  eitherTree/ Either search
 *)
 
 (*
-Problem 4 zip
-*)
+Problem 4 unzip*)
 
 (*
 Problem 5 findMin/FindMax/minMaxTree
