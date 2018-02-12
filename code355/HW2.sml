@@ -18,6 +18,15 @@ fun unzip l =
      | (a,b)::tl => 
         let val (l1, l2) = unzip tl
         in (a::l1, b::l2) end;
+
+fun map f [] = []
+    | map f (x::rest) = (f x)::(map f rest);
+
+fun fold f base [] = base
+    | fold f base (x::rest) = f x (fold f base rest);
+
+fun filter pred [] = []
+    | filter pred (x::rest) = if pred x then x::(filter pred rest) else (filter pred rest);
    
 
 (*
