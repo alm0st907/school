@@ -11,22 +11,11 @@ fun zip nil l = nil
     | zip (a::la) (b::lb) = (a,b)::(zip la lb) ;
 zip[1,2,3] ["one", "two"];
 
-fun unzip l = 
-  case l
-    of nil => (nil, nil)
-     | (a,b)::tl => 
-        let val (l1, l2) = unzip tl
-        in (a::l1, b::l2) end;
-
-fun unzip2 [] = ([], [])
-  | unzip2 ((x,y)::xys)  =
-      let val (xs,ys) = unzip2 xys in (x::xs,y::ys) end;
-
 fun map f [] = []
     | map f (x::rest) = (f x)::(map f rest);
 
-fun fold f base [] = base
-    | fold f base (x::rest) = f x (fold f base rest);
+fun foldL f base [] = base
+    | foldL f base (x::rest) = f x (foldL f base rest);
 
 fun filter pred [] = []
     | filter pred (x::rest) = if pred x then x::(filter pred rest) else (filter pred rest);
@@ -66,22 +55,40 @@ fun zipTail l1 l2 =
 zipTail [1,2,3] ["one", "two"];
 zipTail [1] [1,2,3,4];
 zipTail [] [1,2,3,4];
-
-unzip (zipTail [1,2,3] ["one", "two"]);
-unzip2 (zipTail [1,2,3] ["one", "two"]);
-
     (*Histogram*)
 
 (*
-Problem 2 sum and deepSumOpion
+Problem 2 deepSum and deepSumOpion
 *)
 
+fun deepSum [] = 0 (*base case of empty list*)
+    | deepSum list = foldL (fn x=> fn y=> x+y) 0 (map (foldL (fn a => fn b => a+b) 0) list);
+    (*inner fold works like addup from slides and gets mapped to each of the lists, then the outer fold performs the final summing *)
+
+deepSum [[1,2,3],[4,5],[6,7,8,9],[]];
+deepSum [[10,10],[10,10,10],[10]];
+deepSum [[]];
+deepSum [];
 (*
 Problem 3  eitherTree/ Either search
 *)
 
 (*
 Problem 4 unzip*)
+
+fun unzip l = 
+  case l
+    of nil => (nil, nil)
+     | (a,b)::tl => 
+        let val (l1, l2) = unzip tl
+        in (a::l1, b::l2) end;
+
+fun unzip2 [] = ([], [])
+  | unzip2 ((x,y)::xys)  =
+      let val (xs,ys) = unzip2 xys in (x::xs,y::ys) end;
+
+unzip (zipTail [1,2,3] ["one", "two"]);
+unzip2 (zipTail [1,2,3] ["one", "two"]);
 
 (*
 Problem 5 findMin/FindMax/minMaxTree
