@@ -128,6 +128,7 @@ val unzip_test =zipTail [1] [1,2,3,4];
 (*val mixed_test = ziptail ["1","2","3"] [1,2,3,4];*)
 unzip unzip_test;
 unzip string_test;
+unzip [];
 
 (*
 Problem 4  eitherTree/ Either search
