@@ -5,11 +5,18 @@ HW2 for ML
 Coded on Ubuntu 17.10/Windows 10 with SMLNJ
 *)
 
+(*
+TO DO
+    Make count in list tail recursive properly
+        add the secondary function with an accumulator to do this
+
+    DeepSumOption
+        havent done really anything
+
+    problem 4/5
+*)
+
 (*higher order functions*)
-fun zip nil l = nil
-    | zip l nil = nil
-    | zip (a::la) (b::lb) = (a,b)::(zip la lb) ;
-zip[1,2,3] ["one", "two"];
 
 fun map f [] = []
     | map f (x::rest) = (f x)::(map f rest);
@@ -19,7 +26,13 @@ fun foldL f base [] = base
 
 fun filter pred [] = []
     | filter pred (x::rest) = if pred x then x::(filter pred rest) else (filter pred rest);
+
+fun inList (n,[]) = false
+    | inList(n,x::rest) = if n=x then true else inList(n,rest);
    
+fun removeDuplicates [] = []
+    | removeDuplicates (x::rest) = if inList(x,rest) then (removeDuplicates rest)
+    else x::(removeDuplicates rest);
 
 (*
 Problem 1
@@ -57,10 +70,34 @@ zipTail [1] [1,2,3,4];
 zipTail [] [1,2,3,4];
     (*Histogram*)
 
+fun histogram list = removeDuplicates( zipTail list (map (countInList list)list));
+histogram [1,3,2,2,3,0,3];
+histogram [[1,2],[3],[],[3],[1,2]];
+histogram [];
+histogram [true, false, false, false, true, true, true];
+(*
+ziptail returns list of tuples, joins first element of each list
+remove duplicates returns a list without duplicates
+map applies a function to each element of the list and returns said list
+*)
+
+(*
+val list = [1,1,2,2,3,4,5,5];
+
+val maptest=map (countInList list) list;
+val mapzip = zipTail list maptest; *)
+
+(*removeDuplicates (zipTail L (map (countInList L) L))*)
+
+    
+        
+
+
 (*
 Problem 2 deepSum and deepSumOpion
 *)
 
+    (*deep sum*)
 fun deepSum [] = 0 (*base case of empty list*)
     | deepSum list = foldL (fn x=> fn y=> x+y) 0 (map (foldL (fn a => fn b => a+b) 0) list);
     (*inner fold works like addup from slides and gets mapped to each of the lists, then the outer fold performs the final summing *)
@@ -69,12 +106,11 @@ deepSum [[1,2,3],[4,5],[6,7,8,9],[]];
 deepSum [[10,10],[10,10,10],[10]];
 deepSum [[]];
 deepSum [];
-(*
-Problem 3  eitherTree/ Either search
-*)
+
+    (*deep sum option*)
 
 (*
-Problem 4 unzip*)
+Problem 3 unzip*)
 
 fun unzip l = 
   case l
@@ -89,6 +125,13 @@ fun unzip2 [] = ([], [])
 
 unzip (zipTail [1,2,3] ["one", "two"]);
 unzip2 (zipTail [1,2,3] ["one", "two"]);
+
+(*
+Problem 4  eitherTree/ Either search
+*)
+
+datatype either = ImAString of string | ImAnInt of int;
+
 
 (*
 Problem 5 findMin/FindMax/minMaxTree
