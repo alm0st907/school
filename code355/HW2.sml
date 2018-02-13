@@ -113,6 +113,15 @@ deepSum [];
 (*
 Problem 3 unzip*)
 
+fun unzip l = 
+  case l
+    of nil => (nil, nil)
+     | (a,b)::tl => 
+        let val (l1, l2) = unzip tl
+        in (a::l1, b::l2) end;
+
+
+unzip (zipTail [1,2,3] ["one", "two"]);
 
 (*
 Problem 4  eitherTree/ Either search
