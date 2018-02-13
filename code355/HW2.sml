@@ -25,14 +25,15 @@ fun foldL f base [] = base
     | foldL f base (x::rest) = f x (foldL f base rest);
 
 fun filter pred [] = []
-    | filter pred (x::rest) = if pred x then x::(filter pred rest) else (filter pred rest);
+    | filter pred (x::rest) = if pred x then x::(filter pred rest)
+    else (filter pred rest);
 
 fun inList (n,[]) = false
     | inList(n,x::rest) = if n=x then true else inList(n,rest);
    
 fun removeDuplicates [] = []
-    | removeDuplicates (x::rest) = if inList(x,rest) then (removeDuplicates rest)
-    else x::(removeDuplicates rest);
+    | removeDuplicates(x::rest) = x::removeDuplicates(filter (fn y => y <>x)rest);
+
 
 (*
 Problem 1
@@ -112,19 +113,6 @@ deepSum [];
 (*
 Problem 3 unzip*)
 
-fun unzip l = 
-  case l
-    of nil => (nil, nil)
-     | (a,b)::tl => 
-        let val (l1, l2) = unzip tl
-        in (a::l1, b::l2) end;
-
-fun unzip2 [] = ([], [])
-  | unzip2 ((x,y)::xys)  =
-      let val (xs,ys) = unzip2 xys in (x::xs,y::ys) end;
-
-unzip (zipTail [1,2,3] ["one", "two"]);
-unzip2 (zipTail [1,2,3] ["one", "two"]);
 
 (*
 Problem 4  eitherTree/ Either search
@@ -140,3 +128,4 @@ Problem 5 findMin/FindMax/minMaxTree
 
 
 (*TEST ZONE*)
+
