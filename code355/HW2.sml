@@ -110,18 +110,24 @@ deepSum [];
 
     (*deep sum option*)
 
+(*Problem 3 unzip*)
+
 (*
-Problem 3 unzip*)
+pass in a zipped list
+the function will return  a list, with the two unziped lists inside
+use map to split the values and make our two sublists for the final answer
+    a is the element from the first list, and the first map rips the first element from all the zipped elements
+    b is the element from the second position, and ripped from all sublists in the zip
+*)
+fun unzip list = 
+    if null list <> true then [map (fn (a,_) => a) list, map (fn (_,b) => b) list]
+    else (nil);
 
-fun unzip l = 
-  case l
-    of nil => (nil, nil)
-     | (a,b)::tl => 
-        let val (l1, l2) = unzip tl
-        in (a::l1, b::l2) end;
-
-
-unzip (zipTail [1,2,3] ["one", "two"]);
+val string_test = zipTail ["1","2","3"] ["one", "two"];
+val unzip_test =zipTail [1] [1,2,3,4];
+(*val mixed_test = ziptail ["1","2","3"] [1,2,3,4];*)
+unzip unzip_test;
+unzip string_test;
 
 (*
 Problem 4  eitherTree/ Either search
