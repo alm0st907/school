@@ -155,7 +155,7 @@ Problem 4  eitherTree/ Either search
 *)
 
 datatype either = ImAString of string | ImAnInt of int;
-
+datatype eitherTree = LEAF of either | INTERIOR of (either * eitherTree * eitherTree);
 
 (*
 Problem 5 findMin/FindMax/minMaxTree
