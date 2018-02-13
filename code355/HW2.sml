@@ -7,11 +7,8 @@ Coded on Ubuntu 17.10/Windows 10 with SMLNJ
 
 (*
 TO DO
-
-    DeepSumOption
-        havent done really anything
-
-    problem 4/5
+    problem 4
+    problem 5
 *)
 
 (*higher order functions*)
@@ -106,7 +103,7 @@ Problem 2 deepSum and deepSumOpion
 
     (*deep sum*)
 fun deepSum [] = 0 (*base case of empty list*)
-    | deepSum list = foldL (fn x=> fn y=> x+y) 0 (map (foldL (fn a => fn b => a+b) 0) list);
+    | deepSum list = foldL (fn a=> fn b=> a+b) 0 (map (foldL (fn c => fn d => c+d) 0) list);
     (*inner fold works like addup from slides and gets mapped to each of the lists, then the outer fold performs the final summing *)
 
 deepSum [[1,2,3],[4,5],[6,7,8,9],[]];
@@ -114,7 +111,24 @@ deepSum [[10,10],[10,10,10],[10]];
 deepSum [[]];
 deepSum [];
 
+
+
     (*deep sum option*)
+    (*
+    this closely replicates the logic of the above solution
+    the difference isusing pattern matching to handle the option type before applying our folds to the list/sublist
+    *)
+fun deepSumOption L =
+    let
+        fun opAdd (NONE) (NONE) = NONE
+            | opAdd (SOME(x)) (NONE) = SOME(x)
+            | opAdd (NONE) (SOME(y)) = SOME(y)
+            | opAdd (SOME(x)) (SOME(y)) = SOME(x+y)
+    in
+	    foldL opAdd NONE (map (foldL opAdd NONE) L)
+    end;
+
+val test = (deepSumOption [[SOME(1),SOME(2),SOME(3)],[SOME(4),SOME(5)],[SOME(6),NONE],[],[NONE]]);
 
 (*Problem 3 unzip*)
 
