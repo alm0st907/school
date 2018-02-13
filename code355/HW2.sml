@@ -7,8 +7,6 @@ Coded on Ubuntu 17.10/Windows 10 with SMLNJ
 
 (*
 TO DO
-    Make count in list tail recursive properly
-        add the secondary function with an accumulator to do this
 
     DeepSumOption
         havent done really anything
@@ -42,9 +40,17 @@ countInList, zipTail, histogram
 
     (*count in list, pass a list and a variable to be scanned for. Return how many instances exist in the list*)
 
-fun countInList [] n = 0
-    | countInList (x::rest) n = if x = n then 1 + countInList (rest) n else 0 + countInList rest n;
-    
+fun countInList list cVal =
+  let
+      fun accumulator [] count = count
+        | accumulator (s::list) count =
+            if s = cVal
+            then accumulator list (count + 1)
+            else accumulator list count
+  in
+      accumulator list 0
+  end;
+
 countInList ["3","5","5","-","4","5","1"] "5";
 countInList [true, false, false, false, true, true, true] true;
 countInList [] "n";
