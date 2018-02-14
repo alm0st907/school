@@ -165,7 +165,13 @@ val stuff = eLEAF testing_eleaf;
 val other_stuff = eLEAF test_leaf;
 val tree = eINTERIOR (test_leaf, stuff, other_stuff);
 
+(* (LEAF(iamstrong val)
+    (LEAF (ImAnInt val))
+    (Interior(iamstrong val)
+    (Interior (ImAnInt val))
 
+
+    *)
 (**)
 
 
