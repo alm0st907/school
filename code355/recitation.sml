@@ -33,4 +33,29 @@ church -> create variables
         apply functions
 
         total functions [ [partial functions()computable functions]]
+
+
+tuples are 1 index'd
+
+accessing sub tuple
+
+#3 (#2 (1, (2,4,6,8,10), "true"));
+
+returns 6,  #2 grabs the tuple within the tuple, #3 grabs the third element which is 6
+
+fun b (x::y) = x^y;
+fn b = fn: string list -> string
+
+
+foldL can be tail recursive but might not be
+
+if any part of a function is not tail recursive then the whole thing is immediately not
+
+*)
+
+(*
+
+(true, [[false]], "true", ([1],[2,3]))
+bool * bool list list * string * (int list * int list) is the type of this tuple
+
 *)
