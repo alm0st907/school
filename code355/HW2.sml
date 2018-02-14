@@ -155,12 +155,25 @@ Problem 4  eitherTree/ Either search
 *)
 
 datatype either = ImAString of string | ImAnInt of int;
-datatype eitherTree = LEAF of either | INTERIOR of (either * eitherTree * eitherTree);
+datatype eitherTree = eLEAF of either | eINTERIOR of (either * eitherTree * eitherTree);
+
+ImAnInt 5;
+val test_leaf = ImAString "test";
+val test2_leaf = ImAnInt 5;
+val testing_eleaf = ImAString "inter";
+val stuff = eLEAF testing_eleaf;
+val other_stuff = eLEAF test_leaf;
+val tree = eINTERIOR (test_leaf, stuff, other_stuff);
+
+
+(**)
+
 
 (*
 Problem 5 findMin/FindMax/minMaxTree
 *)
 
+(* every language has a niche *)
 
 
 (*TEST ZONE*)

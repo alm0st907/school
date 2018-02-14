@@ -22,3 +22,15 @@ numbersToSum 1 [];
 
 val testlist = [10, 20, 30, 40];
 val testlist = (rev((tl(rev testlist))));
+
+
+(*
+notes for 2-13
+
+Turing machine -> natural set of problems
+church -> create variables
+        create functions
+        apply functions
+
+        total functions [ [partial functions()computable functions]]
+*)
