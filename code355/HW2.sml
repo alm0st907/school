@@ -7,7 +7,6 @@ Coded on Ubuntu 17.10/Windows 10 with SMLNJ
 
 (*
 TO DO
-    problem 4
     problem 5
 *)
 
@@ -157,13 +156,7 @@ Problem 4  eitherTree/ Either search
 datatype either = ImAString of string | ImAnInt of int;
 datatype eitherTree = eLEAF of either | eINTERIOR of (either * eitherTree * eitherTree);
 
-ImAnInt 5;
-val test_leaf = ImAString "test";
-val test2_leaf = ImAnInt 5;
-val testing_eleaf = ImAString "inter";
-val stuff = eLEAF testing_eleaf;
-val other_stuff = eLEAF test_leaf;
-val tree = eINTERIOR (test_leaf, stuff, other_stuff);
+
 
 (*
 fun eitherSearch (eLEAF(ImAnInt )) = 0 
@@ -180,7 +173,47 @@ fun eitherSearch (eLEAF(ImAnInt )) = 0
 
 
     *)
-(**)
+(*
+ImAnInt 5;
+val test_leaf = ImAString "test";
+val test2_leaf = ImAnInt 5;
+val testing_eleaf = ImAString "inter";
+val stuff = eLEAF testing_eleaf;
+val other_stuff = eLEAF test_leaf;
+val tree = eINTERIOR (test_leaf, stuff, other_stuff);
+*)
+
+fun eitherSearch (eLEAF (ImAnInt x)) v = if v = x then true else false
+    | eitherSearch (eLEAF (ImAString (x))) v = false
+    | eitherSearch (eINTERIOR ((ImAString (x)), t1, t2)) v = (eitherSearch (t1) v) orelse (eitherSearch (t2) v)
+    | eitherSearch (eINTERIOR ((ImAnInt (x)), t1, t2)) v = if v = x then true else (eitherSearch (t1) v) orelse (eitherSearch (t2) v);
+    
+
+fun eitherTest() =
+    let
+	val testTree = eINTERIOR(ImAString("1"), eINTERIOR(ImAString("2"), eINTERIOR(ImAnInt(4), eLEAF(ImAnInt(8)), eLEAF(ImAString("9"))), eLEAF(ImAnInt(5))), eINTERIOR(ImAnInt(3), eLEAF(ImAnInt(6)), eINTERIOR(ImAString("7"), eLEAF(ImAString("14")), eLEAF(ImAnInt(15))) ))
+	val testInt1 = (eitherSearch testTree 8) = true
+	val testInt2 = (eitherSearch testTree 7) = false
+	val testInt3 = (eitherSearch testTree 10) = false
+	val testInt4 = (eitherSearch testTree 9) = false
+	val testInt5 = (eitherSearch testTree 5) = true
+	val testInt6 = (eitherSearch testTree 4) = true
+	val testInt7 = (eitherSearch testTree 3) = true
+    in
+	print("\n----------------\neitherTest:\n" ^
+	      "test1: " ^ Bool.toString(testInt1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(testInt2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(testInt3) ^ "\n" ^
+	      "test4: " ^ Bool.toString(testInt4) ^ "\n" ^
+	      "test5: " ^ Bool.toString(testInt5) ^ "\n" ^
+	      "test6: " ^ Bool.toString(testInt6) ^ "\n" ^
+	      "test7: " ^ Bool.toString(testInt7) ^
+	      "\n----------------\n")
+    end;
+    
+val _ = eitherTest();
+
+
 
 
 (*
