@@ -165,6 +165,14 @@ val stuff = eLEAF testing_eleaf;
 val other_stuff = eLEAF test_leaf;
 val tree = eINTERIOR (test_leaf, stuff, other_stuff);
 
+(*
+fun eitherSearch (eLEAF(ImAnInt )) = 0 
+    | eitherSearch (eLEAF(ImAString _)) = "A"
+    | eitherSearch (eINTERIOR(ImAString _)) = "B"
+    | eitherSearch (eINTERIOR(ImAnInt _)) = 1;
+
+*)
+(* this is roughly the pattern to be matched via recitation*)
 (* (LEAF(iamstrong val)
     (LEAF (ImAnInt val))
     (Interior(iamstrong val)
