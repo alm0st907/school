@@ -22,13 +22,6 @@ fun filter pred [] = []
     | filter pred (x::rest) = if pred x then x::(filter pred rest)
     else (filter pred rest);
 
-fun inList (n,[]) = false
-    | inList(n,x::rest) = if n=x then true else inList(n,rest);
-   
-fun removeDuplicates [] = []
-    | removeDuplicates(x::rest) = x::removeDuplicates(filter (fn y => y <>x)rest);
-
-
 (*
 Problem 1
 countInList, zipTail, histogram
@@ -38,7 +31,7 @@ countInList, zipTail, histogram
 
 fun countInList list cVal =
   let
-      fun accumulator [] count = count
+    fun accumulator [] count = count
         | accumulator (s::list) count =
             if s = cVal
             then accumulator list (count + 1)
@@ -71,9 +64,18 @@ fun zipTail l1 l2 =
 zipTail [1,2,3] ["one", "two"];
 zipTail [1] [1,2,3,4];
 zipTail [] [1,2,3,4];
+
+
     (*Histogram*)
 
-fun histogram list = removeDuplicates( zipTail list (map (countInList list)list));
+fun histogram list = 
+    let
+        fun removeDuplicates [] = []
+            | removeDuplicates(x::rest) = x::removeDuplicates(filter (fn y => y <>x)rest);
+    in
+        removeDuplicates( zipTail list (map (countInList list)list))
+    end;
+
 histogram [1,3,2,2,3,0,3];
 histogram [[1,2],[3],[],[3],[1,2]];
 histogram [];
