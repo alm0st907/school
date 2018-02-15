@@ -158,38 +158,29 @@ Problem 4  eitherTree/ Either search
 datatype either = ImAString of string | ImAnInt of int;
 datatype eitherTree = eLEAF of either | eINTERIOR of (either * eitherTree * eitherTree);
 
-
-
-(*
-fun eitherSearch (eLEAF(ImAnInt )) = 0 
-    | eitherSearch (eLEAF(ImAString _)) = "A"
-    | eitherSearch (eINTERIOR(ImAString _)) = "B"
-    | eitherSearch (eINTERIOR(ImAnInt _)) = 1;
-
-*)
-(* this is roughly the pattern to be matched via recitation*)
-(* (LEAF(iamstrong val)
-    (LEAF (ImAnInt val))
-    (Interior(iamstrong val)
-    (Interior (ImAnInt val))
-
-
-    *)
-(*
-ImAnInt 5;
-val test_leaf = ImAString "test";
-val test2_leaf = ImAnInt 5;
-val testing_eleaf = ImAString "inter";
-val stuff = eLEAF testing_eleaf;
-val other_stuff = eLEAF test_leaf;
-val tree = eINTERIOR (test_leaf, stuff, other_stuff);
-*)
-
 fun eitherSearch (eLEAF (ImAnInt x)) v = if v = x then true else false
     | eitherSearch (eLEAF (ImAString (x))) v = false
     | eitherSearch (eINTERIOR ((ImAString (x)), t1, t2)) v = (eitherSearch (t1) v) orelse (eitherSearch (t2) v)
     | eitherSearch (eINTERIOR ((ImAnInt (x)), t1, t2)) v = if v = x then true else (eitherSearch (t1) v) orelse (eitherSearch (t2) v);
     
+
+(*
+Problem 5 findMin/FindMax/minMaxTree
+*)
+
+datatype 'a Tree = LEAF of 'a | NODE of ('a Tree) * ('a Tree);
+datatype 'a myTree = myLEAF of 'a | myNODE of 'a* 'a*('a myTree)*('a myTree);
+
+fun findMin (LEAF x) = x
+    | findMin (NODE (x,y)) = if findMin x < findMin y then findMin x else findMin y;
+
+fun findMax (LEAF y) = y
+    | findMax (NODE (x,y)) = if findMax y > findMax x then findMax y else findMax x;
+
+
+
+
+(*TEST ZONE*)
 
 fun eitherTest() =
     let
@@ -214,19 +205,3 @@ fun eitherTest() =
     end;
     
 val eTest = eitherTest();
-
-
-
-
-(*
-Problem 5 findMin/FindMax/minMaxTree
-*)
-
-datatype 'a Tree = LEAF of 'a | NODE of ('a Tree) * ('a Tree);
-datatype 'a myTree = myLEAF of 'a | myNODE of 'a* 'a*('a myTree)*('a myTree);
-
-
-
-
-(*TEST ZONE*)
-
