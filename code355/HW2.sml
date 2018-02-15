@@ -236,7 +236,7 @@ fun countInListTest() =
         val test4 = countInList [[],[1,2],[3,2],[5,6,7],[8],[]] [] = 2
 
     in
-        	print("\n----------------\ncountInListTest:\n" ^
+        print("\n----------------\ncountInListTest:\n" ^
 	      "test1: " ^ Bool.toString(test1) ^ "\n" ^
 	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
 	      "test3: " ^ Bool.toString(test3) ^ "\n" ^
@@ -245,22 +245,56 @@ fun countInListTest() =
     end;
 
 val cTest = countInListTest();
-(*
+
 fun zipTailTest() = 
     let
+        val test1 = zipTail [1,2,3,4,5] ["one","two"] = [(1,"one"),(2,"two")]
+        val test2 = zipTail [1] [1,2,3,4] = [(1,1)]
+        val test3 = zipTail [1,2,3,4,5] [] = []
+        val test4 = zipTail [] [1,2,3,4,5] = []
     in
+        print("\n----------------\nzipTailTest:\n" ^
+	      "test1: " ^ Bool.toString(test1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(test3) ^ "\n" ^
+	      "test4: " ^ Bool.toString(test4) ^ 
+	      "\n----------------\n")
     end;
+
+val ztTest = zipTailTest();
 
 fun histogramTest() = 
     let
+        val test1 = histogram [1,3,2,2,3,0,3] = [(1,1),(3,3),(2,2),(0,1)]
+        val test2 = histogram [[1,2],[3],[],[3],[1,2]] = [([1,2],2),([3],2),([],1)]
+        val test3 = histogram [] = []
+        val test4 = histogram [true, false, false, false, true, true, true] = [(true,4),(false,3)]
     in
+        print("\n----------------\nHistogramTest:\n" ^
+	      "test1: " ^ Bool.toString(test1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(test3) ^ "\n" ^
+	      "test4: " ^ Bool.toString(test4) ^ 
+	      "\n----------------\n")
     end;
+val histTest = histogramTest();
 
 fun deepSumTest() =
     let
+        val test1 = deepSum [[1,2,3],[4,5],[6,7,8,9],[]] = 45
+        val test2 = deepSum [[10,10],[10,10,10],[10]] = 60
+        val test3 = deepSum [[]] = 0
+        val test4 = deepSum [] = 0
     in
+        print("\n----------------\ndeepsumTest:\n" ^
+	      "test1: " ^ Bool.toString(test1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(test3) ^ "\n" ^
+	      "test4: " ^ Bool.toString(test4) ^ 
+	      "\n----------------\n")
     end;
-
+val deeptest = deepSumTest();
+(*
 fun deepSumOption() =
     let
     in
