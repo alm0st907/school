@@ -5,10 +5,7 @@ HW2 for ML
 Coded on Ubuntu 17.10/Windows 10 with SMLNJ
 *)
 
-(*
-TO DO
-    problem 5
-*)
+
 
 (*higher order functions*)
 
