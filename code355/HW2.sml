@@ -227,18 +227,25 @@ fun eitherTest() =
     
 val eTest = eitherTest();
 
-(*
+
 fun countInListTest() =
     let
-        val test1 = 
-        val test2 = 
-        val test3 = 
-        val test4 =
+        val test1 = countInList ["3","5","5","-","4","5","1"] "5" = 3
+        val test2 = countInList [] "5" = 0
+        val test3 = countInList [true, false, false, false, true, true, true] true = 4
+        val test4 = countInList [[],[1,2],[3,2],[5,6,7],[8],[]] [] = 2
 
     in
-
+        	print("\n----------------\ncountInListTest:\n" ^
+	      "test1: " ^ Bool.toString(test1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(test3) ^ "\n" ^
+	      "test4: " ^ Bool.toString(test4) ^ 
+	      "\n----------------\n")
     end;
 
+val cTest = countInListTest();
+(*
 fun zipTailTest() = 
     let
     in
