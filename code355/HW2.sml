@@ -213,7 +213,7 @@ fun eitherTest() =
 	      "\n----------------\n")
     end;
     
-val _ = eitherTest();
+val eTest = eitherTest();
 
 
 
