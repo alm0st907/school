@@ -294,17 +294,33 @@ fun deepSumTest() =
 	      "\n----------------\n")
     end;
 val deeptest = deepSumTest();
+
+fun deepSumOptionTest () =
+    let
+    val dso1 = ((deepSumOption [[SOME(1),SOME(2),SOME(3)],[SOME(4),SOME(5)],[SOME(6),NONE],[],[NONE]] = SOME 21))
+    val dso2 = ((deepSumOption [[SOME(10),NONE],[SOME(10), SOME(10), SOME(10),NONE,NONE]] = SOME 40))
+    val dso3 = ((deepSumOption [[NONE]] = NONE))
+    val dso4 = ((deepSumOption [] = NONE))
+    in
+    print ("deepSumOption:-------------------- \n test1: " ^ Bool.toString(dso1) ^ "\n" ^
+    " test2: " ^ Bool.toString(dso2) ^ "\n"^
+    " test3: " ^ Bool.toString(dso3) ^ "\n"^
+    " test4: " ^ Bool.toString(dso4) ^ "\n")
+    end;
+
+val _ = deepSumOptionTest();
+
+fun unzipTest () =
+    let
+        val uz1 = ((unzip [(1,2),(3,4),(5,6)] = [[1,3,5],[2,4,6]]))
+        val uz2 = ((unzip [("1","a"),("5","b"),("8","c")] = [["1","5","8"],["a","b","c"]]))
+
+    in
+        print ("unzip:-------------------- \n test1: " ^ Bool.toString(uz1) ^ "\n"^
+        " test2: " ^ Bool.toString(uz2) ^ "\n")
+    end
+val _ = unzipTest();
 (*
-fun deepSumOption() =
-    let
-    in
-    end;
-
-fun unzipTest()=
-    let
-    in
-    end;
-
 fun findMinTest() = 
     let
     in
