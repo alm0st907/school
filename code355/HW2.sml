@@ -222,7 +222,10 @@ val _ = eitherTest();
 Problem 5 findMin/FindMax/minMaxTree
 *)
 
-(* every language has a niche *)
+datatype 'a Tree = LEAF of 'a | NODE of ('a Tree) * ('a Tree);
+datatype 'a myTree = myLEAF of 'a | myNODE of 'a* 'a*('a myTree)*('a myTree);
+
+
 
 
 (*TEST ZONE*)
