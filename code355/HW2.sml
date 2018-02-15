@@ -71,7 +71,19 @@ zipTail [] [1,2,3,4];
 fun histogram list = 
     let
         fun removeDuplicates [] = []
-            | removeDuplicates(x::rest) = x::removeDuplicates(filter (fn y => y <>x)rest);
+            | removeDuplicates(x::rest) = x::removeDuplicates(filter (fn y => y <>x)rest)
+
+        fun countInList list cVal =
+            let
+                fun accumulator [] count = count
+                    | accumulator (s::list) count =
+                        if s = cVal
+                        then accumulator list (count + 1)
+                        else accumulator list count
+            in
+                accumulator list 0
+            end
+        
     in
         removeDuplicates( zipTail list (map (countInList list)list))
     end;
@@ -99,7 +111,7 @@ val mapzip = zipTail list maptest; *)
 
 
 (*
-Problem 2 deepSum and deepSumOpion
+Problem 2 deepSum and deepSumOption
 *)
 
     (*deep sum*)
@@ -177,7 +189,18 @@ fun findMin (LEAF x) = x
 fun findMax (LEAF y) = y
     | findMax (NODE (x,y)) = if findMax y > findMax x then findMax y else findMax x;
 
+fun minmaxTree (LEAF x) = myLEAF x
+    | minmaxTree (NODE(tree1,tree2)) = myNODE(findMin (NODE(tree1,tree2)), findMax (NODE(tree1,tree2)), minmaxTree tree1, minmaxTree tree2);
 
+val L1 = LEAF(1);
+val L2 = LEAF(2);
+val L3 = LEAF(3);
+val N1 = NODE (L1, L2);
+val N2 = NODE (N1, L1);
+val N3 = NODE (N1, N2);
+val t1 = NODE (N2, N3);
+
+val minmaxTree_test = minmaxTree t1;
 
 
 (*TEST ZONE*)
@@ -190,18 +213,69 @@ fun eitherTest() =
 	val testInt3 = (eitherSearch testTree 10) = false
 	val testInt4 = (eitherSearch testTree 9) = false
 	val testInt5 = (eitherSearch testTree 5) = true
-	val testInt6 = (eitherSearch testTree 4) = true
-	val testInt7 = (eitherSearch testTree 3) = true
+
     in
+
 	print("\n----------------\neitherTest:\n" ^
 	      "test1: " ^ Bool.toString(testInt1) ^ "\n" ^
 	      "test2: " ^ Bool.toString(testInt2) ^ "\n" ^
 	      "test3: " ^ Bool.toString(testInt3) ^ "\n" ^
 	      "test4: " ^ Bool.toString(testInt4) ^ "\n" ^
-	      "test5: " ^ Bool.toString(testInt5) ^ "\n" ^
-	      "test6: " ^ Bool.toString(testInt6) ^ "\n" ^
-	      "test7: " ^ Bool.toString(testInt7) ^
+	      "test5: " ^ Bool.toString(testInt5) ^
 	      "\n----------------\n")
     end;
     
 val eTest = eitherTest();
+
+(*
+fun countInListTest() =
+    let
+        val test1 = 
+        val test2 = 
+        val test3 = 
+        val test4 =
+
+    in
+
+    end;
+
+fun zipTailTest() = 
+    let
+    in
+    end;
+
+fun histogramTest() = 
+    let
+    in
+    end;
+
+fun deepSumTest() =
+    let
+    in
+    end;
+
+fun deepSumOption() =
+    let
+    in
+    end;
+
+fun unzipTest()=
+    let
+    in
+    end;
+
+fun findMinTest() = 
+    let
+    in
+    end;
+
+fun findMaxTest() =
+    let
+    in
+    end;
+
+fun minmaxTreeTest() = 
+    let
+    in
+    end;
+    *)
