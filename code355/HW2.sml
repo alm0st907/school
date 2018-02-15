@@ -39,15 +39,6 @@ fun countInList list cVal =
   in
       accumulator list 0
   end;
-
-countInList ["3","5","5","-","4","5","1"] "5";
-countInList [true, false, false, false, true, true, true] true;
-countInList [] "n";
-countInList [1, 2, 3, 5, 5, 4] 5;
-countInList ["3","5","5","-","4","5","1"] "5";
-countInList [] "5";
-countInList [true, false, false, false, true, true, true] true;
-
     (*zipTail - *)
 
 fun zipTail l1 l2 =
@@ -60,11 +51,6 @@ fun zipTail l1 l2 =
     in
         sub_zip l1 l2 []
     end;
-
-zipTail [1,2,3] ["one", "two"];
-zipTail [1] [1,2,3,4];
-zipTail [] [1,2,3,4];
-
 
     (*Histogram*)
 
@@ -88,10 +74,6 @@ fun histogram list =
         removeDuplicates( zipTail list (map (countInList list)list))
     end;
 
-histogram [1,3,2,2,3,0,3];
-histogram [[1,2],[3],[],[3],[1,2]];
-histogram [];
-histogram [true, false, false, false, true, true, true];
 (*
 ziptail returns list of tuples, joins first element of each list
 remove duplicates returns a list without duplicates
@@ -106,10 +88,6 @@ val mapzip = zipTail list maptest; *)
 
 (*removeDuplicates (zipTail L (map (countInList L) L))*)
 
-    
-        
-
-
 (*
 Problem 2 deepSum and deepSumOption
 *)
@@ -118,13 +96,6 @@ Problem 2 deepSum and deepSumOption
 fun deepSum [] = 0 (*base case of empty list*)
     | deepSum list = foldL (fn a=> fn b=> a+b) 0 (map (foldL (fn c => fn d => c+d) 0) list);
     (*inner fold works like addup from slides and gets mapped to each of the lists, then the outer fold performs the final summing *)
-
-deepSum [[1,2,3],[4,5],[6,7,8,9],[]];
-deepSum [[10,10],[10,10,10],[10]];
-deepSum [[]];
-deepSum [];
-
-
 
     (*deep sum option*)
     (*
@@ -141,8 +112,6 @@ fun deepSumOption L =
 	    foldL opAdd NONE (map (foldL opAdd NONE) L)
     end;
 
-val test = (deepSumOption [[SOME(1),SOME(2),SOME(3)],[SOME(4),SOME(5)],[SOME(6),NONE],[],[NONE]]);
-
 (*Problem 3 unzip*)
 
 (*
@@ -156,13 +125,6 @@ fun unzip list =
     if null list <> true then [map (fn (a,_) => a) list, map (fn (_,b) => b) list]
     else (nil);
 
-val string_test = zipTail ["1","2","3"] ["one", "two"];
-val unzip_test =zipTail [1] [1,2,3,4];
-(*val mixed_test = ziptail ["1","2","3"] [1,2,3,4];*)
-unzip unzip_test;
-unzip string_test;
-unzip [];
-
 (*
 Problem 4  eitherTree/ Either search
 *)
@@ -175,7 +137,6 @@ fun eitherSearch (eLEAF (ImAnInt x)) v = if v = x then true else false
     | eitherSearch (eINTERIOR ((ImAString (x)), t1, t2)) v = (eitherSearch (t1) v) orelse (eitherSearch (t2) v)
     | eitherSearch (eINTERIOR ((ImAnInt (x)), t1, t2)) v = if v = x then true else (eitherSearch (t1) v) orelse (eitherSearch (t2) v);
     
-
 (*
 Problem 5 findMin/FindMax/minMaxTree
 *)
@@ -192,40 +153,10 @@ fun findMax (LEAF y) = y
 fun minmaxTree (LEAF x) = myLEAF x
     | minmaxTree (NODE(tree1,tree2)) = myNODE(findMin (NODE(tree1,tree2)), findMax (NODE(tree1,tree2)), minmaxTree tree1, minmaxTree tree2);
 
-val L1 = LEAF(1);
-val L2 = LEAF(2);
-val L3 = LEAF(3);
-val N1 = NODE (L1, L2);
-val N2 = NODE (N1, L1);
-val N3 = NODE (N1, N2);
-val t1 = NODE (N2, N3);
-
-val minmaxTree_test = minmaxTree t1;
-
 
 (*TEST ZONE*)
 
-fun eitherTest() =
-    let
-	val testTree = eINTERIOR(ImAString("1"), eINTERIOR(ImAString("2"), eINTERIOR(ImAnInt(4), eLEAF(ImAnInt(8)), eLEAF(ImAString("9"))), eLEAF(ImAnInt(5))), eINTERIOR(ImAnInt(3), eLEAF(ImAnInt(6)), eINTERIOR(ImAString("7"), eLEAF(ImAString("14")), eLEAF(ImAnInt(15))) ))
-	val testInt1 = (eitherSearch testTree 8) = true
-	val testInt2 = (eitherSearch testTree 7) = false
-	val testInt3 = (eitherSearch testTree 10) = false
-	val testInt4 = (eitherSearch testTree 9) = false
-	val testInt5 = (eitherSearch testTree 5) = true
 
-    in
-
-	print("\n----------------\neitherTest:\n" ^
-	      "test1: " ^ Bool.toString(testInt1) ^ "\n" ^
-	      "test2: " ^ Bool.toString(testInt2) ^ "\n" ^
-	      "test3: " ^ Bool.toString(testInt3) ^ "\n" ^
-	      "test4: " ^ Bool.toString(testInt4) ^ "\n" ^
-	      "test5: " ^ Bool.toString(testInt5) ^
-	      "\n----------------\n")
-    end;
-    
-val eTest = eitherTest();
 
 
 fun countInListTest() =
@@ -321,6 +252,29 @@ fun unzipTest () =
     end
 val _ = unzipTest();
 
+fun eitherTest() =
+    let
+	val testTree = eINTERIOR(ImAString("1"), eINTERIOR(ImAString("2"), eINTERIOR(ImAnInt(4), eLEAF(ImAnInt(8)), eLEAF(ImAString("9"))), eLEAF(ImAnInt(5))), eINTERIOR(ImAnInt(3), eLEAF(ImAnInt(6)), eINTERIOR(ImAString("7"), eLEAF(ImAString("14")), eLEAF(ImAnInt(15))) ))
+	val testInt1 = (eitherSearch testTree 8) = true
+	val testInt2 = (eitherSearch testTree 7) = false
+	val testInt3 = (eitherSearch testTree 5) = true
+	val testInt4 = (eitherSearch testTree 11) = false
+	val testInt5 = (eitherSearch testTree 4) = true
+
+    in
+
+	print("\n----------------\neitherTest:\n" ^
+	      "test1: " ^ Bool.toString(testInt1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(testInt2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(testInt3) ^ "\n" ^
+	      "test4: " ^ Bool.toString(testInt4) ^ "\n" ^
+	      "test5: " ^ Bool.toString(testInt5) ^
+	      "\n----------------\n")
+    end;
+    
+val eTest = eitherTest();
+
+
 fun findMinTest() = 
     let
         val test1 = findMin (NODE(NODE(LEAF(5),NODE(LEAF(6),LEAF(8))),LEAF(4))) = 4
@@ -351,9 +305,14 @@ fun findMaxTest() =
     end;
 
 val fmTest = findMaxTest();
-(*
-fun minmaxTreeTest() = 
-    let
-    in
-    end;
-    *)
+
+
+(*I got tired of writing tests by here*)
+val L1 = LEAF(1);
+val L2 = LEAF(2);
+val L3 = LEAF(3);
+val N1 = NODE (L1, L2);
+val N2 = NODE (N1, L1);
+val N3 = NODE (N1, N2);
+val t1 = NODE (N2, N3);
+val minmaxTest = minmaxTree t1;
