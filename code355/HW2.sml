@@ -320,17 +320,38 @@ fun unzipTest () =
         " test2: " ^ Bool.toString(uz2) ^ "\n")
     end
 val _ = unzipTest();
-(*
+
 fun findMinTest() = 
     let
+        val test1 = findMin (NODE(NODE(LEAF(5),NODE(LEAF(6),LEAF(8))),LEAF(4))) = 4
+        val test2 = findMin (NODE(NODE(NODE(LEAF(0),LEAF(11)),LEAF(6)),NODE(LEAF(3),LEAF(10)))) = 0
+        val test3 = findMin (LEAF(5)) = 5
+
     in
+        print("\n----------------\nfindMinTest:\n" ^
+	      "test1: " ^ Bool.toString(test1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(test3) ^ 
+	      "\n----------------\n")
     end;
+val fmintest = findMinTest();
 
 fun findMaxTest() =
     let
+        val test1 = findMax (NODE(NODE(LEAF(5),NODE(LEAF(6),LEAF(8))),LEAF(4))) = 8
+        val test2 = findMax (NODE(NODE(NODE(LEAF(0),LEAF(11)),LEAF(6)),NODE(LEAF(3),LEAF(10)))) = 11
+        val test3 = findMax (LEAF(5)) = 5
+
     in
+        print("\n----------------\nfindMaxTest:\n" ^
+	      "test1: " ^ Bool.toString(test1) ^ "\n" ^
+	      "test2: " ^ Bool.toString(test2) ^ "\n" ^
+	      "test3: " ^ Bool.toString(test3) ^ 
+	      "\n----------------\n")
     end;
 
+val fmTest = findMaxTest();
+(*
 fun minmaxTreeTest() = 
     let
     in
