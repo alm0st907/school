@@ -325,3 +325,8 @@ date 2-6-18
 date 2-8-18
     assume all your premises    
     pg 28 exercise 1.4.2    
+
+
+notes 2-15
+    when in doubt go to raa
+    
