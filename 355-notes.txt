@@ -249,4 +249,5 @@ date 1-31
 date 2-2-18
     look into the fold fucntions to get tail recursion easier
 
-    
+date 2-21-18
+    ML might show up on the final, fml    
