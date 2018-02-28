@@ -9,6 +9,7 @@ def main():
     string = string.split(',')
     for word in string:
         print(word)
+        print(len(word))#nab length of word
 
 
 if __name__ == "__main__":
