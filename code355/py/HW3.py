@@ -2,7 +2,6 @@
 #HW3 CptS 355
 
 #problem 1 - dictionaries
-
 #add dict should get the total hours studied per class
 def addDict(dict):
     keylist = dict.keys()#get all the keys from input dictionary
@@ -70,12 +69,48 @@ def addDictN(week_list):
         #   print(key, value)
     return final
 
+#test function for addDictN
 def testaddDictN(result):
     if result == {'355': 16, '360': 24, '451': 6}:
         print("test pass")
     else:
         print("test fail")
+
+#problem 2 code
+#needs to be sorted then stored to a list
+def charCount(st):
+    #write your code here
+    stats = {}
+    for letter in st:
+        if letter == ' ':
+            pass
+        elif letter not in stats:
+            stats.update({letter:1})
+        else:
+            stats[letter] +=1
+    print(stats)
         
+
+def charCount2(st):
+    #code here
+
+#problem 3
+def lookupVal(lst,val):
+    #code here
+    #code to reverse a list, modify later to make useful
+    L1 = [{"x":1,"y":True,"z":"found"},{"x":2},{"y":False}]
+    L2 = []
+    while len(L1) != 0:
+        L2.append(L1.pop())
+    print(L2)
+
+#problem 4
+
+#problem 5
+
+#problem 6
+
+#problem 7
 
 def main():
     add_dict_test = {'Mon':{'355':2,'451':1,'360':2},'Tue':{'451':2,'360':3}, 'Thu':{'355':3,'451':2,'360':3}, 'Fri':{'355':2}, 'Sun':{'355':1,'451':3,'360':1}}
@@ -87,6 +122,9 @@ def main():
     result = addDictN(addDictN_testval)
     print("addDictN Result = " + str(result))
     testaddDictN(result)
+
+    charCount("Cpts355 --- Assign1")
+
 
 if __name__ == "__main__":
     main()
