@@ -88,7 +88,16 @@ def charCount(st):
             stats.update({letter:1})
         else:
             stats[letter] +=1
+    dic_keys = stats.keys()
+
+    result_list = []
+
+    for keys in dic_keys:
+        temp = (keys, stats[keys])
+        result_list.append(temp)
+    result_list = sorted(result_list)
     print(stats)
+    print(result_list)
         
 
 def charCount2(st):
@@ -125,6 +134,7 @@ def main():
     testaddDictN(result)
 
     charCount("Cpts355 --- Assign1")
+
 
 
 if __name__ == "__main__":
