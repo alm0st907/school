@@ -132,6 +132,9 @@ def lookupVal(lst,val):
             pass
     #print(L2)
 
+def lookupVal2(lst,val):
+    print("teststatement")
+
 #problem 4
 
 #problem 5
