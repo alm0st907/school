@@ -93,6 +93,7 @@ def charCount(st):
 
 def charCount2(st):
     #code here
+    print("ignore this")
 
 #problem 3
 def lookupVal(lst,val):
