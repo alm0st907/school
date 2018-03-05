@@ -96,14 +96,26 @@ def charCount(st):
         temp = (keys, stats[keys])
         result_list.append(temp)
     #result_list.sort()
-    result_list.sort(key = lambda x: x[1])
-    #print(stats)
-    print(result_list)
+    result_list.sort(key = lambda x: x[0])
+    num_list = []
+    let_list = []
+    for ent in result_list:
+        if ent[0].isalpha():
+            num_list.append(ent)
+        else:
+            let_list.append(ent)
+    num_list.sort(key = lambda x: x[1])
+    let_list.sort(key = lambda x: x[1])
+    print(num_list)
+    print(let_list)
         
 
 def charCount2(st):
     #code here
     print("ignore this")
+    test_string = "this"
+    count = test_string.count("i")
+    print(count)
 
 #problem 3
 def lookupVal(lst,val):
@@ -113,7 +125,12 @@ def lookupVal(lst,val):
     L2 = []
     while len(L1) != 0:
         L2.append(L1.pop())
-    print(L2)
+    for ent in L2:          
+        if val in ent.keys():
+            return ent[val]
+        else:
+            pass
+    #print(L2)
 
 #problem 4
 
@@ -136,6 +153,8 @@ def main():
 
     charCount("Cpts355 --- Assign1")
 
+    val = lookupVal([{"x":1,"y":True,"z":"found"},{"x":2},{"y":False}],"y")
+    print(val)
 
 
 if __name__ == "__main__":
