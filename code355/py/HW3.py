@@ -95,8 +95,9 @@ def charCount(st):
     for keys in dic_keys:
         temp = (keys, stats[keys])
         result_list.append(temp)
-    result_list = sorted(result_list)
-    print(stats)
+    #result_list.sort()
+    result_list.sort(key = lambda x: x[1])
+    #print(stats)
     print(result_list)
         
 
