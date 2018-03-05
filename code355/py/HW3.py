@@ -98,6 +98,8 @@ def charCount(st):
     #result_list.sort()
     result_list.sort(key = lambda x: x[0])
     result_list.sort(key = lambda x: x[1])
+    #THIS FINISHES THE SORT
+
     num_list = []
     let_list = []
     for ent in result_list:
