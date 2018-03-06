@@ -111,7 +111,7 @@ def lookupVal2(lst,val):
 def funRun(d, name, args):
     function = d[name] #lambda func from dictionary
     try:
-        val = functiom(*args)#execute and return function if possible
+        val = function(*args)#execute and return function if possible
         return(val)
     except:#handling not enough args/bad input
         print("not enough args")
@@ -130,7 +130,19 @@ def numberOfPaths(m, n):
    return  numberOfPaths(m-1, n) + numberOfPaths(m, n-1)
  
 #problem 6
+class iterSquares():
+    def __init__(self):#constructor for the class
+        self.square = 0
+        self.pos = 0
+    def __next__(self):#iterate up to the next square and return
+        self.pos +=1
+        self.square = self.pos*self.pos
+        return self.square
+    def __cur__(self):#return current square
+        return self.square
 
+def numbersToSum(iNumbers,sum):
+    print("print to supress compile errors")
 #problem 7
 
 def main():
@@ -155,10 +167,17 @@ def main():
 
     d = {"add": lambda x,y: (x+y), "concat3": lambda a,b,c: (a+","+b+","+c),"mod2": lambda n: (n % 2)}
 
-    funRun(d, "concat3", ["one","two"])
-    funRun(d, "concat3", ["one","two","three"])
-    funRun(d, "mod2", [40])
-
+    test1=funRun(d, "concat3", ["one","two"])
+    test2=funRun(d, "concat3", ["one","two","three"])
+    test3=funRun(d, "mod2", [40])
+    squares = iterSquares()
+    test = squares.__next__()
+    print(test)
+    test = squares.__next__()
+    print(test)
+    sqaures2 = iterSquares()
+    test2 = sqaures2.__cur__()
+    print(test2)
 
 if __name__ == "__main__":
     main()
