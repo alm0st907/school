@@ -1,15 +1,12 @@
 #garrett rudisill
 #HW3 CptS 355
-
+from functools import reduce
+from collections import OrderedDict
 #problem 1 - dictionaries
 #add dict should get the total hours studied per class
 def addDict(dict):
     keylist = dict.keys()#get all the keys from input dictionary
     #these keys are the days of the week
-    #for keys in keylist:
-    #   print("DoW Key: "+ keys)
-    #for keys in keylist:
-    #    print("Day: " + str(keys) +"; Day Contents: " + str(dict[keys]))
     studied = {}
     for keys in keylist:#loop accesses each key within a day
         daykey = dict[keys].keys()
@@ -18,15 +15,8 @@ def addDict(dict):
             val = day[subkeys]
             if subkeys not in studied: #add to the dictionary if it doesnt exist
                 studied.update({subkeys:val})
-                #print("key not in")
             else: #update the value if the key exists already
-                #print("key in")
                 studied[subkeys] += val
-            #print(str(day)+str(val))
-        #print(daykey)
-    #print(studied)
-    #sums[c] = sums.get(c,0)+val
-    #for k, v in dict.items():print (k,v)
     return studied
 
 #function to test output of the result
@@ -37,37 +27,22 @@ def testaddDict(result):
             print("test fail")
 
 def addDictN(week_list):
-    #print("ignore this")
-    #reduce the list down to the seven days of week
-    #call addDict on that reduced dictionary
-    
-    #we can use addDict to get the individual results of a week
-    # add the results from each week?
-
-    #w1 = addDict(week_list[0])
-    #w2 = addDict(week_list[1])
-    #print("Week 1 times: " + str(w1))
-    #print("week 2 times :" + str(w2))
-    #k1 = w1.keys()
-    #k2 = w2.keys()
-    #for keys in k1,k2:
-    #   print("keys"+str(keys))
     final = {} #dictionary for the results
-    #for keys in k1:
-    #    final.update({keys:w1[keys]})
-    for entry in week_list:
-        week_res = addDict(entry)
-        temp_keys = week_res.keys()
-        #print(week_res)
-        #print(temp_keys)
-        for key in temp_keys:
-            if key not in final:
-                final.update({key:week_res[key]})
+
+    def add_subs(dict1,dict2):
+        keys1=dict1.keys()
+        keys2=dict2.keys()
+        for key in keys2:
+            if key in keys1:
+                dict1[key]+=dict2[key]
             else:
-                final[key] += week_res[key]
-        #for key,value in entry.items():
-        #   print(key, value)
-    return final
+                dict1.update({key:dict2[key]})
+        return dict1
+
+    mapper= reduce(add_subs,map(addDict,week_list)) 
+    print(mapper)
+    #final result is mapper
+    return mapper
 
 #test function for addDictN
 def testaddDictN(result):
@@ -95,33 +70,24 @@ def charCount(st):
     for keys in dic_keys:
         temp = (keys, stats[keys])
         result_list.append(temp)
-    #result_list.sort()
+
     result_list.sort(key = lambda x: x[0])
     result_list.sort(key = lambda x: x[1])
     #THIS FINISHES THEsort
-
-    num_list = []
-    let_list = []
-    for ent in result_list:
-        if ent[0].isalpha():
-            num_list.append(ent)
-        else:
-            let_list.append(ent)
-    num_list.sort(key = lambda x: x[1])
-    let_list.sort(key = lambda x: x[1])
     print(result_list)
-    print(num_list)
-    print(let_list)
+    return(result_list)
 
-
-        
 
 def charCount2(st):
     #code here
-    print("ignore this")
-    test_string = "this"
-    count = test_string.count("i")
-    print(count)
+    st = st.replace(' ','')#remove whitespace
+    res2 =[(let,st.count(let)) for let in st]
+    res2.sort(key = lambda x: x[0])
+    res2.sort(key = lambda x: x[1])
+    #res2= list(set(res2))
+    res2 = list(OrderedDict.fromkeys(res2))#remove duplicates
+    print(res2)
+    return(res2)
 
 #problem 3
 def lookupVal(lst,val):
@@ -160,7 +126,9 @@ def main():
     print("addDictN Result = " + str(result))
     testaddDictN(result)
 
-    charCount("Cpts355 --- Assign1")
+    tes1 = charCount("Cpts355 --- Assign1")
+    tes2 = charCount2("Cpts355 --- Assign1")
+    print(tes1 == tes2)
 
     val = lookupVal([{"x":1,"y":True,"z":"found"},{"x":2},{"y":False}],"y")
     print(val)
