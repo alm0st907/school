@@ -108,6 +108,14 @@ def lookupVal2(lst,val):
     print("teststatement")
 
 #problem 4
+def funRun(d, name, args):
+    function = d[name] #lambda func from dictionary
+    try:
+        val = functiom(*args)#execute and return function if possible
+        return(val)
+    except:#handling not enough args/bad input
+        print("not enough args")
+    
 
 #problem 5
 def numberOfPaths(m, n):
@@ -144,6 +152,12 @@ def main():
     print(val)
 
     print(numberOfPaths(3,3))
+
+    d = {"add": lambda x,y: (x+y), "concat3": lambda a,b,c: (a+","+b+","+c),"mod2": lambda n: (n % 2)}
+
+    funRun(d, "concat3", ["one","two"])
+    funRun(d, "concat3", ["one","two","three"])
+    funRun(d, "mod2", [40])
 
 
 if __name__ == "__main__":
