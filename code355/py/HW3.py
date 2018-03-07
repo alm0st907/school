@@ -149,7 +149,6 @@ def numbersToSum(iNumbers,sum):
         cur_square = iNumbers.__next__()
     else: # preventing off by one on subsequent calls on same class
         cur_square = iNumbers.__cur__()
-        cur_sum = 0
     while  cur_sum + cur_square < sum: #checking if we are at n-1 of sum
         result.append(cur_square)
         cur_sum +=cur_square
