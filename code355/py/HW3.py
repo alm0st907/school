@@ -139,7 +139,6 @@ class iterSquares():
         return self.square
 
 def numbersToSum(iNumbers,sum):
-    print("print to supress compile errors")
     result=[]
     cur_sum = 0
     if iNumbers.__cur__() == 0: #making sure we start at 1
@@ -155,6 +154,27 @@ def numbersToSum(iNumbers,sum):
 
 
 #problem 7
+
+class Stream(object):
+    def __init__(self, first, compute_rest, empty = False):
+        self.first = first
+        self._compute_rest = compute_rest
+        self.empty = empty
+        self._rest = None
+        self._computed = False
+    @property
+    def rest(self):
+        assert not self.empty, 'Empty streams have no rest'
+        if not self._computed:
+            self._rest = self._compute_rest()
+            self._computed = True
+        return self._rest
+
+def make_integer_stream(first = 1):
+    def compute_rest():
+        return make_integer_stream(first+1)
+    return Stream(first, compute_rest)
+
 
 def main():
     add_dict_test = {'Mon':{'355':2,'451':1,'360':2},'Tue':{'451':2,'360':3}, 'Thu':{'355':3,'451':2,'360':3}, 'Fri':{'355':2}, 'Sun':{'355':1,'451':3,'360':1}}
@@ -195,5 +215,10 @@ def main():
     numbersToSum(newnewSquares,100)
     numbersToSum(newnewSquares,-1)
 
+    N = make_integer_stream(1)
+    print(N.first)
+    N = N.rest
+    print(N.first)
+    print(N.rest.first)
 if __name__ == "__main__":
     main()
