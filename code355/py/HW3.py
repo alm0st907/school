@@ -175,6 +175,18 @@ def make_integer_stream(first = 1):
         return make_integer_stream(first+1)
     return Stream(first, compute_rest)
 
+def evenStream(first = 2):
+    def compute_rest():
+        return evenStream(first + 2)
+    return Stream(first, compute_rest)
+
+def streamSquares(first = 1):
+        
+    def compute_rest():
+        return streamSquares(first*first)
+    return Stream(first,compute_rest)
+
+
 
 def main():
     add_dict_test = {'Mon':{'355':2,'451':1,'360':2},'Tue':{'451':2,'360':3}, 'Thu':{'355':3,'451':2,'360':3}, 'Fri':{'355':2}, 'Sun':{'355':1,'451':3,'360':1}}
@@ -215,10 +227,11 @@ def main():
     numbersToSum(newnewSquares,100)
     numbersToSum(newnewSquares,-1)
 
-    N = make_integer_stream(1)
-    print(N.first)
-    N = N.rest
-    print(N.first)
-    print(N.rest.first)
+    N = streamSquares()
+    lis = []
+    while N.first <25:
+        lis.append(N.first)
+        N = N.rest
+    print(lis)
 if __name__ == "__main__":
     main()
