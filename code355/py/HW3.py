@@ -143,6 +143,23 @@ class iterSquares():
 
 def numbersToSum(iNumbers,sum):
     print("print to supress compile errors")
+    result=[]
+    cur_sum = 0
+    if iNumbers.__cur__() == 0: #making sure we start at 1
+        cur_square = iNumbers.__next__()
+    else: # preventing off by one on subsequent calls on same class
+        cur_square = iNumbers.__cur__()
+        cur_sum = 0
+    while  cur_sum + cur_square < sum: #checking if we are at n-1 of sum
+        result.append(cur_square)
+        cur_sum +=cur_square
+        cur_square = iNumbers.__next__()
+        
+        
+    print(result)
+    return result
+
+
 #problem 7
 
 def main():
@@ -175,9 +192,14 @@ def main():
     print(test)
     test = squares.__next__()
     print(test)
-    sqaures2 = iterSquares()
-    test2 = sqaures2.__cur__()
-    print(test2)
+
+    newSquares = iterSquares()
+    numbersToSum(newSquares,55)
+    numbersToSum(newSquares,100)
+    newnewSquares = iterSquares()
+    numbersToSum(newnewSquares,-1)
+    numbersToSum(newnewSquares,100)
+    numbersToSum(newnewSquares,-1)
 
 if __name__ == "__main__":
     main()
