@@ -99,7 +99,7 @@ def lookupVal(lst,val):
             return ent[val]
         else:
             pass
-    #print(L2)
+    #print(L2)  
 
 def lookupVal2(lst,val):
     print("teststatement")
@@ -181,10 +181,9 @@ def evenStream(first = 2):
     return Stream(first, compute_rest)
 
 def streamSquares(first = 1):
-        
     def compute_rest():
-        return streamSquares(first*first)
-    return Stream(first,compute_rest)
+        return streamSquares(first+1)
+    return Stream(first*first,compute_rest)
 
 
 
@@ -228,10 +227,16 @@ def main():
     numbersToSum(newnewSquares,-1)
 
     N = streamSquares()
+    print(N.first)
+    N = N.rest
+    print(N.first)
+    N = N.rest
+    print(N.first)
+    N = N.rest
+    print(N.first)
+    
+    
     lis = []
-    while N.first <25:
-        lis.append(N.first)
-        N = N.rest
-    print(lis)
+
 if __name__ == "__main__":
     main()
