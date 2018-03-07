@@ -94,10 +94,7 @@ def lookupVal(lst,val):
     #code here
     #code to reverse a list, modify later to make useful
     L1 = [{"x":1,"y":True,"z":"found"},{"x":2},{"y":False}]
-    L2 = []
-    while len(L1) != 0:
-        L2.append(L1.pop())
-    for ent in L2:          
+    for ent in reversed(lst):          
         if val in ent.keys():
             return ent[val]
         else:
@@ -153,8 +150,6 @@ def numbersToSum(iNumbers,sum):
         result.append(cur_square)
         cur_sum +=cur_square
         cur_square = iNumbers.__next__()
-        
-        
     print(result)
     return result
 
