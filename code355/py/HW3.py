@@ -5,7 +5,6 @@ from functools import reduce
 from collections import OrderedDict
 import math
 import sys
-import copy
 
 #problem 1 - dictionaries
 #add dict should get the total hours studied per class
