@@ -162,13 +162,25 @@ def lookupVal2Test():
 
 #problem 4
 def funRun(d, name, args):
-    function = d[name] #lambda func from dictionary
+    try:#handles for function not in list
+        function = d[name] #lambda func from dictionary
+    except:
+        return None
     try:
         val = function(*args)#execute and return function if possible
         return(val)
     except:#handling not enough args/bad input
-        print("not enough args")
         return None
+def funRunTest():
+    d = {"add": lambda x,y: (x+y), "concat3": lambda a,b,c:(a+","+b+","+c),"mod2": lambda n: (n % 2)}
+    print("fun run test " + str(funRun(d,"concat3",["one","two","three"])=="one,two,three"))
+    print("fun run test " + str(funRun(d,"mod2",[40])==0))
+    print("fun run test "+ str(funRun(d,"mod3",[])==None))
+    print("fun run test "+ str(funRun(d,"mod2",[])==None))
+    print("fun run test "+ str(funRun([],"mod3",[])==None))
+
+
+    print()
     
 
 #problem 5
@@ -202,7 +214,6 @@ def numbersToSum(iNumbers,sum):
         result.append(cur_square)
         cur_sum +=cur_square
         cur_square = iNumbers.__next__()
-    print(result)
     return result
 
 
@@ -268,6 +279,7 @@ def test_cases():
     testCharCount2()
     lookupValTest()
     lookupVal2Test()
+    funRunTest()
 
 #where the bullshit and black magic gets executed
 def main():
