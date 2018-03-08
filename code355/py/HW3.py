@@ -125,8 +125,10 @@ def lookupVal(lst,val):
 def lookupValTest():
     L1 = [{"x":1,"y":True,"z":"found"},{"x":2},{"y":False}]
     print("lookupValTest = "+str(lookupVal(L1,"x")==2))
+    print(lookupVal(L1,"x"))
     print("lookupValTest = "+str(lookupVal(L1,"y")==False))
     print("lookupValTest = "+str(lookupVal(L1,"z")=="found"))
+    print(lookupVal(L1,"z"))
     print("lookupValTest = "+str(lookupVal(L1,"t")==None))
     print("lookupValTest = "+str(lookupVal([],"t")==None))
     print()
@@ -153,6 +155,7 @@ def lookupVal2(lst,key):
 def lookupVal2Test():
     L2 = [(0,{"x":0,"y":True,"z":"zero"}),(0,{"x":1}),(1,{"y":False}),(1,{"x":3, "z":"three"}),(2,{})]
     print("lookupValTest2 = "+str(lookupVal2(L2,"x")==1))
+    print(lookupVal2(L2,"y"))
     print("lookupValTest2 = "+str(lookupVal2(L2,"y")==False))
     print("lookupValTest2 = "+str(lookupVal2(L2,"z")=="zero"))
     print("lookupValTest2 = "+str(lookupVal2(L2,"t")==None))
