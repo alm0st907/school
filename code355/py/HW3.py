@@ -181,21 +181,21 @@ def funRunTest():
     
 
 #problem 5
-def numberOfPaths(x, y):
+def numPaths(x, y):
     if(x == 0 or y ==0):
         return 0
     #base case to exit the loop
     if(x == 1 or y == 1):
         return 1
     #recursively iterate 
-    return  numberOfPaths(x-1, y) + numberOfPaths(x, y-1)
+    return  numPaths(x-1, y) + numPaths(x, y-1)
  
 def numberOfPathsTest():
-    print("numPath tests " + str(numberOfPaths(2,2)==2))
-    print("numPath tests " + str(numberOfPaths(3,3)==6))
-    print("numPath tests " + str(numberOfPaths(0,2)==0))
-    print("numPath tests " + str(numberOfPaths(2,0)==0))
-    print("numPath tests " + str(numberOfPaths(0,0)==0))
+    print("numPath tests " + str(numPaths(2,2)==2))
+    print("numPath tests " + str(numPaths(3,3)==6))
+    print("numPath tests " + str(numPaths(0,2)==0))
+    print("numPath tests " + str(numPaths(2,0)==0))
+    print("numPath tests " + str(numPaths(0,0)==0))
     print()
 
 #problem 6
@@ -288,12 +288,12 @@ def streamSquares(square=1):
             return Stream(square,compute_rest)
 
 def evenStreamTest():
-    sqStream = streamSquares(25)
+    sqStream = evenStream(streamSquares(9))
     lst = []
     while sqStream.first <225:
         lst.append(sqStream.first)
         sqStream = sqStream.rest
-    if lst == [25, 36, 49, 64, 81, 100, 121, 144, 169, 196]:
+    if lst == [16, 36, 64, 100, 144, 196]:
         print("Even stream test true")
     else:
         print("even stream test failed")
@@ -306,6 +306,7 @@ def test_cases():
     lookupValTest()
     lookupVal2Test()
     funRunTest()
+    numberOfPathsTest()
     numbersToSumTest()
     evenStreamTest()
 
