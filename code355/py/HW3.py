@@ -92,17 +92,32 @@ def charCount2(st):
     print(res2)
     return(res2)
 
+def testCharCount(result):
+    if result == [('1', 1), ('3', 1), ('A', 1), ('C', 1), ('g', 1), ('i', 1), ('n', 1),('p', 1), ('t', 1), ('5', 2), ('-', 3), ('s', 3)]:
+        print("char count test pass")
+    else:
+        print("char count fail")
+    
 #problem 3
 def lookupVal(lst,val):
     #code here
     #code to reverse a list, modify later to make useful
+    try:
+        for ent in reversed(lst):          
+            if val in ent.keys():
+                return ent[val]
+            else:
+                return None
+    except:
+        return None
+    
+def lookupValTest():
     L1 = [{"x":1,"y":True,"z":"found"},{"x":2},{"y":False}]
-    for ent in reversed(lst):          
-        if val in ent.keys():
-            return ent[val]
-        else:
-            pass
-    #print(L2)  
+    print("lookupValTest = "+str(lookupVal(L1,"x")==2))
+    print("lookupValTest = "+str(lookupVal(L1,"y")==False))
+    print("lookupValTest = "+str(lookupVal(L1,"z")=="found"))
+    print("lookupValTest = "+str(lookupVal(L1,"t")==None))
+    print("lookupValTest = "+str(lookupVal([],"t")==None))
 
 def lookupVal2(lst,key):
     #use a subfunction to handle the jumping from index to index
@@ -123,6 +138,13 @@ def lookupVal2(lst,key):
         return helper(lst,len(lst)-1,key)#len(lst)-1 to iterate backwards
     except:
         return None
+def lookupVal2Test():
+    L2 = [(0,{"x":0,"y":True,"z":"zero"}),(0,{"x":1}),(1,{"y":False}),(1,{"x":3, "z":"three"}),(2,{})]
+    print("lookupValTest2 = "+str(lookupVal2(L2,"x")==1))
+    print("lookupValTest2 = "+str(lookupVal2(L2,"y")==False))
+    print("lookupValTest2 = "+str(lookupVal2(L2,"z")=="zero"))
+    print("lookupValTest2 = "+str(lookupVal2(L2,"t")==None))
+    print("lookupValTest2 = "+str(lookupVal2([],"t")==None))
 
 #problem 4
 def funRun(d, name, args):
