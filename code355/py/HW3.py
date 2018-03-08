@@ -5,6 +5,7 @@ from functools import reduce
 from collections import OrderedDict
 import math
 import sys
+import copy
 
 #problem 1 - dictionaries
 #add dict should get the total hours studied per class
@@ -114,21 +115,19 @@ def lookupVal(lst,val):
     #code here
     #code to reverse a list, modify later to make useful
     try:
-        for ent in reversed(lst):          
+        for ent in reversed(lst):
             if val in ent.keys():
                 return ent[val]
             else:
-                return None
+                pass
     except:
         return None
     
 def lookupValTest():
     L1 = [{"x":1,"y":True,"z":"found"},{"x":2},{"y":False}]
     print("lookupValTest = "+str(lookupVal(L1,"x")==2))
-    print(lookupVal(L1,"x"))
     print("lookupValTest = "+str(lookupVal(L1,"y")==False))
     print("lookupValTest = "+str(lookupVal(L1,"z")=="found"))
-    print(lookupVal(L1,"z"))
     print("lookupValTest = "+str(lookupVal(L1,"t")==None))
     print("lookupValTest = "+str(lookupVal([],"t")==None))
     print()
@@ -144,22 +143,22 @@ def lookupVal2(lst,key):
             return None
 
         else:
-            (index,x) = lst[ind] #get next index
-            x = lst.pop(ind) #pop last entry in list, reduces size
+            index,x = lst[ind] #get next index
             return helper(lst,index,key)
     #run in a try block to try and handle anything sam can throw at it
     try:
-        return helper(lst,len(lst)-1,key)#len(lst)-1 to iterate backwards
+        return helper(lst,(lst.__len__())-1,key)
     except:
-        return None
+        return None            
+
 def lookupVal2Test():
     L2 = [(0,{"x":0,"y":True,"z":"zero"}),(0,{"x":1}),(1,{"y":False}),(1,{"x":3, "z":"three"}),(2,{})]
     print("lookupValTest2 = "+str(lookupVal2(L2,"x")==1))
-    print(lookupVal2(L2,"y"))
     print("lookupValTest2 = "+str(lookupVal2(L2,"y")==False))
     print("lookupValTest2 = "+str(lookupVal2(L2,"z")=="zero"))
     print("lookupValTest2 = "+str(lookupVal2(L2,"t")==None))
     print("lookupValTest2 = "+str(lookupVal2([],"t")==None))
+    print()
 
 #problem 4
 def funRun(d, name, args):
