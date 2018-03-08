@@ -288,6 +288,17 @@ def streamSquares(square=1):
                 return streamSquares(new_sqr)
             return Stream(square,compute_rest)
 
+def evenStreamTest():
+    sqStream = streamSquares(25)
+    lst = []
+    while sqStream.first <225:
+        lst.append(sqStream.first)
+        sqStream = sqStream.rest
+    if lst == [25, 36, 49, 64, 81, 100, 121, 144, 169, 196]:
+        print("Even stream test true")
+    else:
+        print("even stream test failed")
+
 def test_cases():
     testaddDict()
     testaddDictN()
@@ -297,6 +308,7 @@ def test_cases():
     lookupVal2Test()
     funRunTest()
     numbersToSumTest()
+    evenStreamTest()
 
 #where the bullshit and black magic gets executed
 def main():
