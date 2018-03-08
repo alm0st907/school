@@ -37,66 +37,77 @@ def addDictN(week_list):
         return dict1
 
     mapper= reduce(add_subs,map(addDict,week_list)) 
-    print(mapper)
     #final result is mapper
     return mapper
 
 #function to test output of the result
-def testaddDict(result):
-        if result == {'355': 8, '451': 8, '360': 9}:
-            print("test pass")
-        else:
-            print("test fail")
+def testaddDict():
+    week = {'Mon':{'355':2,'451':1,'360':2},'Tue':{'451':2,'360':3},'Thu':{'355':3,'451':2,'360':3}, 'Fri':{'355':2},'Sun':{'355':1,'451':3,'360':1}}
+    result = {'355': 8, '451': 8, '360': 9}
+    print("addDict Test "+str(addDict(week)==result))
+    print()
 
 #test function for addDictN
-def testaddDictN(result):
-    if result == {'355': 16, '360': 24, '451': 6}:
-        print("test pass")
-    else:
-        print("test fail")
+def testaddDictN():
+    log = [{'Mon':{'355':2,'360':2},'Tue':{'451':2,'360':3},'Thu':{'360':3},'Fri':{'355':2}, 'Sun':{'355':1}},{'Tue':{'360':2},'Wed':{'355':2},'Fri':{'360':3, '355':1}},{'Mon':{'360':5},'Wed':{'451':4},'Thu':{'355':3},'Fri':{'360':6},'Sun':{'355':5}}]
+    result = {'355': 16, '360': 24, '451': 6}
+    print("addDictN Test "+str(addDictN(log)==result))
+    print()
 
 #problem 2 code
 #needs to be sorted then stored to a list
 def charCount(st):
     #write your code here
-    stats = {}
-    for letter in st:
-        if letter == ' ':
-            pass
-        elif letter not in stats:
-            stats.update({letter:1})
-        else:
-            stats[letter] +=1
-    dic_keys = stats.keys()
+    try:
+        stats = {}
+        for letter in st:
+            if letter == ' ':
+                pass
+            elif letter not in stats:
+                stats.update({letter:1})
+            else:
+                stats[letter] +=1
+        dic_keys = stats.keys()
 
-    result_list = []
+        result_list = []
 
-    for keys in dic_keys:
-        temp = (keys, stats[keys])
-        result_list.append(temp)
+        for keys in dic_keys:
+            temp = (keys, stats[keys])
+            result_list.append(temp)
 
-    result_list.sort(key = lambda x: x[0])
-    result_list.sort(key = lambda x: x[1])
-    #THIS FINISHES THEsort
-    print(result_list)
-    return(result_list)
+        result_list.sort(key = lambda x: x[0])
+        result_list.sort(key = lambda x: x[1])
+        #THIS FINISHES THEsort
+        return(result_list)
+    except:
+        return []
 
 
 def charCount2(st):
     #code here
-    st = st.replace(' ','')#remove whitespace
-    res2 =[(let,st.count(let)) for let in st] #list comprehens
-    res2.sort(key = lambda x: x[0])
-    res2.sort(key = lambda x: x[1])
-    res2 = list(OrderedDict.fromkeys(res2))#remove duplicates
-    print(res2)
-    return(res2)
+    try:
+        st = st.replace(' ','')#remove whitespace
+        res2 =[(let,st.count(let)) for let in st] #list comprehens
+        res2.sort(key = lambda x: x[0])
+        res2.sort(key = lambda x: x[1])
+        res2 = list(OrderedDict.fromkeys(res2))#remove duplicates
+        return(res2)
+    except:
+        return []
 
-def testCharCount(result):
-    if result == [('1', 1), ('3', 1), ('A', 1), ('C', 1), ('g', 1), ('i', 1), ('n', 1),('p', 1), ('t', 1), ('5', 2), ('-', 3), ('s', 3)]:
-        print("char count test pass")
-    else:
-        print("char count fail")
+def testCharCount():
+    st="Cpts355 --- Assign1"
+    result = [('1', 1), ('3', 1), ('A', 1), ('C', 1), ('g', 1), ('i', 1), ('n', 1),('p', 1), ('t', 1), ('5', 2), ('-', 3), ('s', 3)]
+    print("char count test " + str(charCount(st)==result))
+    print("char count test " + str(charCount("")==[]))
+    print()
+
+def testCharCount2():
+    st="Cpts355 --- Assign1"
+    result = [('1', 1), ('3', 1), ('A', 1), ('C', 1), ('g', 1), ('i', 1), ('n', 1),('p', 1), ('t', 1), ('5', 2), ('-', 3), ('s', 3)]
+    print("char count2 test " + str(charCount2(st)==result))
+    print("char count2 test " + str(charCount2("")==[]))
+    print()
     
 #problem 3
 def lookupVal(lst,val):
@@ -118,6 +129,7 @@ def lookupValTest():
     print("lookupValTest = "+str(lookupVal(L1,"z")=="found"))
     print("lookupValTest = "+str(lookupVal(L1,"t")==None))
     print("lookupValTest = "+str(lookupVal([],"t")==None))
+    print()
 
 def lookupVal2(lst,key):
     #use a subfunction to handle the jumping from index to index
@@ -247,85 +259,21 @@ def streamSquares(square=1):
                 return streamSquares(new_sqr)
             return Stream(square,compute_rest)
 
+def test_cases():
+    testaddDict()
+    testaddDictN()
+    testCharCount()
+    testCharCount2()
+    lookupValTest()
+    lookupVal2Test()
+
 #where the bullshit and black magic gets executed
 def main():
-    add_dict_test = {'Mon':{'355':2,'451':1,'360':2},'Tue':{'451':2,'360':3}, 'Thu':{'355':3,'451':2,'360':3}, 'Fri':{'355':2}, 'Sun':{'355':1,'451':3,'360':1}}
-    result = addDict(add_dict_test)
-    print("addDict Result = " + str(result))
-    testaddDict(result)
-
-    addDictN_testval = [{'Mon':{'355':2,'360':2},'Tue':{'451':2,'360':3},'Thu':{'360':3}, 'Fri':{'355':2}, 'Sun':{'355':1}}, {'Tue':{'360':2},'Wed':{'355':2},'Fri':{'360':3, '355':1}}, {'Mon':{'360':5},'Wed':{'451':4},'Thu':{'355':3},'Fri':{'360':6}, 'Sun':{'355':5}}]
-    result = addDictN(addDictN_testval)
-    print("addDictN Result = " + str(result))
-    testaddDictN(result)
-
-    tes1 = charCount("Cpts355 --- Assign1")
-    tes2 = charCount2("Cpts355 --- Assign1")
-    print(tes1 == tes2)
-
-    val = lookupVal([{"x":1,"y":True,"z":"found"},{"x":2},{"y":False}],"y")
-    print(val)
-
-    print(numberOfPaths(3,3))
-
-    d = {"add": lambda x,y: (x+y), "concat3": lambda a,b,c: (a+","+b+","+c),"mod2": lambda n: (n % 2)}
-
-    test1=funRun(d, "concat3", ["one","two"])
-    test2=funRun(d, "concat3", ["one","two","three"])
-    test3=funRun(d, "mod2", [40])
-    squares = iterSquares()
-    test = squares.__next__()
-    print(test)
-    test = squares.__next__()
-    print(test)
-
-    #newSquares = iterSquares()
-    #numbersToSum(newSquares,55)
-    #numbersToSum(newSquares,100)
-    #newnewSquares = iterSquares()
-    #numbersToSum(newnewSquares,-1)
-    #numbersToSum(newnewSquares,100)
-    #numbersToSum(newnewSquares,-1)
-    print("stream squares testing")
-    N = streamSquares()
-    print(N.first)
-    N = N.rest
-    print(N.first)
-    N = N.rest
-    print(N.first)
-    #N = N.rest
-    #print(N.first)
-    
-    sqStream = streamSquares(25)
-    myList = []
-    while sqStream.first < 225:
-        myList.append(sqStream.first)
-        sqStream =sqStream.rest
-    print(myList)
-    evenS = evenStream(streamSquares(9))
-    myList = []
-    while evenS.first < 225:
-        myList.append(evenS.first)
-        evenS = evenS.rest
-    print(myList)
-
-
-    extra_test = evenStream(make_integer_stream(220))
-    myList = []
-    while extra_test.first < 225:
-        myList.append(extra_test.first)
-        extra_test = extra_test.rest
-    print(myList)
-    L2 = [(0,{"x":0,"y":True,"z":"zero"}),(0,{"x":1}),(1,{"y":False}),(1,{"x":3, "z":"three"}),(2,{})]
-    val = lookupVal2(L2,"x")
-    print(val)
-    val = lookupVal2(L2,"y")
-    print(val)
-    val = lookupVal2(L2,"z")
-    print(val)
-    val = lookupVal2(L2,"t")
-    print(val)
-    val = lookupVal2([],"x")
-    print(val)
+    mytests = True
+    if mytests == True:
+        print("Running my tests")
+        test_cases()
+    else:
+        print("Executing your tests")
 if __name__ == "__main__":
     main()
