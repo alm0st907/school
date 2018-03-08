@@ -2,6 +2,7 @@
 #HW3 CptS 355
 from functools import reduce
 from collections import OrderedDict
+import math
 #problem 1 - dictionaries
 #add dict should get the total hours studied per class
 def addDict(dict):
@@ -180,10 +181,23 @@ def evenStream(first = 2):
         return evenStream(first + 2)
     return Stream(first, compute_rest)
 
-def streamSquares(first = 1):
-    def compute_rest():
-        return streamSquares(first+1)
-    return Stream(first*first,compute_rest)
+def streamSquares(square):
+   
+    root = math.sqrt(square)
+    root+=1
+    new_sqr = root* root
+    new_sqr = int(new_sqr)
+    if square == 1:
+        def compute_rest():
+            return streamSquares(4)
+        return Stream(square,compute_rest)
+    else:
+        def compute_rest():
+            return streamSquares(new_sqr)
+        return Stream(square,compute_rest)
+
+     
+
 
 
 
@@ -218,22 +232,22 @@ def main():
     test = squares.__next__()
     print(test)
 
-    newSquares = iterSquares()
-    numbersToSum(newSquares,55)
-    numbersToSum(newSquares,100)
-    newnewSquares = iterSquares()
-    numbersToSum(newnewSquares,-1)
-    numbersToSum(newnewSquares,100)
-    numbersToSum(newnewSquares,-1)
-
-    N = streamSquares()
+    #newSquares = iterSquares()
+    #numbersToSum(newSquares,55)
+    #numbersToSum(newSquares,100)
+    #newnewSquares = iterSquares()
+    #numbersToSum(newnewSquares,-1)
+    #numbersToSum(newnewSquares,100)
+    #numbersToSum(newnewSquares,-1)
+    print("stream squares testing")
+    N = streamSquares(9)
     print(N.first)
     N = N.rest
     print(N.first)
     N = N.rest
     print(N.first)
-    N = N.rest
-    print(N.first)
+    #N = N.rest
+    #print(N.first)
     
     
     lis = []
