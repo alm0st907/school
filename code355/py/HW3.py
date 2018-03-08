@@ -143,8 +143,8 @@ def lookupVal2(lst,key):
             return None
 
         else:
-            index,x = lst[ind] #get next index
-            return helper(lst,index,key)
+            temp = lst[ind] #get next index by nab the tuple
+            return helper(lst,temp[0],key) #access index by accessing first of tuple
     #run in a try block to try and handle anything sam can throw at it
     try:
         return helper(lst,(lst.__len__())-1,key)
