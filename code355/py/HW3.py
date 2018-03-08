@@ -177,13 +177,29 @@ def make_integer_stream(first = 1):
         return make_integer_stream(first+1)
     return Stream(first, compute_rest)
 
-def evenStream(first = 2):
-    def compute_rest():
-        return evenStream(first + 2)
-    return Stream(first, compute_rest)
+def evenStream(streamObj):
+    #N = streamSquares()
+    #print(N.first)
+    #N = N.rest
+    temp = streamObj.first
+    print(temp)
+    if temp % 2 == 0:
+        def compute_rest():
+            return evenStream(streamObj.rest)
+        return Stream(temp,compute_rest)
+    else:
+        while temp % 2 != 0:
+            streamObj = streamObj.rest
+            temp = streamObj.first
+            print("inner loop test = "+str(temp))
+
+        def compute_rest():
+            return evenStream(streamObj.rest)
+        return Stream(temp,compute_rest)
 
 def streamSquares(square=1):
     if(square % math.sqrt(square) != 0):
+        print("stop trying to break my code dammit")
         return sys.exit("exiting due to non integer root")
     else:
         root = math.sqrt(square)
@@ -252,8 +268,26 @@ def main():
     #N = N.rest
     #print(N.first)
     
-    
-    lis = []
+    sqStream = streamSquares(25)
+    myList = []
+    while sqStream.first < 225:
+        myList.append(sqStream.first)
+        sqStream =sqStream.rest
+    print(myList)
+    evenS = evenStream(streamSquares(9))
+    myList = []
+    while evenS.first < 225:
+        myList.append(evenS.first)
+        evenS = evenS.rest
+    print(myList)
+
+
+    extra_test = evenStream(make_integer_stream(220))
+    myList = []
+    while extra_test.first < 225:
+        myList.append(extra_test.first)
+        extra_test = extra_test.rest
+    print(myList)
 
 if __name__ == "__main__":
     main()
