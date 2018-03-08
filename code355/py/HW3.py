@@ -3,6 +3,7 @@
 from functools import reduce
 from collections import OrderedDict
 import math
+import sys
 #problem 1 - dictionaries
 #add dict should get the total hours studied per class
 def addDict(dict):
@@ -181,20 +182,22 @@ def evenStream(first = 2):
         return evenStream(first + 2)
     return Stream(first, compute_rest)
 
-def streamSquares(square):
-   
-    root = math.sqrt(square)
-    root+=1
-    new_sqr = root* root
-    new_sqr = int(new_sqr)
-    if square == 1:
-        def compute_rest():
-            return streamSquares(4)
-        return Stream(square,compute_rest)
+def streamSquares(square=1):
+    if(square % math.sqrt(square) != 0):
+        return sys.exit("exiting due to non integer root")
     else:
-        def compute_rest():
-            return streamSquares(new_sqr)
-        return Stream(square,compute_rest)
+        root = math.sqrt(square)
+        root+=1
+        new_sqr = root* root
+        new_sqr = int(new_sqr)
+        if square == 1:
+            def compute_rest():
+                return streamSquares(4)
+            return Stream(square,compute_rest)
+        else:
+            def compute_rest():
+                return streamSquares(new_sqr)
+            return Stream(square,compute_rest)
 
      
 
@@ -240,7 +243,7 @@ def main():
     #numbersToSum(newnewSquares,100)
     #numbersToSum(newnewSquares,-1)
     print("stream squares testing")
-    N = streamSquares(9)
+    N = streamSquares()
     print(N.first)
     N = N.rest
     print(N.first)
