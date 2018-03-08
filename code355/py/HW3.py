@@ -178,19 +178,27 @@ def funRunTest():
     print("fun run test "+ str(funRun(d,"mod3",[])==None))
     print("fun run test "+ str(funRun(d,"mod2",[])==None))
     print("fun run test "+ str(funRun([],"mod3",[])==None))
-
-
     print()
     
 
 #problem 5
 def numberOfPaths(x, y):
+    if(x == 0 or y ==0):
+        return 0
     #base case to exit the loop
     if(x == 1 or y == 1):
         return 1
     #recursively iterate 
     return  numberOfPaths(x-1, y) + numberOfPaths(x, y-1)
  
+def numberOfPathsTest():
+    print("numPath tests " + str(numberOfPaths(2,2)==2))
+    print("numPath tests " + str(numberOfPaths(3,3)==6))
+    print("numPath tests " + str(numberOfPaths(0,2)==0))
+    print("numPath tests " + str(numberOfPaths(2,0)==0))
+    print("numPath tests " + str(numberOfPaths(0,0)==0))
+    print()
+
 #problem 6
 class iterSquares():
     def __init__(self):#constructor for the class
@@ -216,6 +224,14 @@ def numbersToSum(iNumbers,sum):
         cur_square = iNumbers.__next__()
     return result
 
+def numbersToSumTest():
+    squares = iterSquares()
+    test = numbersToSum(squares,55)
+    test2 = numbersToSum(squares,100)
+    if test ==[1, 4, 9, 16] and test2 ==[25, 36]:
+        print("numToSum tests True")
+    else:
+        print("numToSum pass fail")
 
 #problem 7
 
@@ -280,6 +296,7 @@ def test_cases():
     lookupValTest()
     lookupVal2Test()
     funRunTest()
+    numbersToSumTest()
 
 #where the bullshit and black magic gets executed
 def main():
