@@ -1,9 +1,11 @@
 #garrett rudisill
-#HW3 CptS 355
+#WSU ID 11461816
+#HW3 "py-ton" CptS 355
 from functools import reduce
 from collections import OrderedDict
 import math
 import sys
+
 #problem 1 - dictionaries
 #add dict should get the total hours studied per class
 def addDict(dict):
@@ -20,13 +22,6 @@ def addDict(dict):
             else: #update the value if the key exists already
                 studied[subkeys] += val
     return studied
-
-#function to test output of the result
-def testaddDict(result):
-        if result == {'355': 8, '451': 8, '360': 9}:
-            print("test pass")
-        else:
-            print("test fail")
 
 def addDictN(week_list):
     final = {} #dictionary for the results
@@ -45,6 +40,13 @@ def addDictN(week_list):
     print(mapper)
     #final result is mapper
     return mapper
+
+#function to test output of the result
+def testaddDict(result):
+        if result == {'355': 8, '451': 8, '360': 9}:
+            print("test pass")
+        else:
+            print("test fail")
 
 #test function for addDictN
 def testaddDictN(result):
@@ -83,10 +85,9 @@ def charCount(st):
 def charCount2(st):
     #code here
     st = st.replace(' ','')#remove whitespace
-    res2 =[(let,st.count(let)) for let in st]
+    res2 =[(let,st.count(let)) for let in st] #list comprehens
     res2.sort(key = lambda x: x[0])
     res2.sort(key = lambda x: x[1])
-    #res2= list(set(res2))
     res2 = list(OrderedDict.fromkeys(res2))#remove duplicates
     print(res2)
     return(res2)
@@ -103,8 +104,25 @@ def lookupVal(lst,val):
             pass
     #print(L2)  
 
-def lookupVal2(lst,val):
-    print("teststatement")
+def lookupVal2(lst,key):
+    #use a subfunction to handle the jumping from index to index
+    #this hanldes the non linear jumps via the given index in the dictionary
+    def helper(lst, ind, key):
+        if key in lst[ind][1]:# key is in one of the dictionaries
+            return lst[ind][1][key]#return the value
+
+        elif ind == lst[ind][0]: #handling cur_ind = next_ind; key!=present
+            return None
+
+        else:
+            (index,x) = lst[ind] #get next index
+            x = lst.pop(ind) #pop last entry in list, reduces size
+            return helper(lst,index,key)
+    #run in a try block to try and handle anything sam can throw at it
+    try:
+        return helper(lst,len(lst)-1,key)#len(lst)-1 to iterate backwards
+    except:
+        return None
 
 #problem 4
 def funRun(d, name, args):
@@ -114,19 +132,16 @@ def funRun(d, name, args):
         return(val)
     except:#handling not enough args/bad input
         print("not enough args")
+        return None
     
 
 #problem 5
-def numberOfPaths(m, n):
-   # If either given row number is first
-   # or given column number is first
-   if(m == 1 or n == 1):
+def numberOfPaths(x, y):
+    #base case to exit the loop
+    if(x == 1 or y == 1):
         return 1
-   
-   # If diagonal movements are allowed
-   # then the last addition
-   # is required.
-   return  numberOfPaths(m-1, n) + numberOfPaths(m, n-1)
+    #recursively iterate 
+    return  numberOfPaths(x-1, y) + numberOfPaths(x, y-1)
  
 #problem 6
 class iterSquares():
@@ -158,68 +173,59 @@ def numbersToSum(iNumbers,sum):
 #problem 7
 
 class Stream(object):
-    def __init__(self, first, compute_rest, empty = False):
+    def __init__(self, first, compute_rest, empty = False):#construct
         self.first = first
         self._compute_rest = compute_rest
         self.empty = empty
         self._rest = None
         self._computed = False
     @property
-    def rest(self):
+    def rest(self):#rest property to call on stream objects
         assert not self.empty, 'Empty streams have no rest'
         if not self._computed:
             self._rest = self._compute_rest()
             self._computed = True
         return self._rest
 
-def make_integer_stream(first = 1):
+def make_integer_stream(first = 1):#default construct is 1, or what is passed in
     def compute_rest():
-        return make_integer_stream(first+1)
-    return Stream(first, compute_rest)
+        return make_integer_stream(first+1)#increment up
+    return Stream(first, compute_rest)#return integer, call increment
 
 def evenStream(streamObj):
-    #N = streamSquares()
-    #print(N.first)
-    #N = N.rest
     temp = streamObj.first
-    print(temp)
-    if temp % 2 == 0:
+    if temp % 2 == 0:#check if stream obj is even
         def compute_rest():
             return evenStream(streamObj.rest)
-        return Stream(temp,compute_rest)
-    else:
-        while temp % 2 != 0:
+        return Stream(temp,compute_rest)#return even and increment stream
+    else:#stream obj isnt returning an even num
+        while temp % 2 != 0:#loop to iterate until even
             streamObj = streamObj.rest
             temp = streamObj.first
-            print("inner loop test = "+str(temp))
-
         def compute_rest():
             return evenStream(streamObj.rest)
         return Stream(temp,compute_rest)
 
 def streamSquares(square=1):
-    if(square % math.sqrt(square) != 0):
+    if(square % math.sqrt(square) != 0):#check for a int root/square
+    #this guaruntees 1, or a square is coming in for expected output
         print("stop trying to break my code dammit")
         return sys.exit("exiting due to non integer root")
     else:
-        root = math.sqrt(square)
-        root+=1
-        new_sqr = root* root
-        new_sqr = int(new_sqr)
-        if square == 1:
+        root = math.sqrt(square)#get square root of what is passed in
+        root+=1#increment up for next square
+        new_sqr = root* root #make the square
+        new_sqr = int(new_sqr)#cast as int just to make sure
+        if square == 1:#making sure that it properly increments up from 1
             def compute_rest():
                 return streamSquares(4)
             return Stream(square,compute_rest)
-        else:
+        else:#any other number
             def compute_rest():
                 return streamSquares(new_sqr)
             return Stream(square,compute_rest)
 
-     
-
-
-
-
+#where the bullshit and black magic gets executed
 def main():
     add_dict_test = {'Mon':{'355':2,'451':1,'360':2},'Tue':{'451':2,'360':3}, 'Thu':{'355':3,'451':2,'360':3}, 'Fri':{'355':2}, 'Sun':{'355':1,'451':3,'360':1}}
     result = addDict(add_dict_test)
@@ -288,6 +294,16 @@ def main():
         myList.append(extra_test.first)
         extra_test = extra_test.rest
     print(myList)
-
+    L2 = [(0,{"x":0,"y":True,"z":"zero"}),(0,{"x":1}),(1,{"y":False}),(1,{"x":3, "z":"three"}),(2,{})]
+    val = lookupVal2(L2,"x")
+    print(val)
+    val = lookupVal2(L2,"y")
+    print(val)
+    val = lookupVal2(L2,"z")
+    print(val)
+    val = lookupVal2(L2,"t")
+    print(val)
+    val = lookupVal2([],"x")
+    print(val)
 if __name__ == "__main__":
     main()
