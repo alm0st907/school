@@ -335,7 +335,7 @@ def test_cases():
 def main():
     mytests = True
     if mytests == True:
-        print("Running my tests")
+        print("Running my tests, set mytests at line 336 to false to disable")
         test_cases()
     else:
         print("Executing your tests")
