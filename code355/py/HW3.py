@@ -182,7 +182,7 @@ def funRunTest():
 
 #problem 5
 def numPaths(x, y):
-    if(x == 0 or y ==0):
+    if(x <= 0 or y <=0): #stop trying to break my code plz
         return 0
     #base case to exit the loop
     if(x == 1 or y == 1):
