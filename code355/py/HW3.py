@@ -227,7 +227,8 @@ def numbersToSumTest():
     squares = iterSquares()
     test = numbersToSum(squares,55)
     test2 = numbersToSum(squares,100)
-    if test ==[1, 4, 9, 16] and test2 ==[25, 36]:
+    test3 = numbersToSum(iterSquares(),100)
+    if test ==[1, 4, 9, 16] and test2 ==[25, 36] and test3 == [1,4,9,16,25,36]:
         print("numToSum tests True")
     else:
         print("numToSum pass fail")
@@ -294,6 +295,26 @@ def evenStreamTest():
         lst.append(sqStream.first)
         sqStream = sqStream.rest
     if lst == [16, 36, 64, 100, 144, 196]:
+        print("Even stream test true")
+    else:
+        print("even stream test failed")
+    
+    sqStream = evenStream(streamSquares())
+    lst2 = []
+    while sqStream.first <225:
+        lst2.append(sqStream.first)
+        sqStream = sqStream.rest
+    if lst2 == [4,16, 36, 64, 100, 144, 196]:
+        print("Even stream test true")
+    else:
+        print("even stream test failed")
+        
+    sqStream = evenStream(streamSquares(64))
+    lst2 = []
+    while sqStream.first <225:
+        lst2.append(sqStream.first)
+        sqStream = sqStream.rest
+    if lst2 == [64, 100, 144, 196]:
         print("Even stream test true")
     else:
         print("even stream test failed")
