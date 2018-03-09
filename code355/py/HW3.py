@@ -114,6 +114,8 @@ def testCharCount():
     result = [('1', 1), ('3', 1), ('A', 1), ('C', 1), ('g', 1), ('i', 1), ('n', 1),('p', 1), ('t', 1), ('5', 2), ('-', 3), ('s', 3)]
     print("char count test " + str(charCount(st)==result))
     print("char count test " + str(charCount("")==[]))
+    print("char count test " + str(charCount(" ")==[]))
+
     print()
 
 def testCharCount2():
@@ -121,6 +123,8 @@ def testCharCount2():
     result = [('1', 1), ('3', 1), ('A', 1), ('C', 1), ('g', 1), ('i', 1), ('n', 1),('p', 1), ('t', 1), ('5', 2), ('-', 3), ('s', 3)]
     print("char count2 test " + str(charCount2(st)==result))
     print("char count2 test " + str(charCount2("")==[]))
+    print("char count2 test " + str(charCount2(" ")==[]))
+
     print()
     
 #problem 3
