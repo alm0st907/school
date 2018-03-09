@@ -25,7 +25,8 @@ def addDict(dict):
 
 def addDictN(week_list):
     final = {} #dictionary for the results
-
+    if week_list == []:
+        return final
     def add_subs(dict1,dict2):
         keys1=dict1.keys()
         keys2=dict2.keys()
@@ -57,7 +58,14 @@ def testaddDict():
 def testaddDictN():
     log = [{'Mon':{'355':2,'360':2},'Tue':{'451':2,'360':3},'Thu':{'360':3},'Fri':{'355':2}, 'Sun':{'355':1}},{'Tue':{'360':2},'Wed':{'355':2},'Fri':{'360':3, '355':1}},{'Mon':{'360':5},'Wed':{'451':4},'Thu':{'355':3},'Fri':{'360':6},'Sun':{'355':5}}]
     result = {'355': 16, '360': 24, '451': 6}
+    log2 = [{'Mon':{'355':2,'451':1,'360':2},'Tue':{'451':2,'360':3},'Thu':{'355':3,'451':2,'360':3}, 'Fri':{'355':2}, 'Sun':{'355':1,'451':3,'360':1}}]
+    result2 = {'355': 8, '451': 8, '360': 9}
+    
     print("addDictN Test "+str(addDictN(log)==result))
+    print("addDictN Test "+str(addDictN([])=={}))
+    print("addDictN Test "+str(addDictN(log2)==result2))
+
+
     print()
 
 #problem 2 code
