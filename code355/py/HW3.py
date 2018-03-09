@@ -42,9 +42,15 @@ def addDictN(week_list):
 
 #function to test output of the result
 def testaddDict():
+    print()
     week = {'Mon':{'355':2,'451':1,'360':2},'Tue':{'451':2,'360':3},'Thu':{'355':3,'451':2,'360':3}, 'Fri':{'355':2},'Sun':{'355':1,'451':3,'360':1}}
     result = {'355': 8, '451': 8, '360': 9}
+    week2 = {'Mon':{'355':2,'451':1,'360':2},'Tue':{'451':2,'360':3}}
+    result2 = {'355': 2, '451': 3, '360': 5}
     print("addDict Test "+str(addDict(week)==result))
+    print("addDict Test "+str(addDict({})=={}))
+    print("addDict Test "+str(addDict(week2)==result2))
+
     print()
 
 #test function for addDictN
