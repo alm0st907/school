@@ -5,20 +5,21 @@
 opstack = []
 
 def opPop():
-    pass
+    return opstack.pop()
 
 def opPush(val):
-    pass
+    #probably more to be done here
+    opstack.append(val)
 
 #dictionary stack
 #-----------------------
 dictstack = []
 
 def dictPop():
-    pass
+    return dictstack.pop()
 
 def dictPush(d):
-    pass
+    dictstack.append(d)
 
 def define(name,val):
     pass
