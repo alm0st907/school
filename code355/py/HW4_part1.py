@@ -9,6 +9,8 @@ def opPop():
 
 def opPush(val):
     #probably more to be done here
+    #use isinstance or type() to check for a type for error checking push
+
     opstack.append(val)
 
 #dictionary stack
@@ -19,6 +21,7 @@ def dictPop():
     return dictstack.pop()
 
 def dictPush(d):
+    #use isinstance or type() to check for a type for error checking push
     dictstack.append(d)
 
 def define(name,val):
