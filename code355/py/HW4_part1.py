@@ -25,10 +25,21 @@ def dictPush(d):
     dictstack.append(d)
 
 def define(name,val):
-    pass
+    if dictstack == []:
+        d = {}
+        d[name] = val
+        dictstack.append(d)
+    else:
+        #push to top of dictionary of dict stack
+        (dictstack[-1])[name] = val
 
 def lookup(name):
-    pass
+    operable_dict = reversed(dictstack)
+    for d in operable_dict:
+        if name in d:
+            return d[name]
+    else:
+        print("Name is not defined")
 
 #we gon shoot at ops
 #-----
@@ -37,6 +48,31 @@ def lookup(name):
 #mul
 #div
 #mod
+def add():
+    op1 = opPop()
+    op2 = opPop()
+    opstack.append(op1+op2)
+
+def sub():
+    op1 = opPop()
+    op2 = opPop()
+    opstack.append(op1-op2)
+
+def mul():
+    op1 = opPop()
+    op2 = opPop()
+    opstack.append(op1*op2)
+
+def div():
+    op1 = opPop()
+    op2 = opPop()
+    opstack.append(op1/op2)
+
+def mod():
+    op1 = opPop()
+    op2 = opPop()
+    opstack.append(op1%op2)
+
 
 #array ops
 #---------
