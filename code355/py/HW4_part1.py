@@ -33,6 +33,7 @@ def define(name,val):
         #push to top of dictionary of dict stack
         (dictstack[-1])[name] = val
 
+#check this
 def lookup(name):
     operable_dict = reversed(dictstack)
     for d in operable_dict:
@@ -44,7 +45,7 @@ def lookup(name):
 #we gon shoot at ops
 #-----
 #add
-#sub
+#sub 
 #mul
 #div
 #mod
@@ -79,9 +80,41 @@ def mod():
 #length
 #get
 
+def length():
+    pass
+
+def get():
+    pass
+
+    
 #stack manip ops
 #--------
 #dup, exch, pop, roll , copy, clear, stack
+
+def dup():
+    op1 = opPop()
+    op2 = op1
+    opstack.append(op1)
+    opstack.append(op2)
+
+def exch():
+    op1 = opPop()
+    op2 = opPop()
+    opstack.append(op1)
+    opstack.append(op2)
+
+#not finished
+def roll(post_position, vals):
+    i = 0
+    val_list = []
+    while i < vals:
+        val_list=opstack[i]
+    for ent in val_list:
+        opstack.insert(post_position,ent)
+    i=0
+    while i<vals:
+        temp =opPop()
+
 
 #dick manip ops
 #------
