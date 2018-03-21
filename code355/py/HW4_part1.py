@@ -5,7 +5,10 @@
 opstack = []
 
 def opPop():
-    return opstack.pop()
+    if len(opstack) > 0:
+        return opstack.pop()
+    else:
+        print("Op stack is empty")
 
 def opPush(val):
     #probably more to be done here
@@ -18,7 +21,10 @@ def opPush(val):
 dictstack = []
 
 def dictPop():
-    return dictstack.pop()
+    if len(dictstack) > 0:
+        return dictstack.pop()
+    else:
+        print("Dict stack is empty")
 
 def dictPush(d):
     #use isinstance or type() to check for a type for error checking push
@@ -50,14 +56,20 @@ def lookup(name):
 #div
 #mod
 def add():
-    op1 = opPop()
-    op2 = opPop()
-    opstack.append(op1+op2)
+    try:
+        op1 = opPop()
+        op2 = opPop()
+        opstack.append(op1+op2)
+    except:
+        print("not enough args")
 
 def sub():
-    op1 = opPop()
-    op2 = opPop()
-    opstack.append(op1-op2)
+    try:
+        op1 = opPop()
+        op2 = opPop()
+        opstack.append(op1-op2)
+    except:
+        print("not enough args")
 
 def mul():
     op1 = opPop()
@@ -65,14 +77,23 @@ def mul():
     opstack.append(op1*op2)
 
 def div():
-    op1 = opPop()
-    op2 = opPop()
-    opstack.append(op1/op2)
+    try:
+        op1 = opPop()
+        op2 = opPop()
+        if op2 != 0:
+            opstack.append(op1/op2)
+        else:
+            print("div by 0 error")
+    except:
+        print("not enough args")
 
 def mod():
-    op1 = opPop()
-    op2 = opPop()
-    opstack.append(op1%op2)
+    try:
+        op1 = opPop()
+        op2 = opPop()
+        opstack.append(op1%op2)
+    except:
+        print("not enough args")
 
 
 #array ops
@@ -93,9 +114,8 @@ def get():
 
 def dup():
     op1 = opPop()
-    op2 = op1
     opstack.append(op1)
-    opstack.append(op2)
+    opstack.append(op1)
 
 def exch():
     op1 = opPop()
