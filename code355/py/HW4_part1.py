@@ -123,6 +123,12 @@ def exch():
     opstack.append(op1)
     opstack.append(op2)
 
+def pop():
+    trash = opPop()
+
+def clear():
+    opstack.clear()
+    
 #not finished
 def roll(post_position, vals):
     i = 0
