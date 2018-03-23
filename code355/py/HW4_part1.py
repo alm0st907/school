@@ -581,3 +581,7 @@ def main_part1():
 if __name__ == '__main__':
     print("comment out main() to not run tests")
     print(main_part1())
+
+    print("\n\n")
+    print("comment out line 583 to stop tests")
+    print("error catch cases will print out, not effect output and thus tests should pass")
