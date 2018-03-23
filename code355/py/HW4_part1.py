@@ -62,7 +62,10 @@ def add():
     try:
         op1 = opPop()
         op2 = opPop()
-        opstack.append(op1+op2)
+        if isinstance(op1,(int,float)) and isinstance(op2,(int,float)):
+            opstack.append(op1+op2)
+        else:
+            print("Invalid inputs")
     except:
         print("not enough args")
 
@@ -70,7 +73,10 @@ def sub():
     try:
         op1 = opPop()
         op2 = opPop()
-        opstack.append(op2-op1)
+        if isinstance(op1,(int,float)) and isinstance(op2,(int,float)):
+            opstack.append(op2-op1)
+        else:
+            print("Invalid inputs")
     except:
         print("not enough args")
 
@@ -78,18 +84,24 @@ def mul():
     try:
         op1 = opPop()
         op2 = opPop()
-        opstack.append(op1*op2)
+        if isinstance(op1,(int,float)) and isinstance(op2,(int,float)):
+            opstack.append(op2*op1)
+        else:
+            print("Invalid inputs")
     except:
-        pass
+        print("not enough args")
 
 def div():
     try:
         op1 = opPop()
         op2 = opPop()
-        if op2 != 0:
-            opstack.append(op2/op1)
+        if isinstance(op1,(int,float)) and isinstance(op2,(int,float)):
+            if op2 != 0:
+                opstack.append(op2/op1)
+            else:
+                print("div by 0 error")
         else:
-            print("div by 0 error")
+            print("invalid inputs")
     except:
         print("not enough args")
 
@@ -97,7 +109,10 @@ def mod():
     try:
         op1 = opPop()
         op2 = opPop()
-        opstack.append(op2%op1)
+        if isinstance(op1,int) and isinstance(op2,int):
+            opstack.append(op2%op1)
+        else:
+            print("invalid ops")
     except:
         print("not enough args")
 
@@ -142,7 +157,7 @@ def exch():
     opstack.append(op2)
 
 def pop():
-    trash = opPop()
+    _ = opPop()
     #trash a op
 
 def clear():
@@ -286,6 +301,7 @@ def testDiv():
     div()
     if opPop() != 2.5:
         return False
+
     return True
 
 def testMod():
