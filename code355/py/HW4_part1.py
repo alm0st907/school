@@ -403,9 +403,12 @@ def main_part1():
 
 if __name__ == '__main__':
     #main_part1()
-    #print(testDefine())
-    print(testAdd())
-    print(testSub())
-    print(testMul())
-    print(testDiv())
-    print(testMod())
+    #math ops tested and good
+    #print(testAdd())
+    #print(testSub())
+    #print(testMul())
+    #print(testDiv())
+    #print(testMod())
+
+    #print(testLength())
+    #print(testGet())
