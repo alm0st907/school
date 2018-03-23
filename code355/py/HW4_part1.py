@@ -337,6 +337,10 @@ def testDiv():
     div()
     if opPop() != 2.5:
         return False
+    
+    clear()
+    div()
+    
     opPush(0)
     opPush(10)
     div()
@@ -354,6 +358,16 @@ def testMod():
     mod()
     if opPop() != 1:
         return False
+    opPush(3.5)
+    opPush(2)
+    mod()
+
+    clear()
+    mod()
+
+    opPush("string")
+    opPush(123)
+    mod()
     return True
 
 #Array operator tests
@@ -361,6 +375,17 @@ def testLength():
     opPush([1,2,3,4,5])
     length()
     if opPop() != 5:
+        return False
+    opPush("strong")
+    length()
+    
+    clear()
+    length()
+
+    opPush([])
+    length()
+
+    if opPop() != 0:
         return False
     return True
 
@@ -370,6 +395,16 @@ def testGet():
     get()
     if opPop() != 5:
         return False
+    opPush([])
+    opPush(4)
+    get()
+
+    opPush("sring")
+    opPush(4)
+    get()
+
+    clear()
+    get()
     return True
 
 #stack manipulation functions
