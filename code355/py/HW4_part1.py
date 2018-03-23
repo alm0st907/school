@@ -449,7 +449,17 @@ def main():
             print(str(tests[0])+" test failed")
     else:
         print("Tests passed")
+def main_part1():
+    testCases = [('define',testDefine),('lookup',testLookup),('add', testAdd), ('sub', testSub),('mul', testMul),('div', testDiv),  ('mod', testMod), \
+                ('length', testLength),('get', testGet), ('dup', testDup), ('exch', testExch), ('pop', testPop), ('roll', testRoll), ('copy', testCopy), \
+                ('clear', testClear), ('dict', testDict), ('begin', testBeginEnd), ('psDef', testpsDef), ('psDef2', testpsDef2)]
+    # add you test functions to this list along with suitable names
+    failedTests = [testName for (testName, testProc) in testCases if not testProc()]
+    if failedTests:
+        return ('Some tests failed', failedTests)
+    else:
+        return ('All part-1 tests OK')
 
 if __name__ == '__main__':
     print("comment out main() to not run tests")
-    main()
+    print(main_part1())
