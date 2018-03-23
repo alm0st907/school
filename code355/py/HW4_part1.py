@@ -31,11 +31,16 @@ def dictPush(d):
     dictstack.append(d)
 
 def define(name,val):
-    try:
-        top = dictstack[-1]
-        top[name]=val
-    except:
-        pass
+    if name[0] =='/':
+        name = name[1:]#rem /
+        if dictstack == []:
+            d = {}
+            d[name] = val
+            dictstack.append(d)
+        else:
+            (dictstack[-1])[name]=val
+    else:
+        print("variable not defined")
 
 #check this
 def lookup(name):
@@ -205,17 +210,8 @@ def end():
 def psDef():
     val = opPop()
     name = opPop()
-    if isinstance(name,str) and isinstance(val,(int,list)):
-        if dictstack == None:
-            dictPush({})
-        define(name,lookup(val))
-    
-    elif isinstance(name,str) and isinstance(val,str):
-        if dictstack == None:
-            dictPush({})
-        define(name,lookup(val))    
-    else:
-        print("type error")
+    define(name,val)
+
 #------- Part 1 TEST CASES--------------
 def testDefine():
     define("/n1", 4)
@@ -412,3 +408,10 @@ if __name__ == '__main__':
 
     #print(testLength())
     #print(testGet())
+
+    print(testDefine())
+    print(testLookup())
+    print(testDict())
+    print(testBeginEnd())
+    print(testpsDef())   
+    print(testpsDef2())
