@@ -178,39 +178,32 @@ def copy():
         numItems = int(opPop()) #cast to an int if possible
     except:
         print("Item is null/unsucessfully converted to int")
+        return
     if numItems > len(opstack) or numItems < 0:
         print("negative items or attempting to copy nonexistent items")
+        return
     else:
         #operation execution
         i = 0
         temp = []
         operableStack = list(reversed(opstack))
-        while i < numItems: 
+        #reversed for easy linear traversal
+        while i < numItems: #iterate for i number of items
             #get num items
             temp.append(operableStack[i])
             i+=1            
-        for val in temp:
+        for val in temp:#appened all the values that need to be copied
             opstack.append(val)
         
 
     
-#not finished
-# def roll(post_position, vals):
-#     i = 0
-#     val_list = []
-#     while i < vals:
-#         val_list=opstack[i]
-#     for ent in val_list:
-#         opstack.insert(post_position,ent)
-#     i=0
-#     while i<vals:
-#         temp =opPop()
+
 def roll():
-    if len(opstack) <=2 :
+    if len(opstack) <=2 : #stack 2 short
         print("not enough args, cant roll")
         return
     rolls = opPop() # num of rolls
-    items = opPop()
+    items = opPop() # num of items to be rolled
     if not isinstance(rolls,int) or not isinstance(items,int):
         print("invalid args")
         return
@@ -233,7 +226,7 @@ def roll():
                 val = opPop()
                 opstack[items:items-1]=[val]
 
- 
+#print le stack
 def stack():
     printable = reversed(opstack)
     for ent in printable:
@@ -248,18 +241,22 @@ def psDict():
     else:
         print("operation not completed")
 
+#push a dict to dictstack
 def begin():
     temp = opPop()
     if isinstance(temp, dict):
         dictPush(temp)
     else:
         print("not a dictionary")
+
+#pop off dictstact
 def end():
     if dictstack != None:
         dictPop()
     else:
         print("dict empty, nothing to pop from end")
 
+#define stuff
 def psDef():
     val = opPop()
     name = opPop()
