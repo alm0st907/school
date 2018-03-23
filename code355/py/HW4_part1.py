@@ -5,15 +5,15 @@
 opstack = []
 
 def opPop():
+    #pop a item off stack if its not empty
     if len(opstack) > 0:
         return opstack.pop()
     else:
         print("Op stack is empty")
 
 def opPush(val):
-    #probably more to be done here
-    #use isinstance or type() to check for a type for error checking push
-
+    #push things to the stack
+    #functions error check, so we dont need to check whats pushed
     opstack.append(val)
 
 #dictionary stack
@@ -21,30 +21,31 @@ def opPush(val):
 dictstack = []
 
 def dictPop():
+    #pop from dictionary if there is an item inside
     if len(dictstack) > 0:
         return dictstack.pop()
     else:
         print("Dict stack is empty")
 
 def dictPush(d):
-    #use isinstance or type() to check for a type for error checking push
+    #append to dictstack
     dictstack.append(d)
 
 def define(name,val):
-    if name[0] =='/':
+    if name[0] =='/':#check for / character symbolizing a var def
         name = name[1:]#rem /
-        if dictstack == []:
+        if dictstack == []:#if dictionary stack empty
             d = {}
             d[name] = val
-            dictstack.append(d)
+            dictstack.append(d) #append new dict with val to dictstack
         else:
-            (dictstack[-1])[name]=val
+            (dictstack[-1])[name]=val #update if not empty
     else:
         print("variable not defined")
 
 #check this
 def lookup(name):
-    operable_dict = reversed(dictstack)
+    operable_dict = reversed(dictstack) #if more than one dict, ensure from top of stack to bottom
     for d in operable_dict:
         if name in d:
             return d[name]
@@ -62,6 +63,7 @@ def add():
     try:
         op1 = opPop()
         op2 = opPop()
+        #type checking
         if isinstance(op1,(int,float)) and isinstance(op2,(int,float)):
             opstack.append(op1+op2)
         else:
@@ -73,6 +75,7 @@ def sub():
     try:
         op1 = opPop()
         op2 = opPop()
+        #type checking
         if isinstance(op1,(int,float)) and isinstance(op2,(int,float)):
             opstack.append(op2-op1)
         else:
@@ -84,6 +87,7 @@ def mul():
     try:
         op1 = opPop()
         op2 = opPop()
+        #type checking
         if isinstance(op1,(int,float)) and isinstance(op2,(int,float)):
             opstack.append(op2*op1)
         else:
@@ -95,11 +99,12 @@ def div():
     try:
         op1 = opPop()
         op2 = opPop()
+        #type checking
         if isinstance(op1,(int,float)) and isinstance(op2,(int,float)):
             if op2 != 0:
                 opstack.append(op2/op1)
             else:
-                print("div by 0 error")
+                print("div by 0 error") #necessary 
         else:
             print("invalid inputs")
     except:
@@ -109,6 +114,8 @@ def mod():
     try:
         op1 = opPop()
         op2 = opPop()
+        #type checking
+        #mods are probably int only?
         if isinstance(op1,int) and isinstance(op2,int):
             opstack.append(op2%op1)
         else:
@@ -124,7 +131,7 @@ def mod():
 
 def length():
     temp = opPop()
-    if isinstance(temp, list):
+    if isinstance(temp, list): #check for array before len call
         opPush(len(temp))
     else:
         print("type error")
@@ -149,12 +156,14 @@ def dup():
     op1 = opPop()
     opstack.append(op1)
     opstack.append(op1)
+    #works, could be more efficient, but I dont really care
 
 def exch():
     op1 = opPop()
     op2 = opPop()
     opstack.append(op1)
     opstack.append(op2)
+    #ol' reddit switcheroo
 
 def pop():
     _ = opPop()
@@ -162,10 +171,11 @@ def pop():
 
 def clear():
     opstack.clear()
+    #nuclear launch @ stack detected
 
 def copy():
     try:#how many items to copy
-        numItems = int(opPop())
+        numItems = int(opPop()) #cast to an int if possible
     except:
         print("Item is null/unsucessfully converted to int")
     if numItems > len(opstack) or numItems < 0:
@@ -437,7 +447,11 @@ def main():
                 ('clear', testClear), ('dict', testDict), ('begin', testBeginEnd), ('psDef', testpsDef), ('psDef2', testpsDef2)]
     # add you test functions to this list along with suitable names
     for tests in testCases:
-        print(tests[0] +" test = "+ str(tests[1]()))
+        #print(tests[0] +" test = "+ str(tests[1]()))
+        if tests[1] == False:
+            print(str(tests[0])+" test failed")
+    else:
+        print("Tests passed")
 
 if __name__ == '__main__':
     print("comment out main() to not run tests")
