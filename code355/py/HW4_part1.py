@@ -65,7 +65,7 @@ def sub():
     try:
         op1 = opPop()
         op2 = opPop()
-        opstack.append(op1-op2)
+        opstack.append(op2-op1)
     except:
         print("not enough args")
 
@@ -82,7 +82,7 @@ def div():
         op1 = opPop()
         op2 = opPop()
         if op2 != 0:
-            opstack.append(op1/op2)
+            opstack.append(op2/op1)
         else:
             print("div by 0 error")
     except:
@@ -92,7 +92,7 @@ def mod():
     try:
         op1 = opPop()
         op2 = opPop()
-        opstack.append(op1%op2)
+        opstack.append(op2%op1)
     except:
         print("not enough args")
 
@@ -138,39 +138,31 @@ def exch():
 
 def pop():
     trash = opPop()
+    #trash a op
 
 def clear():
     opstack.clear()
 
 def copy():
-    # Sufficient number of operands
-    if len(opstack) >= 1:
-        N = opstack[-1] # Number of top values to copy
-
-        # Check for right data type
-        if type(N) is int:
-            # N has to be lower than or equal to number of elements in stack
-            if (N <= len(opstack)):
-                # Non negative N
-                if (N >= 0):
-                    N = opPop() # pop N from stack
-                    L = [] # Temp list
-                    for index in range(-N, 0, +1): # Start at -N, stop before 0, increment
-                        L.append(opstack[index]) # Append top values to temp list
-                    for value in L: # For each element in temp list
-                        opstack.append(value) # Push element to stack to copy top values
-                # Negative N
-                else:
-                    return "negative" # Return error
-            # N is out of range of stack
-            else:
-                return "range" # Return error
-        # Wrong data type
-        else:
-            return "type" # Return error
-    # Insufficient operands
+    try:#how many items to copy
+        numItems = int(opPop())
+    except:
+        print("Item is null/unsucessfully converted to int")
+    if numItems > len(opstack) or numItems < 0:
+        print("negative items or attempting to copy nonexistent items")
     else:
-        return "operand" # Return error
+        #operation execution
+        i = 0
+        temp = []
+        operableStack = list(reversed(opstack))
+        while i < numItems: 
+            #get num items
+            temp.append(operableStack[i])
+            i+=1            
+        for val in temp:
+            opstack.append(val)
+        
+
     
 #not finished
 def roll(post_position, vals):
@@ -224,682 +216,196 @@ def psDef():
         define(name,lookup(val))    
     else:
         print("type error")
-
-#testfunction
+#------- Part 1 TEST CASES--------------
 def testDefine():
-    # Layer 1 of dictionaries: new entry
-    dictPush({})
-    define('x', 1)
-    if lookup('x') != 1:
-        return False
-    # Layer 2 of dictionaries: new entry
-    dictPush({})
-    define('x', 2)
-    if lookup('x') != 2:
-        return False
-    # Update existing entry
-    define('x', 3)
-    if lookup('x') != 3:
+    define("/n1", 4)
+    if lookup("n1") != 4:
         return False
     return True
 
 def testLookup():
-    # Layer 1 of dictionaries: Defined name constant
-    opPush("y")
-    opPush(10)
-    psDef()
-    if lookup("y") != 10:
-        return False
-    # Layer 2 of dictionaries: Defined name constant
-    dictPush() # Create new layer
-    opPush("nl")
+    opPush("/n1")
     opPush(3)
     psDef()
-    if lookup("nl") != 3:
-        return False
-    # Layer 3 of dictionaries: Defined name constant
-    dictPush() # Create new layer
-    opPush("x")
-    opPush(4)
-    psDef()
-    if lookup("x") != 4:
-        return False
-    # Non-defined name constant
-    if lookup("xl") != None:
-        return False
-    # Previous layer: Define name constant
-    if lookup("y") != 10:
+    if lookup("n1") != 3:
         return False
     return True
 
-############################# operand stack operations ########################
-
-def testOpPush():
-    # String
-    # Case 1: Name constant
-    opPush('/x')
-    if opstack[-1] != 'x':
-        return False
-    # Case 2: Name
-    dictPush()
-    define('x', 3)
-    opPush('x')
-    if opstack[-1] != 3: # Defined
-        return False
-    # Array constant
-    opPush([])
-    if opstack[-1] != []:
-        return False
-    # Integer constant
-    opPush(1)
-    if opstack[-1] != 1:
-        return False
-    # Real constant
-    opPush(1.0)
-    if opstack[-1] != 1.0:
-        return False
-    # Dictionaries
-    opPush({})
-    if opstack[-1] != {}:
-        return False
-    return True
-
-############################ arithmetic operators ###############################
-
+#Arithmatic operator tests
 def testAdd():
-    # Test Cases
-    # Test 1: Int & Int
     opPush(1)
     opPush(2)
     add()
     if opPop() != 3:
         return False
-    # Test 2: Float & Int
-    opPush(2.5)
-    opPush(1)
-    add()
-    if opPop() != 3.5:
-        return False
-    # Test 3: Int & Float
-    opPush(2)
-    opPush(2.5)
-    add()
-    if opPop() != 4.5:
-        return False
-    # Test 4: Float & Float
-    opPush(1.5)
-    opPush(1.5)
-    add()
-    if opPop() != 3.0:
-        return False
-
-    
     return True
 
 def testSub():
-    # Test Cases
-    # Test 1: Int & Int
-    opPush(1)
-    opPush(2)
+    opPush(10)
+    opPush(4.5)
     sub()
-    if opPop() != -1:
-        return False
-    # Test 2: Float & Int
-    opPush(1)
-    opPush(2.5)
-    sub()
-    if opPop() != -1.5:
-        return False
-    # Test 3: Int & Float
-    opPush(1.5)
-    opPush(2)
-    sub()
-    if opPop() != -0.5:
-        return False
-    # Test 4: Float & Float
-    opPush(1.5)
-    opPush(1.5)
-    sub()
-    if opPop() != 0.0:
-        return False
-
-    # Error Test Cases
-    # Test 1: Not enough operands
-    opPush(1)
-    if sub() != "operand":
-        return False
-    # Test 2: Wrong data type
-    opPush(1)
-    opPush([])
-    if sub() != "type":
-        return False
-    opPush(1.0)
-    opPush([])
-    if sub() != "type":
-        return False
-    opPush([])
-    opPush(1.0)
-    if sub() != "type":
-        return False
-    opPush([])
-    opPush(1.0)
-    if sub() != "type":
+    if opPop() != 5.5:
         return False
     return True
 
 def testMul():
-    # Test Cases
-    # Test 1: Int & Int
-    opPush(1)
     opPush(2)
+    opPush(4.5)
     mul()
-    if opPop() != 2:
+    if opPop() != 9:
         return False
-    # Test 2: Float & Int
-    opPush(2.5)
-    opPush(1)
-    mul()
-    if opPop() != 2.5:
-        return False
-    # Test 3: Int & Float
-    opPush(1)
-    opPush(2.5)
-    mul()
-    if opPop() != 2.5:
-        return False
-    # Test 4: Float & Float
-    opPush(1.5)
-    opPush(1.5)
-    mul()
-    if opPop() != 2.25:
-        return False
-
     return True
 
 def testDiv():
-    # Test Cases
-    # Test 1: Int & Int
-    opPush(2)
-    opPush(1)
+    opPush(10)
+    opPush(4)
     div()
-    if opPop() != 2:
-        return False
-    # Test 2: Float & Int
-    opPush(1)
-    opPush(2.5)
-    div()
-    if opPop() != 0.4:
-        return False
-    # Test 3: Int & Float
-    opPush(2.5)
-    opPush(2)
-    div()
-    if opPop() != 1.25:
-        return False
-    # Test 4: Float & Float
-    opPush(1.5)
-    opPush(1.5)
-    div()
-    if opPop() != 1.0:
-        return False
-
-    # Error Test Cases
-    # Test 1: Not enough operands
-    opPush(1)
-    if div() != "operand":
-        return False
-    # Test 2: Wrong data type
-    opPush(1)
-    opPush([])
-    if div() != "type":
-        return False
-    opPush(1.0)
-    opPush([])
-    if div() != "type":
-        return False
-    opPush([])
-    opPush(1.0)
-    if div() != "type":
-        return False
-    opPush([])
-    opPush(1.0)
-    if div() != "type":
-        return False
-    # Test 3: denominator = 0
-    opPush(2)
-    opPush(0)
-    if div() != "undefined":
+    if opPop() != 2.5:
         return False
     return True
 
 def testMod():
-    # Test Cases
-    # Test 1: Int & Int
-    opPush(2)
-    opPush(1)
+    opPush(10)
+    opPush(3)
     mod()
-    if opPop() != 0:
-        return False
-    opPush(7)
-    opPush(4)
-    mod()
-    if opPop() != 3:
-        return False
-
-    # Error Test Cases
-    # Test 1: Not enough operands
-    if mod() != "operand":
-        return False
-    # Test 2: Wrong data type
-    opPush(1)
-    opPush([])
-    if mod() != "type":
-        return False
-    opPush(1)
-    opPush(1.0)
-    if mod() != "type":
-        return False
-    opPush([])
-    opPush(1)
-    if mod() != "type":
-        return False
-    opPush(1.0)
-    opPush(1)
-    if mod() != "type":
-        return False
-    # Test 3: denominator = 0
-    opPush(2)
-    opPush(0)
-    if mod() != "undefined":
+    if opPop() != 1:
         return False
     return True
 
-################################ Array operators #############################
-
+#Array operator tests
 def testLength():
-    # Test Cases
-    # Non-empty array
-    opPush([1, 2, 3, 4])
+    opPush([1,2,3,4,5])
     length()
-    if opPop() != 4:
-        return False
-    # empty array
-    opPush([])
-    length()
-    if opPop() != 0:
-        return False
-
-    # Error Test Cases
-    # Test 1: Not enough operands
-    if length() != "operand":
-        return False
-    # Test 2: Wrong type
-    opPush(1)
-    if length() != "type":
+    if opPop() != 5:
         return False
     return True
 
 def testGet():
-    # Test Cases
-    # Non-empty array
-    opPush([1, 2, 3, 4])
-    opPush(0)
+    opPush([1,2,3,4,5])
+    opPush(4)
     get()
-    if opPop() != 1:
-        return False
-    opPush([1, 2, 3, 4])
-    opPush(1)
-    get()
-    if opPop() != 2:
-        return False
-
-    # Error Test Cases
-    # Test 1: Not enough operands
-    if get() != "operand":
-        return False
-    # Test 2: Wrong type
-    opPush(1.0)
-    opPush([1, 2])
-    if get() != "type":
-        return False
-    opPush(1)
-    opPush(1.0)
-    if get() != "type":
-        return False
-    # Test 3: Index not in range
-    opPush([1])
-    opPush(6)
-    if get() != "range":
+    if opPop() != 5:
         return False
     return True
 
-###################### Stack manipulation & print operators ####################
-
-def testPop():
-    # Test Cases
-    # Non-empty stack
-    opPush(1)
-    opPush(2)
-    pop()
-    if opstack[-1] != 1:
-        return False
-
-    # Error Test Cases
-    # Empty stack
-    pop()
-    if pop() != "empty":
-        return False
-    return True
-
+#stack manipulation functions
 def testDup():
-    # Test Cases
-    # Name constant
-    opPush("/x")
+    opPush(10)
     dup()
-    if opPop() != 'x' or opPop() != 'x':
-        return False
-    # array constant
-    opPush([])
-    dup()
-    if opPop() != [] or opPop() != []:
-        return False
-    # Integer constant
-    opPush(1)
-    dup()
-    if opPop() != 1 or opPop() != 1:
-        return False
-    # Real constant
-    opPush(1.0)
-    dup()
-    if opPop() != 1.0 or opPop() != 1.0:
-        return False
-    # Dictionary
-    opPush({})
-    dup()
-    if opPop() != {} or opPop() != {}:
-        return False
-
-    # Error Test Cases
-    # Empty stack
-    if dup() != "empty":
+    if opPop()!=opPop():
         return False
     return True
 
 def testExch():
-    # Test Cases
-    # Integer constant
+    opPush(10)
+    opPush("/x")
+    exch()
+    if opPop()!=10 and opPop()!="/x":
+        return False
+    return True
+
+def testPop():
+    l1 = len(opstack)
+    opPush(10)
+    pop()
+    l2= len(opstack)
+    if l1!=l2:
+        return False
+    return True
+
+def testRoll():
     opPush(1)
     opPush(2)
-    exch()
-    if opPop() != 1 or opPop() != 2:
+    opPush(3)
+    opPush(4)
+    opPush(5)
+    opPush(4)
+    opPush(-2)
+    #roll()
+    if opPop()!=3 and opPop()!=2 and opPop()!=5 and opPop()!=4 and opPop()!=1:
         return False
-    # Real constant
-    opPush(1.0)
-    opPush(2.0)
-    exch()
-    if opPop() != 1.0 or opPop() != 2.0:
-        return False
-    # Array constant
-    opPush([1])
-    opPush([])
-    exch()
-    if opPop() != [1] or opPop() != []:
-        return False
-    else:
-        return True
-
-
-
-
+    return True
 
 def testCopy():
-    # Test Cases
     opPush(1)
     opPush(2)
-    # 1 copy
-    opPush(1)
+    opPush(3)
+    opPush(4)
+    opPush(5)
+    opPush(2)
     copy()
-    if opPop() != 2:
-        return False
-    if opPop() != 2:
-        return False
-    # 0 copy
-    opPush(2)
-    opPush(0)
-    copy()
-    if opPop() != 2:
-        return False
-    if opPop() != 1:
-        return False
-
-    # Error Test Cases
-    # Test 1: Not enough operands
-    if copy() != "operand":
-        return False
-    # Test 2: Wrong type
-    opPush(1.3)
-    if copy() != "type":
-        return False
-    # Test 3: Out of range of stack
-    opPush(1)
-    opPush(2)
-    opPush(8)
-    if copy() != "range":
-        return False
-    opPush(-1)
-    if copy() != "negative":
+    if opPop()!=5 and opPop()!=4 and opPop()!=5 and opPop()!=4 and opPop()!=3 and opPop()!=2:
         return False
     return True
 
 def testClear():
-    opPush(1)
+    opPush(10)
+    opPush("/x")
     clear()
-    if opstack: # If stack has content
+    if len(opstack)!=0:
         return False
     return True
 
-########################## Dictionary manipulation operators ######################
-
-def testDef():
-    # Tase Cases
-    # First layer of dictionaries: new defined variable
-    dictPush({})
-    opPush("/x")
-    opPush(3)
-    psDef()
-    if lookup('x') != 3:
-        return False
-    # Updating variable
-    opPush("/x")
-    opPush(4)
-    psDef()
-    if lookup('x') != 4:
-        return False
-    # Second layer of dictionaries: new defined variable
-    dictPush({})
-    opPush('/x')
-    opPush(5)
-    psDef()
-    if lookup('x') != 5:
-        return False
-
-    # Error Test Cases
-    # Test 1: Not enough operands
-    if psDef() != "operand":
-        return False
-    # Test 2: Wrong type
-    opPush(1)
-    opPush("/string")
-    if psDef() != "type":
-        return False
-    opPush(1)
-    opPush([])
-    if psDef() != "type":
-        return False
-    return True
-
+#dictionary stack operators
 def testDict():
-    # Test Cases
-    # Push new empty stack to op stack
     opPush(1)
     psDict()
-    if opPop() != {}:
-        return False
-
-    # Test Cases
-    # Test 1: Not enough operands
-    if psDict() != 'operand':
-        return False
-    # Test 2: Wrong type
-    opPush(1.3)
-    if psDict() != "type":
+    if opPop()!={}:
         return False
     return True
 
-def testBegin():
-    # Test Cases
-    # Non empty dictionary
-    opPush({'x':4})
-    begin()
-    if dictstack[-1] != {'x':4}:
-        return False
-    # empty dictionary
+def testBeginEnd():
+    opPush("/x")
+    opPush(3)
+    psDef()
     opPush({})
     begin()
-    if dictstack[-1] != {}:
-        return False
-
-    # Error Test Cases
-    # Test 1: Empty stack
-    if begin() != "empty":
-        return False
-    # Test 2: Wrong type
-    opPush([])
-    if begin() != "type":
-        return False
-    return True
-
-def testEnd():
-    # Test Cases
-    dictPush({})
-    dictPush({})
-    # Top dictionary popped, one dictionary remains
+    opPush("/x")
+    opPush(4)
+    psDef()
     end()
-    if dictstack[-1] != {}:
+    if lookup("x")!=3:
         return False
-    # Top dictionary popped, empty stack
+    return True
+
+def testpsDef():
+    opPush("/x")
+    opPush(10)
+    psDef()
+    if lookup("x")!=10:
+        return False
+    return True
+
+def testpsDef2():
+    opPush("/x")
+    opPush(10)
+    psDef()
+    opPush(1)
+    psDict()
+    begin()
+    if lookup("x")!=10:
+        end()
+        return False
     end()
-    if dictstack:
-        return False
-
-    # Error Test Cases
-    # Empty dict stack
-    if end() != "empty":
-        return False
     return True
 
 
-def testRoll():
-    # Test Cases
-    opPush(0)
-    opPush(1)
-    opPush(2)
-    opPush(3)
-    # 3 2 roll
-    opPush(3)
-    opPush(2)
-    roll()
-    if opstack != [0, 2, 3, 1]:
-        return False
-    # 3 -2 roll
-    opPush(3)
-    opPush(-2)
-    roll()
-    if opstack != [0, 1, 2, 3]:
-        return False
-    # 0 -2 roll
-    opPush(0)
-    opPush(-2)
-    roll()
-    if opstack != [0, 1, 2, 3]:
-        return False
-    # 1 2 roll
-    opPush(1)
-    opPush(2)
-    roll()
-    if opstack != [0, 1, 2, 3]:
-        return False
-    # 2 0 roll
-    opPush(2)
-    opPush(0)
-    roll()
-    if opstack != [0, 1, 2, 3]:
-        return False
-
-    # Error Test Cases
-    # Test 1: Insufficient elements on stack
-    opPush(8)
-    opPush(1)
-    if roll() != "insufficient":
-        return False
-    # Test 2: Negative second operand
-    opPush(-1)
-    opPush(1)
-    if roll() != "negative":
-        return False
-    # Test 3: Wrong type
-    opPush([])
-    opPush(1)
-    if roll() != "type":
-        return False
-    opPush(1)
-    opPush([])
-    if roll() != "type":
-        return False
-    # Test 4: Not enough operands
-    opstack.clear()
-    if roll() != "operand":
-        return False
-
-    return True
-
-#---------------------------------------------------------------------------------
-
-#                                     Main                                       #
-
-# Accepts a variable number of function names
-# Accepts a dictionary with strings as keys and values as functions
-# Tests all functions
-def testAll(matchFuncs, *testNames):
-    for testName in testNames:
-        valid = matchFuncs[testName]() # Boolean value
-        clear() # Clear operand stack
-        dictstack.clear() # Clear dict stack
-
-        # Display messages
-        if valid == True:
-            print(testName, "passed!")
-        else:
-            print(testName, "failed!")
+def main_part1():
+    testCases = [('define',testDefine),('lookup',testLookup),('add', testAdd), ('sub', testSub),('mul', testMul),('div', testDiv),  ('mod', testMod), \
+                ('length', testLength),('get', testGet), ('dup', testDup), ('exch', testExch), ('pop', testPop), ('roll', testRoll), ('copy', testCopy), \
+                ('clear', testClear), ('dict', testDict), ('begin', testBeginEnd), ('psDef', testpsDef), ('psDef2', testpsDef2)]
+    # add you test functions to this list along with suitable names
+    failedTests = [testName for (testName, testProc) in testCases if not testProc()]
+    if failedTests:
+        return ('Some tests failed', failedTests)
+    else:
+        return ('All part-1 tests OK')
 
 if __name__ == '__main__':
-
-    # Functions as high order objects
-    # Dictionary of values as functions
-    #matchTestFuncs = {"testDefine": testDefine, "testLookup": testLookup, "testOpPush": testOpPush, "testAdd": testAdd, "testSub": testSub, "testMul": testMul, "testDiv": testDiv, "testMod": testMod, "testLength": testMod, "testGet": testGet, "testPop": testPop, "testDup": testDup, "testExch": testExch, "testCopy": testCopy, "testClear": testClear, "testDef": testDef, "testDict": testDict, "testBegin": testBegin, "testEnd": testEnd}
-
-    # Tests all of the functions
-    #testAll(matchTestFuncs, "testDefine", "testLookup", "testOpPush", "testAdd", "testSub", "testMul", "testDiv", "testMod", "testLength", "testGet", "testPop", "testDup", "testExch", "testCopy", "testClear", "testDef", "testDict", "testBegin", "testEnd")
-    opPush(1)
-    opPush(2)
-    add()
-    opPush(4)
-    opPush("str")
-    mul()
-    clear()
-    print(testDefine())
-    print(testLookup())
-    print(testOpPush())
+    #main_part1()
+    #print(testDefine())
     print(testAdd())
+    print(testSub())
     print(testMul())
-    print(testExch())
+    print(testDiv())
+    print(testMod())
