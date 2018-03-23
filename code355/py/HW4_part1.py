@@ -365,6 +365,18 @@ def testMod():
     opPush(2)
     mod()
 
+    opPush(0)
+    opPush(10)
+    mod()
+    if opPop() != 0:
+        return False
+
+    opPush(10)
+    opPush(0)
+    mod()
+    if opPop() != 10:
+        return False
+
     clear()
     mod()
 
@@ -462,6 +474,13 @@ def testRoll():
     roll()
     if opPop()!=3 and opPop()!=2 and opPop()!=5 and opPop()!=4 and opPop()!=1:
         return False
+    opPush("other stuff")
+    opPush(0)
+    opPush(2)
+    roll()
+    
+    clear()
+    roll()
     return True
 
 def testCopy():
@@ -474,6 +493,13 @@ def testCopy():
     copy()
     if opPop()!=5 and opPop()!=4 and opPop()!=5 and opPop()!=4 and opPop()!=3 and opPop()!=2:
         return False
+
+    clear()
+    copy()
+
+    opPush(-1)
+    copy()
+
     return True
 
 def testClear():
