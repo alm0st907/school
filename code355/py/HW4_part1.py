@@ -99,12 +99,20 @@ def div():
     try:
         op1 = opPop()
         op2 = opPop()
+        if op2 == 0:
+            print("div by 0 error")
+            return
+        elif op1 == 0 and op2 == 0:
+            print("div by 0 error")
+            return
+        elif op1 == 0:
+            opstack.append(0)
+            return
+        else:
+            pass
         #type checking
         if isinstance(op1,(int,float)) and isinstance(op2,(int,float)):
-            if op2 != 0:
                 opstack.append(op2/op1)
-            else:
-                print("div by 0 error") #necessary 
         else:
             print("invalid inputs")
     except:
@@ -267,6 +275,9 @@ def testDefine():
     define("/n1", 4)
     if lookup("n1") != 4:
         return False
+    define("test",4)
+    if lookup("test") == 4:
+        return False
     return True
 
 def testLookup():
@@ -274,6 +285,8 @@ def testLookup():
     opPush(3)
     psDef()
     if lookup("n1") != 3:
+        return False
+    if lookup("n2") == 2:
         return False
     return True
 
@@ -284,6 +297,11 @@ def testAdd():
     add()
     if opPop() != 3:
         return False
+    clear()
+    add()
+    opPush("test")
+    opPush(-2)
+    add()
     return True
 
 def testSub():
@@ -292,6 +310,12 @@ def testSub():
     sub()
     if opPop() != 5.5:
         return False
+    clear()
+    sub()
+    opPush("string")
+    opPush(123)
+    sub()
+    
     return True
 
 def testMul():
@@ -300,6 +324,11 @@ def testMul():
     mul()
     if opPop() != 9:
         return False
+    clear()
+    mul()
+    opPush("string")
+    opPush(123)
+    mul()
     return True
 
 def testDiv():
@@ -307,6 +336,14 @@ def testDiv():
     opPush(4)
     div()
     if opPop() != 2.5:
+        return False
+    opPush(0)
+    opPush(10)
+    div()
+    
+    opPush(10)
+    opPush(0)
+    if opPop() != 0:
         return False
 
     return True
@@ -449,6 +486,7 @@ def main():
             print(str(tests[0])+" test failed")
     else:
         print("Tests passed")
+
 def main_part1():
     testCases = [('define',testDefine),('lookup',testLookup),('add', testAdd), ('sub', testSub),('mul', testMul),('div', testDiv),  ('mod', testMod), \
                 ('length', testLength),('get', testGet), ('dup', testDup), ('exch', testExch), ('pop', testPop), ('roll', testRoll), ('copy', testCopy), \
