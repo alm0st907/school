@@ -169,6 +169,9 @@ def dup():
 def exch():
     op1 = opPop()
     op2 = opPop()
+    if op1 == None or op2 == None:
+        print("cant exchange some with none")
+        return
     opstack.append(op1)
     opstack.append(op2)
     #ol' reddit switcheroo
@@ -413,6 +416,13 @@ def testDup():
     dup()
     if opPop()!=opPop():
         return False
+    clear()
+    dup()
+
+    opPush("string")
+    dup()
+    if opPop() != "string":
+        return False
     return True
 
 def testExch():
@@ -421,6 +431,11 @@ def testExch():
     exch()
     if opPop()!=10 and opPop()!="/x":
         return False
+    clear()
+    exch()
+
+    opPush(1)
+    exch()
     return True
 
 def testPop():
@@ -430,6 +445,10 @@ def testPop():
     l2= len(opstack)
     if l1!=l2:
         return False
+
+    clear()
+    opPop()
+
     return True
 
 def testRoll():
@@ -440,7 +459,7 @@ def testRoll():
     opPush(5)
     opPush(4)
     opPush(-2)
-    #roll()
+    roll()
     if opPop()!=3 and opPop()!=2 and opPop()!=5 and opPop()!=4 and opPop()!=1:
         return False
     return True
