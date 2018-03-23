@@ -170,16 +170,44 @@ def copy():
 
     
 #not finished
-def roll(post_position, vals):
-    i = 0
-    val_list = []
-    while i < vals:
-        val_list=opstack[i]
-    for ent in val_list:
-        opstack.insert(post_position,ent)
-    i=0
-    while i<vals:
-        temp =opPop()
+# def roll(post_position, vals):
+#     i = 0
+#     val_list = []
+#     while i < vals:
+#         val_list=opstack[i]
+#     for ent in val_list:
+#         opstack.insert(post_position,ent)
+#     i=0
+#     while i<vals:
+#         temp =opPop()
+def roll():
+    if len(opstack) <=2 :
+        print("not enough args, cant roll")
+        return
+    rolls = opPop() # num of rolls
+    items = opPop()
+    if not isinstance(rolls,int) or not isinstance(items,int):
+        print("invalid args")
+        return
+    elif items < 0:
+        print("invalid index")
+        return
+    elif items <2:
+        return #no change to stack
+    
+    else: #actually perform op
+        if rolls >=0 :
+            items = -items +1
+            for count in range(rolls):
+                val = opPop()
+                opstack[items:items-1]=[val]
+        else:
+            items = -items
+            rolls = -rolls
+            for count in range(rolls):
+                val = opPop()
+                opstack[items:items-1]=[val]
+
  
 def stack():
     printable = reversed(opstack)
@@ -386,32 +414,15 @@ def testpsDef2():
     return True
 
 
-def main_part1():
+def main():
+    
     testCases = [('define',testDefine),('lookup',testLookup),('add', testAdd), ('sub', testSub),('mul', testMul),('div', testDiv),  ('mod', testMod), \
                 ('length', testLength),('get', testGet), ('dup', testDup), ('exch', testExch), ('pop', testPop), ('roll', testRoll), ('copy', testCopy), \
                 ('clear', testClear), ('dict', testDict), ('begin', testBeginEnd), ('psDef', testpsDef), ('psDef2', testpsDef2)]
     # add you test functions to this list along with suitable names
-    failedTests = [testName for (testName, testProc) in testCases if not testProc()]
-    if failedTests:
-        return ('Some tests failed', failedTests)
-    else:
-        return ('All part-1 tests OK')
+    for tests in testCases:
+        print(tests[0] +" test = "+ str(tests[1]()))
 
 if __name__ == '__main__':
-    #main_part1()
-    #math ops tested and good
-    #print(testAdd())
-    #print(testSub())
-    #print(testMul())
-    #print(testDiv())
-    #print(testMod())
-
-    #print(testLength())
-    #print(testGet())
-
-    print(testDefine())
-    print(testLookup())
-    print(testDict())
-    print(testBeginEnd())
-    print(testpsDef())   
-    print(testpsDef2())
+    print("comment out main() to not run tests")
+    main()
