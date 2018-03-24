@@ -1,5 +1,8 @@
 #Garrett Rudisill
 #CptS 355 HW4 part 1
+#WSU ID 11461816
+#PostScript interpreter part 1 in python 3.6
+#tested on both linux and windows
 
 #opstack portion
 opstack = []
@@ -215,7 +218,7 @@ def roll():
         return
     rolls = opPop() # num of rolls
     items = opPop() # num of items to be rolled
-    if not isinstance(rolls,int) or not isinstance(items,int):
+    if not isinstance(rolls,int) or not isinstance(items,int): #datatype check
         print("invalid args")
         return
     elif items < 0:
@@ -225,12 +228,13 @@ def roll():
         return #no change to stack
     
     else: #actually perform op
-        if rolls >=0 :
-            items = -items +1
+        if rolls >=0 : #roll data to bottom from top
+            items = -items +1 #index correction
             for count in range(rolls):
                 val = opPop()
                 opstack[items:items-1]=[val]
         else:
+            #roll data to top from bottom
             items = -items
             rolls = -rolls
             for count in range(rolls):
@@ -583,5 +587,7 @@ if __name__ == '__main__':
     print(main_part1())
 
     print("\n\n")
-    print("comment out line 583 to stop tests")
+    print("comment out line 587 to stop tests")
     print("error catch cases will print out, not effect output and thus tests should pass")
+    print("Error catch messages are for tests of a empty stack, or improper data input")
+    print("There are also tests for div/0 errors in the div function \n")
