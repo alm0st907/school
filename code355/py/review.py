@@ -49,6 +49,11 @@ def make_integer_stream(first=1):
     return Stream(first, compute_rest)
 S2 = stream_mystery(lambda x,y: x+y, 2, make_integer_stream(1))
 
+def make_one_stream(): 
+    def compute_rest(): 
+        return make_one_stream() 
+    return Stream(1, compute_rest)
+
 def aroundL(L):
     temp = []
     for item in L:
@@ -94,3 +99,6 @@ if __name__ == "__main__":
     aroundL2([1,2,3])
     
     wordCount(["yes","yes","no","maybe","probably"])
+
+    S3 = stream_mystery(lambda x,y: x+y, 3, make_one_stream())
+    print(S3.first,S3.rest.first,S3.rest.rest.first, S3.rest.rest.rest.first)
