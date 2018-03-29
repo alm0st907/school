@@ -277,6 +277,16 @@ def psDef():
     name = opPop()
     define(name,val)
 
+#need to handle a 
+def forLoop():
+    pass
+def forall():
+    pass
+#dictionary of operations we can call in the interpreter
+PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": length, "get": get, "pop": pop, "dup": dup, "exch": exch, "roll": roll, "copy": copy, "clear": clear, "stack": stack, "def": psDef, "dict": psDict, "begin": begin, "end": end, "for": forLoop, "forall": forall}
+
+#need to implement the for loop/for all loop
+#implement interpreter function
 
 
 if __name__ == '__main__':
