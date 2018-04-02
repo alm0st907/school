@@ -367,11 +367,14 @@ def forLoop():
 #def forall():
 #    pass
 def safe_ex(token):
-    if token in PsOps:#see if function in dictionary
-        try:
-            PsOps[token]() #executes function from dictionary
-        except:
-            print("some error or something")
+    for tokens in token:
+        if tokens in PsOps:#see if function in dictionary
+            try:
+                PsOps[tokens]() #executes function from dictionary
+            except:
+                print("some error or something")
+        else:
+            opPush(tokens)
 
 def interpret(code):
     #this takes in the parsed code to start operating on
@@ -388,7 +391,7 @@ PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": l
 
 if __name__ == '__main__':
     print("not finished lols")
-    opPush(3)
-    opPush(4)
-    safe_ex("sub")
+    tokens = tokenize("3 4 add")
+    tokens = parse(tokens)
+    safe_ex(tokens)
     print(opPop())
