@@ -277,6 +277,52 @@ def psDef():
     name = opPop()
     define(name,val)
 
+#-----------------------------------#
+#part 2 work
+
+import re #for regex handling
+
+#given function that uses regex for parsing the passed in code
+def tokenize(s):
+     retValue = re.findall("/?[a-zA-Z][a-zA-Z0-9_]*|[[][a-zA-Z0-9_\s!][a-zA-Z09_\s!]*[]]|[-]?[0-9]+|[}{]+|%.*|[^ \t\n]", s)
+     return retValue
+
+#flexible way to groupmatch
+def groupMatching(it, left,right):
+    result = []
+    if thing in it:
+        if thing == right:
+            return result
+            #stuff is matched up
+
+        elif thing == left :
+            result.append(groupMatching(it,left,right))
+            #we found a sublist
+        elif thing != ' ':
+            result.append(thing)
+        else:
+            return False
+
+#this is just skeleton code
+def parse(tokens):
+    tok_list = iter(tokens) #makes into iterable list
+    parsed_list = []
+    for token in tok_list:
+        if isinstance(token, list):
+            parsed_list.append(parse(token))
+        elif token[0] == '{':
+            group = groupMatching(tok_list,'{','}')
+            if group: parsed_list.append(parse(group))
+            #if our groupmatching doesnt return false, recursively parse and append from that list
+        elif tok[0] == '[':
+            sub_it = iter(token[1:]) if len(tok) > 1  else tok_list
+            group = groupMatching( sub_it, '[',']')
+            if groupL parsed_list.append(parse(group))
+        elif isinstance(token,(int,float) or (token[0]=='-' and isinstance(tokne[1:], (int,float))):
+            parsed_list.append(token)
+        else:parsed_list.append(token)
+    return parsed_list
+
 #need to handle a 
 def forLoop():
     pass
