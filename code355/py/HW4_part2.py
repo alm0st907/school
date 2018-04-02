@@ -303,7 +303,7 @@ def groupMatching(it, left,right):
         else:
             return False
 
-#this is just skeleton code
+#NEED TO TEST
 def parse(tokens):
     tok_list = iter(tokens) #makes into iterable list
     parsed_list = []
@@ -317,19 +317,39 @@ def parse(tokens):
         elif tok[0] == '[':
             sub_it = iter(token[1:]) if len(tok) > 1  else tok_list
             group = groupMatching( sub_it, '[',']')
-            if groupL parsed_list.append(parse(group))
-        elif isinstance(token,(int,float) or (token[0]=='-' and isinstance(tokne[1:], (int,float))):
+            if group: 
+                parsed_list.append(parse(group))
+        elif (isinstance(token,(int,float) or (token[0]=='-' and isinstance(tokne[1:], (int,float))))):
             parsed_list.append(token)
         else:parsed_list.append(token)
     return parsed_list
 
 #need to handle a 
 def forLoop():
-    pass
-def forall():
-    pass
+    code_ar = opPop()
+    final = opPop()
+    incr = opPop()
+    init = opPop()
+    if isinstance((code_ar and final and incr), int) and isinstance(init, list): #type check our oppops
+        if incr < 0 :
+            final -= 1
+        else:
+            final += 1
+        for index in range (init, final,incr):
+            opPush(index)
+            print("INTERPRET CALL MISSING IN FORLOOP")
+        
+    else:
+        print("missing arg for loop")
+
+
+#def forall():
+#    pass
+
+
 #dictionary of operations we can call in the interpreter
-PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": length, "get": get, "pop": pop, "dup": dup, "exch": exch, "roll": roll, "copy": copy, "clear": clear, "stack": stack, "def": psDef, "dict": psDict, "begin": begin, "end": end, "for": forLoop, "forall": forall}
+#not sure if i need for all alongside for
+PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": length, "get": get, "pop": pop, "dup": dup, "exch": exch, "roll": roll, "copy": copy, "clear": clear, "stack": stack, "def": psDef, "dict": psDict, "begin": begin, "end": end, "for": forLoop}
 
 #need to implement the for loop/for all loop
 #implement interpreter function
@@ -337,3 +357,8 @@ PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": l
 
 if __name__ == '__main__':
     print("not finished lols")
+    opPush([1,2,3,4])
+    opPush(4)
+    opPush(4)
+    opPush(4)
+    forLoop()
