@@ -291,6 +291,7 @@ def tokenize(s):
 
 
 #flexible way to groupmatch
+#i know it works because parsing worked fine
 def groupMatching(it, left,right):
     result = []
     for thing in it:
@@ -334,16 +335,13 @@ def parse(tokens):
     return parsed_list
 
 def testParse():
-    # Test cases
+    # Test cases, handles +- ints and floats, code arrays, etc
     tokens = parse(tokenize("/square {dup mul} def -1.1 square 2 square -3 square add add"))
     if tokens == ['/square', ['dup', 'mul'], 'def', -1.1, 'square', 2, 'square', -3, 'square', 'add', 'add']:
         print("\ntokens are "+str(tokens))
         return True
-        
-        
+               
     else:
-        print("tokens should be"+" ['/square', ['dup', 'mul'], 'def', -1.1, 'square', 2, 'square', 3, 'square', 'add', 'add']")
-        print("\ntokens are "+str(tokens))
         return False
         
 
@@ -368,6 +366,16 @@ def forLoop():
 
 #def forall():
 #    pass
+def safe_ex(token):
+    if token in PsOps:#see if function in dictionary
+        try:
+            PsOps[token]() #executes function from dictionary
+        except:
+            print("some error or something")
+
+def interpret(code):
+    #this takes in the parsed code to start operating on
+    pass
 
 
 #dictionary of operations we can call in the interpreter
@@ -380,10 +388,7 @@ PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": l
 
 if __name__ == '__main__':
     print("not finished lols")
-    opPush([1,2,3,4])
+    opPush(3)
     opPush(4)
-    opPush(4)
-    opPush(4)
-    forLoop()
-
-    print(testParse())
+    safe_ex("sub")
+    print(opPop())
