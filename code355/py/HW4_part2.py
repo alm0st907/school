@@ -284,13 +284,16 @@ import re #for regex handling
 
 #given function that uses regex for parsing the passed in code
 def tokenize(s):
-     retValue = re.findall("/?[a-zA-Z][a-zA-Z0-9_]*|[[][a-zA-Z0-9_\s!][a-zA-Z09_\s!]*[]]|[-]?[0-9]+|[}{]+|%.*|[^ \t\n]", s)
+     retValue = re.findall("-?\d+\.\d|/?[a-zA-Z][a-zA-Z0-9_]*|[[][a-zA-Z0-9_\s!][a-zA-Z09_\s!]*[]]|[-]?[0-9]+|[}{]+|%.*|[^ \t\n]", s)
+     #retValue = re.findall("/?[a-zA-Z][a-zA-Z0-9_]*|[[][a-zA-Z0-9_\s!][a-zA-Z09_\s!]*[]]|[-]?[0-9]+|[}{]+|%.*|[^ \t\n]", s)
+     
      return retValue
+
 
 #flexible way to groupmatch
 def groupMatching(it, left,right):
     result = []
-    if thing in it:
+    for thing in it:
         if thing == right:
             return result
             #stuff is matched up
@@ -305,6 +308,7 @@ def groupMatching(it, left,right):
 
 #NEED TO TEST
 def parse(tokens):
+    print(tokens)
     tok_list = iter(tokens) #makes into iterable list
     parsed_list = []
     for token in tok_list:
@@ -314,15 +318,34 @@ def parse(tokens):
             group = groupMatching(tok_list,'{','}')
             if group: parsed_list.append(parse(group))
             #if our groupmatching doesnt return false, recursively parse and append from that list
-        elif tok[0] == '[':
-            sub_it = iter(token[1:]) if len(tok) > 1  else tok_list
+        elif token[0] == '[':
+            sub_it = iter(token[1:]) if len(token) > 1  else tok_list
             group = groupMatching( sub_it, '[',']')
             if group: 
                 parsed_list.append(parse(group))
-        elif (isinstance(token,(int,float) or (token[0]=='-' and isinstance(tokne[1:], (int,float))))):
+        elif (token[0].isdigit() or (token[0]=='-' and token[1].isdigit())):#checks for a number
+            #check for pos/neg floats
+            if token.find('.') != -1 or (token.find('-') and token.find('.') != -1): 
+                token=float(token)
+            else:#otherwise this is an int
+                token = int(token)
             parsed_list.append(token)
-        else:parsed_list.append(token)
+        else:parsed_list.append(token) #string
     return parsed_list
+
+def testParse():
+    # Test cases
+    tokens = parse(tokenize("/square {dup mul} def -1.1 square 2 square -3 square add add"))
+    if tokens == ['/square', ['dup', 'mul'], 'def', -1.1, 'square', 2, 'square', -3, 'square', 'add', 'add']:
+        print("\ntokens are "+str(tokens))
+        return True
+        
+        
+    else:
+        print("tokens should be"+" ['/square', ['dup', 'mul'], 'def', -1.1, 'square', 2, 'square', 3, 'square', 'add', 'add']")
+        print("\ntokens are "+str(tokens))
+        return False
+        
 
 #need to handle a 
 def forLoop():
@@ -335,7 +358,7 @@ def forLoop():
             final -= 1
         else:
             final += 1
-        for index in range (init, final,incr):
+        for index in range (final,incr):
             opPush(index)
             print("INTERPRET CALL MISSING IN FORLOOP")
         
@@ -362,3 +385,5 @@ if __name__ == '__main__':
     opPush(4)
     opPush(4)
     forLoop()
+
+    print(testParse())
