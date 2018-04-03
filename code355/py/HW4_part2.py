@@ -53,7 +53,7 @@ def lookup(name):
         if name in d:
             return d[name]
     else:
-        return 
+        return None
 
 #we gon shoot at ops
 #-----
@@ -307,14 +307,14 @@ def groupMatching(it, left,right):
         else:
             return False
 
-#NEED TO TEST
+#breaking the tokens down
 def parse(tokens):
     tok_list = iter(tokens) #makes into iterable list
     parsed_list = []
     for token in tok_list:
         if isinstance(token, list):
             parsed_list.append(parse(token))
-        elif token[0] == '{':
+        elif token[0] == '{': #code arrays and such
             group = groupMatching(tok_list,'{','}')
             if group: parsed_list.append(parse(group))
             #if our groupmatching doesnt return false, recursively parse and append from that list
@@ -362,26 +362,28 @@ def testParse2():
 
 #need to handle a 
 def forLoop():
-    code_ar = opPop()
-    final = opPop()
-    incr = opPop()
+    codeArr = opPop() 
+    final = opPop() 
+    incr = opPop() 
     init = opPop()
-    try:
-        if isinstance((code_ar and final and incr), int) and isinstance(init, list): #type check our oppops
-            if incr < 0 :
-                final -= 1
-            elif incr == 0:
-                print("inf loop detected")
-                return
-            else:
-                final += 1
-            for index in range (init, final,incr):
-                opPush(index)
-                interp(code_ar)        
+    # Perform basic type checks
+    if(isinstance((final and incr and init), (int)) and isinstance(codeArr, list)):
+        # Perform infinite loop checking
+        if incr == 0 or (final > init and incr < 0) or (init > final and incr > 0):
+            print("Infinite loop ya dingus")
+            return
+        if incr > 0:
+            while init <= final:      # execute until init "passes" final
+                opPush(init)          # push current index
+                better_interp(codeArr)    # execute code array
+                init += incr          # increment counter
         else:
-            print("missing arg for loop")
-    except:
-        print("Invalid args for loop")
+            while final <= init:      # execute until init "passes" final
+                opPush(init)          # push current index
+                better_interp(codeArr)    # execute code array
+                init += incr          # increment counter (really a decrement since incr < 0)
+    else:
+        print("You have an invalid argument")
 
 #def forall():
 #    pass
@@ -415,8 +417,8 @@ def better_interp(code):
             else:
                 lookup_val = lookup(token)#try a lookup
                 if lookup_val != None:
-                    if isinstance(token, list):
-                        better_interp(token)
+                    if isinstance(lookup_val, list):
+                        better_interp(lookup_val)
                     else:
                         if lookup_val != None:
                             opPush(lookup_val)
@@ -428,7 +430,7 @@ def better_interp(code):
 
 
 def testInterpreter():
-    better_interp(parse(tokenize("/test 1 def test 4 add")))
+    better_interp(parse(tokenize("/fact { 0 dict begin /n exch def 1 n -1 1 { mul } for end } def [1 2 3 4 5] dup 4 get pop length fact stack")))
     return
 
 #dictionary of operations we can call in the interpreter
@@ -442,5 +444,17 @@ PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": l
 if __name__ == '__main__':
     print("not finished lols")
     #print(testParse2())
-    testInterpreter()
+    
+    print()
+
+    better_interp(parse(tokenize("/square {dup mul} def 1 square 2 square 3 square add add")))
     print(opPop())
+    clear()
+    dictstack.clear()
+    testInterpreter()
+    better_interp(parse(tokenize("/square { dup mul }  def 2.5 square -7 square -24 square add add")))
+    print(opPop())
+
+
+    
+    
