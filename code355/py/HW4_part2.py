@@ -284,7 +284,7 @@ import re #for regex handling
 
 #given function that uses regex for parsing the passed in code
 def tokenize(s):
-     retValue = re.findall("-?\d+\.\d|/?[a-zA-Z][a-zA-Z0-9_]*|[[][a-zA-Z0-9_\s!][a-zA-Z09_\s!]*[]]|[-]?[0-9]+|[}{]+|%.*|[^ \t\n]", s)
+     retValue = re.findall("-?\d*\.\d*|/?[a-zA-Z][a-zA-Z0-9_]*|[[][a-zA-Z0-9_\s!][a-zA-Z09_\s!]*[]]|[-]?[0-9]+|[}{]+|%.*|[^ \t\n]", s)
      #retValue = re.findall("/?[a-zA-Z][a-zA-Z0-9_]*|[[][a-zA-Z0-9_\s!][a-zA-Z09_\s!]*[]]|[-]?[0-9]+|[}{]+|%.*|[^ \t\n]", s)
      
      return retValue
@@ -336,8 +336,8 @@ def parse(tokens):
 
 def testParse():
     # Test cases, handles +- ints and floats, code arrays, etc
-    tokens = parse(tokenize("/square {dup mul} def -1.1 square 2 square -3 square add add"))
-    if tokens == ['/square', ['dup', 'mul'], 'def', -1.1, 'square', 2, 'square', -3, 'square', 'add', 'add']:
+    tokens = parse(tokenize("/square {dup mul} def -11.101 square 2 square -3 square add add"))
+    if tokens == ['/square', ['dup', 'mul'], 'def', -11.101, 'square', 2, 'square', -3, 'square', 'add', 'add']:
         print("\ntokens are "+str(tokens))
         return True
                
@@ -395,3 +395,4 @@ if __name__ == '__main__':
     tokens = parse(tokens)
     safe_ex(tokens)
     print(opPop())
+    print(testParse())
