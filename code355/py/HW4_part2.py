@@ -284,9 +284,8 @@ import re #for regex handling
 
 #given function that uses regex for parsing the passed in code
 def tokenize(s):
-     retValue = re.findall("-?\d*\.\d*|/?[a-zA-Z][a-zA-Z0-9_]*|[[][a-zA-Z0-9_\s!][a-zA-Z09_\s!]*[]]|[-]?[0-9]+|[}{]+|%.*|[^ \t\n]", s)
-     #retValue = re.findall("/?[a-zA-Z][a-zA-Z0-9_]*|[[][a-zA-Z0-9_\s!][a-zA-Z09_\s!]*[]]|[-]?[0-9]+|[}{]+|%.*|[^ \t\n]", s)
-     
+     retValue = re.findall(r"-?\d*\.\d*|/?[a-zA-Z][a-zA-Z0-9_]*|[[][a-zA-Z0-9_\s!][a-zA-Z09_\s!]*[]]|[-]?[0-9]+|[}{]+|%.*|[^ \t\n]", s)
+     #r before quotes removes the pylint errors thrown in vs code linting     
      return retValue
 
 
@@ -310,8 +309,8 @@ def groupMatching(it, left,right):
 def parse(tokens):
     tok_list = iter(tokens) #makes into iterable list
     parsed_list = [] #list of parsed code
-    for token in tok_list:
-        if isinstance(token, list):
+    for token in tok_list: #iterate through each token
+        if isinstance(token, list): #array
             parsed_list.append(parse(token)) #append a code array
         elif token[0] == '{': #code arrays and such
             group = groupMatching(tok_list,'{','}')
@@ -322,14 +321,16 @@ def parse(tokens):
             group = groupMatching( sub_it, '[',']')
             if group: 
                 parsed_list.append(parse(group))
-        elif (token[0].isdigit() or (token[0]=='-' and token[1].isdigit())):#checks for a number
+        elif (token[0].isdigit() or (token[0]=='-' and token[1].isdigit())):#checks for a number, and a potential negative sign
             #check for pos/neg floats
             if token.find('.') != -1 or (token.find('-') and token.find('.') != -1): 
+                #we check for a "." or "-" and a period which denotes a pos/neg float
                 token=float(token)
             else:#otherwise this is an int
                 token = int(token)
-            parsed_list.append(token)
-        else:parsed_list.append(token) #string
+            parsed_list.append(token)#append the token after doing castings
+        else:
+            parsed_list.append(token) #string
     return parsed_list
 
 def testParse():
@@ -365,7 +366,7 @@ def forLoop():
     final = opPop() 
     incr = opPop() 
     init = opPop()
-    # Perform basic type checks
+    # Perform basic type checks, else jump out and print that theres an invalid argument
     if(isinstance((final and incr and init), (int)) and isinstance(codeArr, list)):
         # Perform infinite loop checking
         if incr == 0 or (final > init and incr < 0) or (init > final and incr > 0):
@@ -391,12 +392,12 @@ def interpTok(token):
             PsOps[token]() #executes function from dictionary
 
     except:
-        codeAr = opPush(token) #push to opstack
+        opPush(token) #push to opstack
         #if we have code array, need to eval innards
-        if isinstance(codeAr,list):
-            interp(codeAr)
+        if isinstance(token,list):
+            interp(token)
             
-
+#depreciated
 #handles the code arrays. Iterate through for all elements
 def interp(code):
     for token in code:
@@ -406,11 +407,14 @@ def interp(code):
 def better_interp(code):
     for token in code:
         if isinstance(token,(int,float)):
+            #if the token is just an int/float, its to be pushed to opstack
             opPush(token)
         elif isinstance(token, str):
+            #if token is a string, its a name, a lookup, or an op
             if token[0]=='/':
                 opPush(token)
             elif token in PsOps:
+                #if token is a valid function from the dict, we call it
                 PsOps[token]()
             else:
                 lookup_val = lookup(token)#try a lookup
@@ -421,8 +425,8 @@ def better_interp(code):
                         if lookup_val != None:
                             opPush(lookup_val)
                 else:
-                    print("weird shit")
-        if isinstance(token, list):
+                    print("undefined variable")#if none is returned, that var isnt found
+        if isinstance(token, list): #push an array
             opPush(token)
     return
 
@@ -434,9 +438,6 @@ def testInterpreter():
 #dictionary of operations we can call in the interpreter
 #not sure if i need for all alongside for
 PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": length, "get": get, "pop": pop, "dup": dup, "exch": exch, "roll": roll, "copy": copy, "clear": clear, "stack": stack, "def": psDef, "dict": psDict, "begin": begin, "end": end, "for": forLoop}
-
-#need to implement the for loop/for all loop
-#implement interpreter function
 
 
 if __name__ == '__main__':
