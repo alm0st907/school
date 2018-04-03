@@ -291,29 +291,28 @@ def tokenize(s):
 
 
 #flexible way to groupmatch
-#i know it works because parsing worked fine
 def groupMatching(it, left,right):
-    result = []
+    result = [] #the inner code from parsing
     for thing in it:
-        if thing == right:
+        if thing == right: 
             return result
-            #stuff is matched up
+            #return on hitting right bracket
 
         elif thing == left :
             result.append(groupMatching(it,left,right))
-            #we found a sublist
-        elif thing != ' ':
+            #we found a sublist, make another call
+        elif thing != ' ': #append what isnt a space
             result.append(thing)
         else:
-            return False
+            return False #unmatched braces
 
 #breaking the tokens down
 def parse(tokens):
     tok_list = iter(tokens) #makes into iterable list
-    parsed_list = []
+    parsed_list = [] #list of parsed code
     for token in tok_list:
         if isinstance(token, list):
-            parsed_list.append(parse(token))
+            parsed_list.append(parse(token)) #append a code array
         elif token[0] == '{': #code arrays and such
             group = groupMatching(tok_list,'{','}')
             if group: parsed_list.append(parse(group))
@@ -385,8 +384,7 @@ def forLoop():
     else:
         print("You have an invalid argument")
 
-#def forall():
-#    pass
+#depreceated
 def interpTok(token):
     try:
         if token in PsOps:#see if function in dictionary
@@ -399,7 +397,7 @@ def interpTok(token):
             interp(codeAr)
             
 
-#handles the code arrays tokens
+#handles the code arrays. Iterate through for all elements
 def interp(code):
     for token in code:
         interpTok(token)
