@@ -53,7 +53,7 @@ def lookup(name):
         if name in d:
             return d[name]
     else:
-        print("Name is not defined")
+        return 
 
 #we gon shoot at ops
 #-----
@@ -309,7 +309,6 @@ def groupMatching(it, left,right):
 
 #NEED TO TEST
 def parse(tokens):
-    print(tokens)
     tok_list = iter(tokens) #makes into iterable list
     parsed_list = []
     for token in tok_list:
@@ -343,6 +342,22 @@ def testParse():
                
     else:
         return False
+
+def testParse2():
+    # Test cases
+    tokens = parse(tokenize("/square {dup mul} def 1 square 2 square 3 square add add"))
+    if tokens != ['/square', ['dup', 'mul'], 'def', 1, 'square', 2, 'square', 3, 'square', 'add', 'add']:
+        return False
+
+    tokens = parse(tokenize("/n 5 def 1 n -1 1 {mul} for"))
+    if tokens != ['/n', 5, 'def', 1, 'n', -1, 1, ['mul'], 'for']:
+        return False
+
+    tokens = parse(tokenize("/sum { -1 0 {add} for } def 0 [1 2 3 4] length sum 2 mul [1 2 3 4] {2 mul} forall add add add stack"))
+    if tokens != ['/sum', [-1, 0, ['add'], 'for'], 'def', 0, [1, 2, 3, 4], 'length', 'sum', 2, 'mul', [1, 2, 3, 4], [2, 'mul'], 'forall', 'add', 'add', 'add', 'stack']:
+        return False
+
+    return True
         
 
 #need to handle a 
@@ -351,35 +366,70 @@ def forLoop():
     final = opPop()
     incr = opPop()
     init = opPop()
-    if isinstance((code_ar and final and incr), int) and isinstance(init, list): #type check our oppops
-        if incr < 0 :
-            final -= 1
+    try:
+        if isinstance((code_ar and final and incr), int) and isinstance(init, list): #type check our oppops
+            if incr < 0 :
+                final -= 1
+            elif incr == 0:
+                print("inf loop detected")
+                return
+            else:
+                final += 1
+            for index in range (init, final,incr):
+                opPush(index)
+                interp(code_ar)        
         else:
-            final += 1
-        for index in range (final,incr):
-            opPush(index)
-            print("INTERPRET CALL MISSING IN FORLOOP")
-        
-    else:
-        print("missing arg for loop")
-
+            print("missing arg for loop")
+    except:
+        print("Invalid args for loop")
 
 #def forall():
 #    pass
-def safe_ex(token):
-    for tokens in token:
-        if tokens in PsOps:#see if function in dictionary
-            try:
-                PsOps[tokens]() #executes function from dictionary
-            except:
-                print("some error or something")
-        else:
-            opPush(tokens)
+def interpTok(token):
+    try:
+        if token in PsOps:#see if function in dictionary
+            PsOps[token]() #executes function from dictionary
 
-def interpret(code):
-    #this takes in the parsed code to start operating on
-    pass
+    except:
+        codeAr = opPush(token) #push to opstack
+        #if we have code array, need to eval innards
+        if isinstance(codeAr,list):
+            interp(codeAr)
+            
 
+#handles the code arrays tokens
+def interp(code):
+    for token in code:
+        interpTok(token)
+
+
+def better_interp(code):
+    for token in code:
+        if isinstance(token,(int,float)):
+            opPush(token)
+        elif isinstance(token, str):
+            if token[0]=='/':
+                opPush(token)
+            elif token in PsOps:
+                PsOps[token]()
+            else:
+                lookup_val = lookup(token)#try a lookup
+                if lookup_val != None:
+                    if isinstance(token, list):
+                        better_interp(token)
+                    else:
+                        if lookup_val != None:
+                            opPush(lookup_val)
+                else:
+                    print("weird shit")
+        if isinstance(token, list):
+            opPush(token)
+    return
+
+
+def testInterpreter():
+    better_interp(parse(tokenize("/test 1 def test 4 add")))
+    return
 
 #dictionary of operations we can call in the interpreter
 #not sure if i need for all alongside for
@@ -391,8 +441,6 @@ PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": l
 
 if __name__ == '__main__':
     print("not finished lols")
-    tokens = tokenize("3 4 add")
-    tokens = parse(tokens)
-    safe_ex(tokens)
+    #print(testParse2())
+    testInterpreter()
     print(opPop())
-    print(testParse())
