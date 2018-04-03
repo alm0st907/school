@@ -409,7 +409,6 @@ def new_interp(code):
                     print("undefined variable")#if none is returned, that var isnt found
         else:            #ints, floats, and lists just get pushed to opstack
             opPush(token)
-
     return
 
 
