@@ -375,64 +375,45 @@ def forLoop():
         if incr > 0:
             while init <= final:      # execute until init "passes" final
                 opPush(init)          # push current index
-                better_interp(codeArr)    # execute code array
+                new_interp(codeArr)    # execute code array
                 init += incr          # increment counter
         else:
             while final <= init:      # execute until init "passes" final
                 opPush(init)          # push current index
-                better_interp(codeArr)    # execute code array
+                new_interp(codeArr)    # execute code array
                 init += incr          # increment counter (really a decrement since incr < 0)
     else:
         print("You have an invalid argument")
 
-#depreceated
-def interpTok(token):
-    try:
-        if token in PsOps:#see if function in dictionary
-            PsOps[token]() #executes function from dictionary
-
-    except:
-        opPush(token) #push to opstack
-        #if we have code array, need to eval innards
-        if isinstance(token,list):
-            interp(token)
-            
-#depreciated
-#handles the code arrays. Iterate through for all elements
-def interp(code):
-    for token in code:
-        interpTok(token)
-
-
-def better_interp(code):
-    for token in code:
-        if isinstance(token,(int,float)):
-            #if the token is just an int/float, its to be pushed to opstack
-            opPush(token)
-        elif isinstance(token, str):
+#recursive code interpreter that handles our parsed code
+def new_interp(code):
+    for token in code:                  
+        if isinstance(token, str):
             #if token is a string, its a name, a lookup, or an op
             if token[0]=='/':
+                #slash denotes var name to be defined
                 opPush(token)
             elif token in PsOps:
                 #if token is a valid function from the dict, we call it
                 PsOps[token]()
             else:
-                lookup_val = lookup(token)#try a lookup
+                lookup_val = lookup(token)#try a lookup if name lacks "/"
                 if lookup_val != None:
                     if isinstance(lookup_val, list):
-                        better_interp(lookup_val)
+                        #detected a code array, so we recursively call the interpreter on it
+                        new_interp(lookup_val)
                     else:
-                        if lookup_val != None:
-                            opPush(lookup_val)
+                        opPush(lookup_val)
                 else:
                     print("undefined variable")#if none is returned, that var isnt found
-        if isinstance(token, list): #push an array
+        else:            #ints, floats, and lists just get pushed to opstack
             opPush(token)
+
     return
 
 
 def testInterpreter():
-    better_interp(parse(tokenize("/fact { 0 dict begin /n exch def 1 n -1 1 { mul } for end } def [1 2 3 4 5] dup 4 get pop length fact stack")))
+    new_interp(parse(tokenize("/fact { 0 dict begin /n exch def 1 n -1 1 { mul } for end } def [1 2 3 4 5] dup 4 get pop length fact stack")))
     return
 
 #dictionary of operations we can call in the interpreter
@@ -446,12 +427,12 @@ if __name__ == '__main__':
     
     print()
 
-    better_interp(parse(tokenize("/square {dup mul} def 1 square 2 square 3 square add add")))
+    new_interp(parse(tokenize("/square {dup mul} def 1 square 2 square 3 square add add")))
     print(opPop())
     clear()
     dictstack.clear()
     testInterpreter()
-    better_interp(parse(tokenize("/square { dup mul }  def 2.5 square -7 square -24 square add add")))
+    new_interp(parse(tokenize("/square { dup mul }  def 2.5 square -7 square -24 square add add")))
     print(opPop())
 
 
