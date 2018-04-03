@@ -284,9 +284,9 @@ import re #for regex handling
 
 #given function that uses regex for parsing the passed in code
 def tokenize(s):
-     retValue = re.findall(r"-?\d*\.\d*|/?[a-zA-Z][a-zA-Z0-9_]*|[[][a-zA-Z0-9_\s!][a-zA-Z09_\s!]*[]]|[-]?[0-9]+|[}{]+|%.*|[^ \t\n]", s)
-     #r before quotes removes the pylint errors thrown in vs code linting     
-     return retValue
+    retValue = re.findall(r"-?\d*\.\d*|/?[a-zA-Z][a-zA-Z0-9_]*|[[][a-zA-Z0-9_\s!][a-zA-Z09_\s!]*[]]|[-]?[0-9]+|[}{]+|%.*|[^ \t\n]", s)
+    #r before quotes removes the pylint errors thrown in vs code linting     
+    return retValue
 
 
 #flexible way to groupmatch
