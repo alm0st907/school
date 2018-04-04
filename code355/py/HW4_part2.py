@@ -1,5 +1,5 @@
 #Garrett Rudisill
-#CptS 355 HW4 part 1
+#CptS 355 HW4 part 1 & 2
 #WSU ID 11461816
 #PostScript interpreter part 1 in python 3.6
 #tested on both linux and windows
@@ -335,58 +335,26 @@ def parse(tokens):
             parsed_list.append(token) #string
     return parsed_list
 
-def testParse():
-    # Test cases, handles +- ints and floats, code arrays, etc
-    tokens = parse(tokenize("/square {dup mul} def -11.101 square 2 square -3 square add add"))
-    if tokens == ['/square', ['dup', 'mul'], 'def', -11.101, 'square', 2, 'square', -3, 'square', 'add', 'add']:
-        print("\ntokens are "+str(tokens))
-        return True
-               
-    else:
-        return False
-
-def testParse2():
-    # Test cases
-    tokens = parse(tokenize("/square {dup mul} def 1 square 2 square 3 square add add"))
-    if tokens != ['/square', ['dup', 'mul'], 'def', 1, 'square', 2, 'square', 3, 'square', 'add', 'add']:
-        return False
-
-    tokens = parse(tokenize("/n 5 def 1 n -1 1 {mul} for"))
-    if tokens != ['/n', 5, 'def', 1, 'n', -1, 1, ['mul'], 'for']:
-        return False
-
-    tokens = parse(tokenize("/sum { -1 0 {add} for } def 0 [1 2 3 4] length sum 2 mul [1 2 3 4] {2 mul} forall add add add stack"))
-    if tokens != ['/sum', [-1, 0, ['add'], 'for'], 'def', 0, [1, 2, 3, 4], 'length', 'sum', 2, 'mul', [1, 2, 3, 4], [2, 'mul'], 'forall', 'add', 'add', 'add', 'stack']:
-        return False
-
-    return True
-        
-
-#need to handle a 
+#for loop implementation
 def forLoop():
-    codeArr = opPop() 
-    final = opPop() 
-    incr = opPop() 
-    init = opPop()
-    # Perform basic type checks, else jump out and print that theres an invalid argument
+    codeArr = opPop() #code array
+    final = opPop() #final condition
+    incr = opPop() #increment
+    init = opPop()#starting point
     if(isinstance((final and incr and init), (int)) and isinstance(codeArr, list)):
-        # Perform infinite loop checking
-        if incr == 0 or (final > init and incr < 0) or (init > final and incr > 0):
-            print("Infinite loop ya dingus")
+        if (final > init and incr < 0) or (init > final and incr > 0) or incr == 0:
+            print("Infinite loop/out of bounds ya dingus")
+            #error checking for infinite loop/out of bounds
             return
-        if incr > 0:
-            while init <= final:      # execute until init "passes" final
-                opPush(init)          # push current index
-                interpret(codeArr)    # execute code array
-                init += incr          # increment counter
         else:
-            while final <= init:      # execute until init "passes" final
-                opPush(init)          # push current index
-                interpret(codeArr)    # execute code array
-                init += incr          # increment counter (really a decrement since incr < 0)
+            if incr>0: final+=1 #final value manipulation allowed in positive increments
+            else: final-=1 #for negative indexing
+            for index in range(init, final, incr):#increment throught the range
+                opPush(index) #push the index to stack
+                interpret(codeArr) #apply code array
     else:
         print("You have an invalid argument")
-
+        
 #recursive code interpreter that handles our parsed code
 def interpret(code):
     for token in code:                  
@@ -412,30 +380,67 @@ def interpret(code):
             opPush(token)
     return
 
+def interpreter(original_code):#all in one call to run interpreter. Pass in the ps code and let it rip
+    interpret(parse(tokenize(original_code)))
+
+def testParse():
+    # Test cases
+    tokens = parse(tokenize("/square {dup mul} def 1 square 2 square 3 square add add"))
+    if tokens != ['/square', ['dup', 'mul'], 'def', 1, 'square', 2, 'square', 3, 'square', 'add', 'add']:
+        return False
+
+    tokens = parse(tokenize("/n 5 def 1 n -1 1 {mul} for"))
+    if tokens != ['/n', 5, 'def', 1, 'n', -1, 1, ['mul'], 'for']:
+        return False
+
+    tokens = parse(tokenize("/sum { -1 0 {add} for } def 0 [1 2 3 4] length sum 2 mul [1 2 3 4] {2 mul} forall add add add stack"))
+    if tokens != ['/sum', [-1, 0, ['add'], 'for'], 'def', 0, [1, 2, 3, 4], 'length', 'sum', 2, 'mul', [1, 2, 3, 4], [2, 'mul'], 'forall', 'add', 'add', 'add', 'stack']:
+        return False
+
+    return True
 
 def testInterpreter():
-    interpret(parse(tokenize("/fact { 0 dict begin /n exch def 1 n -1 1 { mul } for end } def [1 2 3 4 5] dup 4 get pop length fact stack")))
-    return
+    #good input test from pdf
+    interpreter("/fact {0 dict begin /n exch def 1 n -1 1 {mul} for end} def [1 2 3 4 5] dup 4 get pop length fact stack")
+    if opPop() != 120:
+        return False
+    clear()
+    dictstack.clear()
+    #clears just in case before code runs
+
+    #testing pad ps code coming in, doesnt evaluate to a number and should return None when oppop()
+    interpreter("/sum { -1 0 {add} for} def 0 [1 2 3 4] length sum 2 mul [1 2 3 4] 2 get add add add stack")
+    if opPop() != None:
+        return False    
+    
+    clear()
+    dictstack.clear()
+    #some random ps i wrote
+    interpreter(" /thing 4 def [1 2 5 6] 3 get thing mul stack")
+    if opPop() != 24 :
+        return False
+    
+    clear()
+    dictstack.clear()
+    return True
+
+
 
 #dictionary of operations we can call in the interpreter
-#not sure if i need for all alongside for
+
 PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": length, "get": get, "pop": pop, "dup": dup, "exch": exch, "roll": roll, "copy": copy, "clear": clear, "stack": stack, "def": psDef, "dict": psDict, "begin": begin, "end": end, "for": forLoop}
 
 
 if __name__ == '__main__':
-    print("not finished lols")
-    #print(testParse2())
-    
-    print()
+    testing = True
+    if testing == True:
+        print("\nRunning tests. Change testing @ line 435 to false to disable \n")
+        print("Parsing testing",testParse(),"\n")
+        print("interpreter testing/output :", testInterpreter(),"\n\ntests complete\n")
+    else:
+        print("running any code after line 441.")
 
-    interpret(parse(tokenize("/square {dup mul} def 1 square 2 square 3 square add add")))
-    print(opPop())
-    clear()
-    dictstack.clear()
-    testInterpreter()
-    interpret(parse(tokenize("/square { dup mul }  def 2.5 square -7 square -24 square add add")))
-    print(opPop())
-
+        
 
     
     
