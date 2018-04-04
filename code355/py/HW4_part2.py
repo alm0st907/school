@@ -315,7 +315,8 @@ def parse(tokens):
             parsed_list.append(parse(token)) #append a code array
         elif token[0] == '{': #code arrays and such
             group = groupMatching(tok_list,'{','}')
-            if group: parsed_list.append(parse(group))
+            if group: 
+                parsed_list.append(parse(group))
             #if our groupmatching doesnt return false, recursively parse and append from that list
         elif token[0] == '[':
             sub_it = iter(token[1:]) if len(token) > 1  else tok_list
