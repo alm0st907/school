@@ -377,18 +377,18 @@ def forLoop():
         if incr > 0:
             while init <= final:      # execute until init "passes" final
                 opPush(init)          # push current index
-                new_interp(codeArr)    # execute code array
+                interpret(codeArr)    # execute code array
                 init += incr          # increment counter
         else:
             while final <= init:      # execute until init "passes" final
                 opPush(init)          # push current index
-                new_interp(codeArr)    # execute code array
+                interpret(codeArr)    # execute code array
                 init += incr          # increment counter (really a decrement since incr < 0)
     else:
         print("You have an invalid argument")
 
 #recursive code interpreter that handles our parsed code
-def new_interp(code):
+def interpret(code):
     for token in code:                  
         if isinstance(token, str):
             #if token is a string, its a name, a lookup, or an op
@@ -403,7 +403,7 @@ def new_interp(code):
                 if lookup_val != None:
                     if isinstance(lookup_val, list):
                         #detected a code array, so we recursively call the interpreter on it
-                        new_interp(lookup_val)
+                        interpret(lookup_val)
                     else:
                         opPush(lookup_val)
                 else:
@@ -414,7 +414,7 @@ def new_interp(code):
 
 
 def testInterpreter():
-    new_interp(parse(tokenize("/fact { 0 dict begin /n exch def 1 n -1 1 { mul } for end } def [1 2 3 4 5] dup 4 get pop length fact stack")))
+    interpret(parse(tokenize("/fact { 0 dict begin /n exch def 1 n -1 1 { mul } for end } def [1 2 3 4 5] dup 4 get pop length fact stack")))
     return
 
 #dictionary of operations we can call in the interpreter
@@ -428,12 +428,12 @@ if __name__ == '__main__':
     
     print()
 
-    new_interp(parse(tokenize("/square {dup mul} def 1 square 2 square 3 square add add")))
+    interpret(parse(tokenize("/square {dup mul} def 1 square 2 square 3 square add add")))
     print(opPop())
     clear()
     dictstack.clear()
     testInterpreter()
-    new_interp(parse(tokenize("/square { dup mul }  def 2.5 square -7 square -24 square add add")))
+    interpret(parse(tokenize("/square { dup mul }  def 2.5 square -7 square -24 square add add")))
     print(opPop())
 
 
