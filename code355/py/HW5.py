@@ -55,6 +55,29 @@ def lookup(name):
     else:
         return None
 
+def lookup_static(name):
+    #ripped from my hw 3, since thats more or less a static lookup
+    def lookupVal2(lst,key):
+        #use a subfunction to handle the jumping from index to index
+        #this hanldes the non linear jumps via the given index in the dictionary
+        def helper(lst, ind, key):
+            if key in lst[ind][1]:# key is in one of the dictionaries
+                return lst[ind][1][key]#return the value
+
+            elif ind == lst[ind][0]: #handling cur_ind = next_ind; key!=present
+                return None
+
+            else:
+                temp = lst[ind] #get next index by nab the tuple
+                return helper(lst,temp[0],key) #access index by accessing first of tuple
+        #run in a try block to try and handle anything sam can throw at it
+        try:
+            return helper(lst,(lst.__len__())-1,key)
+        except:
+            return None
+    #name is our key, and dictstack is our list of tuples
+    return lookupVal2(dictstack,name)
+    
 #we gon shoot at ops
 #-----
 #add
