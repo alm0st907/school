@@ -41,21 +41,23 @@ def define(name,val):
             d = {}
             d[name] = val
             dictstack.append((0,d)) #append new dict with val to dictstack
+            #defined as tuple now, and initial tuple is 0 index
         else:
             (dictstack[-1][1])[name]=val #update if not empty
     else:
         print("variable not defined")
 
-#check this
+#dynamic lookup 
 def lookup(name):
     operable_dict = reversed(dictstack) #if more than one dict, ensure from top of stack to bottom
     for tupl in operable_dict:
         (ind, d) = tupl
         if name in d:
-            return (ind, d[name])
+            return (ind, d[name]) #return the tuple
     else:
-        return None,None
+        return None
 
+#static lookup
 def lookup_static(name):
     #ripped from my hw 3, since thats more or less a static lookup
     def lookupVal2(lst,key):
@@ -63,7 +65,7 @@ def lookup_static(name):
         #this hanldes the non linear jumps via the given index in the dictionary
         def helper(lst, ind, key):
             if key in lst[ind][1]:# key is in one of the dictionaries
-                return (ind, lst[ind][1][key])#return the value
+                return (ind, lst[ind][1][key])#return the tuple of index, dictionary
 
             elif ind == lst[ind][0]: #handling cur_ind = next_ind; key!=present
                 return None
@@ -396,6 +398,7 @@ def interpretSPS(code,scopeMode):
                 if scopeMode == "dynamic":
                     index, lookup_val = lookup(token)
                 else:
+                    #static lookup based on global var
                      index, lookup_val = lookup_static(token)
              
                     
@@ -415,21 +418,20 @@ def interpretSPS(code,scopeMode):
     return
 
 def interpreter(original_code,scopeMode):#all in one call to run interpreter. Pass in the ps code and let it rip
-    if scopeMode != ("dynamic" or "static"):
-        print("Please choose a scoping mode")
-        return
-    else:
+
+
         interpretSPS(parse(tokenize(original_code)),scopeMode)
 
 
-    return True
 
 def testInterpreter():
-    interpreter("/x 4 def /g { x stack } def /f { /x 7 def g } def f", "dynamic")
+    interpreter("/x 4 def /g { x stack } def /f { /x 7 def g } def f", scopeMode)
+
     dictstack.clear()
     opstack.clear()
     print("----------------")
-    interpreter("/m 50 def /n 100 def /egg1 {/m 25 def n} def /chic { /n 1 def /egg2 { n } def m n egg1 egg2 stack } def n chic", "dynamic")
+    interpreter("/m 50 def /n 100 def /egg1 {/m 25 def n} def /chic { /n 1 def /egg2 { n } def m n egg1 egg2 stack } def n chic", scopeMode)
+
     return True
 
 
@@ -438,7 +440,7 @@ def testInterpreter():
 
 #begin end and dict functions removed per reqs
 PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": length, "get": get, "pop": pop, "dup": dup, "exch": exch, "roll": roll, "copy": copy, "clear": clear, "stack": stack, "def": psDef,"for": forLoop}
-scopeMode = "dynamic"
+scopeMode = "static"
 if __name__ == '__main__':
     testing = True
     if testing == True:
