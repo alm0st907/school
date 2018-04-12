@@ -268,6 +268,7 @@ def roll():
                 opstack[items:items-1]=[val]
 
 #print le stack
+#dictionary stack added per reqs of HW5
 def stack():
     print("=op_stack=")
     printable = reversed(opstack)
@@ -430,8 +431,12 @@ def interpretSPS(code,scopeMode):
     return
 
 def interpreter(original_code,scopeMode):#all in one call to run interpreter. Pass in the ps code and let it rip
-     interpretSPS(parse(tokenize(original_code)),scopeMode)
-     return
+    if(scopeMode !="dynamic" and scopeMode != "static"):
+        print("Improper scoping mode")
+        return
+    else:    
+        interpretSPS(parse(tokenize(original_code)),scopeMode)
+    return
 
 
 
@@ -450,6 +455,12 @@ def testInterpreter():
         return False
     dictstack.clear()
     opstack.clear()
+    print("----------------")
+    interpreter("/m 50 def /n 100 def m n mul stack ", scopeMode) 
+    if(opPop()!=5000):
+        return False   
+    dictstack.clear()
+    opstack.clear()
 
     print("----------------")
     scopeMode = "static" #static tests
@@ -464,6 +475,16 @@ def testInterpreter():
     if(opstack[0:5] != [100,50,1,100,1]):
         return False
 
+    dictstack.clear()
+    opstack.clear()
+    print("----------------")
+    interpreter("/m 50 def /n 100 def m n mul stack ", scopeMode)
+    if(opPop()!=5000):
+        return False
+    print("----------------")    
+    scopeMode = "bad test" #purposeful bad test
+    interpreter("junk code", scopeMode)#testing scope mode checker
+    scopeMode = "dynamic" #reset to a useful mode
     return True
 
 
@@ -477,10 +498,11 @@ scopeMode  = "dynamic"
 if __name__ == '__main__':
     testing = True
     if testing == True:
-        print("\nRunning tests. Change testing @ line 435 to false to disable \n")
+        print("\nRunning tests. Change testing @ line 499 to false to disable \n")
+        print("Scoping mode is set at line 497, but can be set elsewhere. Scoping is a global variable")
         print("interpreter testing/output :", testInterpreter(),"\n\ntests complete\n")
     else:
-        print("running any code after line 441.")
+        print("running any code after line 504.")
 
         
 
