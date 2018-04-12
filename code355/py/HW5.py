@@ -1,7 +1,7 @@
 #Garrett Rudisill
-#CptS 355 HW4 part 1 & 2
+#CptS 355 HW5
 #WSU ID 11461816
-#PostScript interpreter part 1 in python 3.6
+#SSPS in python 3.6
 #tested on both linux and windows
 
 #opstack portion
@@ -274,8 +274,11 @@ def stack():
     for ent in printable:
         print(ent)
     print("=dict_stack=")
-    for (i, tupl) in reversed(list(enumerate(dictstack))):
-        link, dic = tupl
+    #reverse to print top to bottom for sensible reading
+    #enumerate gives us the index i for stack print
+    temp_stack = reversed(dictstack)
+    for (i, tupl) in enumerate(temp_stack):
+        link, dic = tupl #tuple breakdown
         print("--",i,"---",link,"--")
         if dic:
             for ent in dic:
@@ -433,7 +436,7 @@ def interpreter(original_code,scopeMode):#all in one call to run interpreter. Pa
 
 
 def testInterpreter():
-    scopeMode = "dynamic"
+    scopeMode = "dynamic" #dynamic tests
     interpreter("/x 4 def /g { x stack } def /f { /x 7 def g } def f", scopeMode)
     if opPop() != 7:
         return False
@@ -449,7 +452,7 @@ def testInterpreter():
     opstack.clear()
 
     print("----------------")
-    scopeMode = "static"
+    scopeMode = "static" #static tests
     interpreter("/x 4 def /g { x stack } def /f { /x 7 def g } def f", scopeMode)
     if(opPop() != 4):
         return False
@@ -469,7 +472,8 @@ def testInterpreter():
 
 #begin end and dict functions removed per reqs
 PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": length, "get": get, "pop": pop, "dup": dup, "exch": exch, "roll": roll, "copy": copy, "clear": clear, "stack": stack, "def": psDef,"for": forLoop}
-scopeMode = "dynamic" #default mode is dynamic
+global scopeMode #default mode is dynamic
+scopeMode  = "dynamic"
 if __name__ == '__main__':
     testing = True
     if testing == True:
