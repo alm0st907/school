@@ -40,20 +40,21 @@ def define(name,val):
         if dictstack == []:#if dictionary stack empty
             d = {}
             d[name] = val
-            dictstack.append(d) #append new dict with val to dictstack
+            dictstack.append((0,d)) #append new dict with val to dictstack
         else:
-            (dictstack[-1])[name]=val #update if not empty
+            (dictstack[-1][1])[name]=val #update if not empty
     else:
         print("variable not defined")
 
 #check this
 def lookup(name):
     operable_dict = reversed(dictstack) #if more than one dict, ensure from top of stack to bottom
-    for d in operable_dict:
+    for tupl in operable_dict:
+        (ind, d) = tupl
         if name in d:
-            return d[name]
+            return (ind, d[name])
     else:
-        return None
+        return None,None
 
 def lookup_static(name):
     #ripped from my hw 3, since thats more or less a static lookup
@@ -62,7 +63,7 @@ def lookup_static(name):
         #this hanldes the non linear jumps via the given index in the dictionary
         def helper(lst, ind, key):
             if key in lst[ind][1]:# key is in one of the dictionaries
-                return lst[ind][1][key]#return the value
+                return (ind, lst[ind][1][key])#return the value
 
             elif ind == lst[ind][0]: #handling cur_ind = next_ind; key!=present
                 return None
@@ -77,7 +78,7 @@ def lookup_static(name):
             return None
     #name is our key, and dictstack is our list of tuples
     return lookupVal2(dictstack,name)
-    
+
 #we gon shoot at ops
 #-----
 #add
@@ -374,12 +375,12 @@ def forLoop():
             else: final-=1 #for negative indexing
             for index in range(init, final, incr):#increment throught the range
                 opPush(index) #push the index to stack
-                interpret(codeArr) #apply code array
+                interpretSPS(codeArr,scopeMode) #apply code array
     else:
         print("You have an invalid argument")
         
 #recursive code interpreter that handles our parsed code
-def interpret(code):
+def interpretSPS(code,scopeMode):
     for token in code:                  
         if isinstance(token, str):
             #if token is a string, its a name, a lookup, or an op
@@ -390,75 +391,58 @@ def interpret(code):
                 #if token is a valid function from the dict, we call it
                 PsOps[token]()
             else:
-                lookup_val = lookup(token)#try a lookup if name lacks "/"
+                #try a lookup if name lacks "/"
+                #we now have to define static/dynamic mode behavior
+                if scopeMode == "dynamic":
+                    index, lookup_val = lookup(token)
+                else:
+                     index, lookup_val = lookup_static(token)
+             
+                    
+                dictPush((index, {}))
                 if lookup_val != None:
                     if isinstance(lookup_val, list):
                         #detected a code array, so we recursively call the interpreter on it
-                        interpret(lookup_val)
+                        interpretSPS(lookup_val,scopeMode)
                     else:
                         opPush(lookup_val)
                 else:
                     print("undefined variable")#if none is returned, that var isnt found
+
+                _ = dictPop()
         else:            #ints, floats, and lists just get pushed to opstack
             opPush(token)
     return
 
-def interpreter(original_code):#all in one call to run interpreter. Pass in the ps code and let it rip
-    interpret(parse(tokenize(original_code)))
+def interpreter(original_code,scopeMode):#all in one call to run interpreter. Pass in the ps code and let it rip
+    if scopeMode != ("dynamic" or "static"):
+        print("Please choose a scoping mode")
+        return
+    else:
+        interpretSPS(parse(tokenize(original_code)),scopeMode)
 
-def testParse():
-    # Test cases
-    tokens = parse(tokenize("/square {dup mul} def 1 square 2 square 3 square add add"))
-    if tokens != ['/square', ['dup', 'mul'], 'def', 1, 'square', 2, 'square', 3, 'square', 'add', 'add']:
-        return False
-
-    tokens = parse(tokenize("/n 5 def 1 n -1 1 {mul} for"))
-    if tokens != ['/n', 5, 'def', 1, 'n', -1, 1, ['mul'], 'for']:
-        return False
-
-    tokens = parse(tokenize("/sum { -1 0 {add} for } def 0 [1 2 3 4] length sum 2 mul [1 2 3 4] {2 mul} forall add add add stack"))
-    if tokens != ['/sum', [-1, 0, ['add'], 'for'], 'def', 0, [1, 2, 3, 4], 'length', 'sum', 2, 'mul', [1, 2, 3, 4], [2, 'mul'], 'forall', 'add', 'add', 'add', 'stack']:
-        return False
 
     return True
 
 def testInterpreter():
-    #good input test from pdf
-    interpreter("/fact {0 dict begin /n exch def 1 n -1 1 {mul} for end} def [1 2 3 4 5] dup 4 get pop length fact stack")
-    if opPop() != 120:
-        return False
-    clear()
+    interpreter("/x 4 def /g { x stack } def /f { /x 7 def g } def f", "dynamic")
     dictstack.clear()
-    #clears just in case before code runs
-
-    #testing pad ps code coming in, doesnt evaluate to a number and should return None when oppop()
-    interpreter("/sum { -1 0 {add} for} def 0 [1 2 3 4] length sum 2 mul [1 2 3 4] 2 get add add add stack")
-    if opPop() != None:
-        return False    
-    
-    clear()
-    dictstack.clear()
-    #some random ps i wrote
-    interpreter(" /thing 4 def [1 2 5 6] 3 get thing mul stack")
-    if opPop() != 24 :
-        return False
-    
-    clear()
-    dictstack.clear()
+    opstack.clear()
+    print("----------------")
+    interpreter("/m 50 def /n 100 def /egg1 {/m 25 def n} def /chic { /n 1 def /egg2 { n } def m n egg1 egg2 stack } def n chic", "dynamic")
     return True
 
 
 
 #dictionary of operations we can call in the interpreter
 
-PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": length, "get": get, "pop": pop, "dup": dup, "exch": exch, "roll": roll, "copy": copy, "clear": clear, "stack": stack, "def": psDef, "dict": psDict, "begin": begin, "end": end, "for": forLoop}
-
-
+#begin end and dict functions removed per reqs
+PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": length, "get": get, "pop": pop, "dup": dup, "exch": exch, "roll": roll, "copy": copy, "clear": clear, "stack": stack, "def": psDef,"for": forLoop}
+scopeMode = "dynamic"
 if __name__ == '__main__':
     testing = True
     if testing == True:
         print("\nRunning tests. Change testing @ line 435 to false to disable \n")
-        print("Parsing testing",testParse(),"\n")
         print("interpreter testing/output :", testInterpreter(),"\n\ntests complete\n")
     else:
         print("running any code after line 441.")
