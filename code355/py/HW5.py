@@ -269,9 +269,18 @@ def roll():
 
 #print le stack
 def stack():
+    print("=op_stack=")
     printable = reversed(opstack)
     for ent in printable:
         print(ent)
+    print("=dict_stack=")
+    for (i, tupl) in reversed(list(enumerate(dictstack))):
+        link, dic = tupl
+        print("--",i,"---",link,"--")
+        if dic:
+            for ent in dic:
+                print(ent,dic[ent])
+    print("=============")
 
 #dick manip ops
 #------
@@ -418,19 +427,39 @@ def interpretSPS(code,scopeMode):
     return
 
 def interpreter(original_code,scopeMode):#all in one call to run interpreter. Pass in the ps code and let it rip
-
-
-        interpretSPS(parse(tokenize(original_code)),scopeMode)
+     interpretSPS(parse(tokenize(original_code)),scopeMode)
+     return
 
 
 
 def testInterpreter():
+    scopeMode = "dynamic"
     interpreter("/x 4 def /g { x stack } def /f { /x 7 def g } def f", scopeMode)
+    if opPop() != 7:
+        return False
 
     dictstack.clear()
     opstack.clear()
     print("----------------")
+
     interpreter("/m 50 def /n 100 def /egg1 {/m 25 def n} def /chic { /n 1 def /egg2 { n } def m n egg1 egg2 stack } def n chic", scopeMode)
+    if(opstack[0:5] != [100,50,1,1,1]):
+        return False
+    dictstack.clear()
+    opstack.clear()
+
+    print("----------------")
+    scopeMode = "static"
+    interpreter("/x 4 def /g { x stack } def /f { /x 7 def g } def f", scopeMode)
+    if(opPop() != 4):
+        return False
+   
+    dictstack.clear()
+    opstack.clear()
+    print("----------------")
+    interpreter("/m 50 def /n 100 def /egg1 {/m 25 def n} def /chic { /n 1 def /egg2 { n } def m n egg1 egg2 stack } def n chic", scopeMode)
+    if(opstack[0:5] != [100,50,1,100,1]):
+        return False
 
     return True
 
@@ -440,7 +469,7 @@ def testInterpreter():
 
 #begin end and dict functions removed per reqs
 PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": length, "get": get, "pop": pop, "dup": dup, "exch": exch, "roll": roll, "copy": copy, "clear": clear, "stack": stack, "def": psDef,"for": forLoop}
-scopeMode = "static"
+scopeMode = "dynamic" #default mode is dynamic
 if __name__ == '__main__':
     testing = True
     if testing == True:
