@@ -50,8 +50,10 @@ public class BallGame {
 
         // create colored balls 
         //TO DO: Create "numBalls" balls (of types given in "ballTypes" with sizes given in "ballSizes") and store them in an Arraylist
-   		BasicBall ball = new ShrinkBall(ballSizes[0],Color.RED);
+        BasicBall ball = new ShrinkBall(ballSizes[0],Color.RED);
+        BasicBall ball2 = new BasicBall(ballSizes[0], Color.CYAN);
    		//TO DO: initialize the numBallsinGame
+   		numBallsinGame++;
    		numBallsinGame++;
         
         // do the animation loop
@@ -60,6 +62,7 @@ public class BallGame {
 
         	// TODO: move all balls
             ball.move();
+            ball2.move();
 
             //Check if the mouse is clicked
             if (StdDraw.isMousePressed()) {
@@ -70,6 +73,10 @@ public class BallGame {
                     	ball.reset();
                     	//TO DO: Update player statistics
                 }
+                if (ball2.isHit(x,y)) {
+                    ball2.reset();
+                    //TO DO: Update player statistics
+            }
             }
                 
             numBallsinGame = 0;
@@ -80,6 +87,10 @@ public class BallGame {
             //TO DO: check each ball and see if they are still visible. numBallsinGame should hold the number of visible balls in the game.  
             if (ball.isOut == false) { 
                 ball.draw();
+                numBallsinGame++;
+            }
+            if (ball2.isOut == false) { 
+                ball2.draw();
                 numBallsinGame++;
             }
             //Print the game progress
