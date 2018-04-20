@@ -23,5 +23,8 @@ public class ShrinkBall extends BasicBall
         }
         else return false; 
     }
+    public int getScore() {
+    	return 20;
+    }
 }
 
