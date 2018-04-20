@@ -430,15 +430,140 @@ def testInterpreter():
 
 PsOps = {"add": add, "sub": sub, "div": div, "mul": mul, "mod": mod, "length": length, "get": get, "pop": pop, "dup": dup, "exch": exch, "roll": roll, "copy": copy, "clear": clear, "stack": stack, "def": psDef, "dict": psDict, "begin": begin, "end": end, "for": forLoop}
 
+def main_part2():
+
+#---------Test Case 1 -------
+    print('---------Test Case-1 (15%)-------')
+    testcase1= """
+    /fact{
+    0 dict
+            begin
+                    /n exch def
+                    1
+                    n -1 1 {mul} for
+            end
+    }def
+    [1 2 3 4 5] dup 4 get pop
+    length
+    fact
+    stack
+    """
+    interpreter(testcase1)
+    #output should print 120
+    clear() #clear the stack for next test case
+    dictstack.clear()
+
+#---------Test Case 2a -------
+    print('---------Test Case-2a (15%)-------')
+    testcase2a = """
+    /L [4 3 2 1] def
+    /lengthL {L length 1 sub} def
+    /getL {L exch get} def
+    0 1 lengthL {getL dup mul} for 
+    stack
+    """
+    interpreter(testcase2a)
+    #should print : 1 4 9 16
+    clear() #clear the stack for next test case
+    dictstack.clear()
+
+#---------Test Case 2b -------
+    print('---------Test Case-2b (5%)-------')
+    testcase2b = """
+    /L [4 3 2 1] def
+    /lengthL { [4 3 2 1] length 1 sub} def
+    /getL { [4 3 2 1] exch get} def
+    0 1 lengthL {getL dup mul} for 
+    stack
+    """
+    interpreter(testcase2b)
+    #should print : 1 4 9 16
+    clear() #clear the stack for next test case
+    dictstack.clear()
+
+
+#---------Test Case 3 -------
+    print('---------Test Case-3 (20%) -------')
+    testcase3 = """
+     /x 10 def 
+     /y 5 def
+     /f1 { x y 1 dict begin
+                /y /z y def x def
+                /x z def
+                x y sub
+         end} def 
+     f1 3 1 roll sub     
+     stack
+    """
+    interpreter(testcase3)
+    #should print 5  -5
+    clear() #clear the stack for next test case
+    dictstack.clear()
+
+#---------Test Case 4 -------
+    print('---------Test Case-4 (15%)-------')
+    testcase4 = """
+        /sum { -1 0 {add} for} def 
+        0 
+        [1 2 3 4] length 
+        sum 
+        2 mul 
+        [1 2 3 4] 2 get 
+        add  
+        stack 
+    """
+    interpreter(testcase4)
+    # should print 23
+    clear() #clear the stack for next test case
+    dictstack.clear()
+
+#---------Test Case 5 -------
+    print('---------Test Case-5 (15%) -------')
+    testcase5 = """
+        /a 2 def
+        /b 3 def
+        /f1 { 1 dict begin 
+                a 1 add /a exch def 
+                2 dict begin 
+                a 1 sub /a exch def 
+                b 1 add /b exch def 
+             end
+             a b mul
+             end } def
+        f1
+        stack
+    """
+    interpreter(testcase5)
+    # should print 9
+    clear() #clear the stack for next test case
+    dictstack.clear()
+
+    print('---------Test Case-6 (15%) -------')
+    testcase6 = """
+        /x 2 def
+        /y 3 def
+        /fn { x y add
+              x y mul
+        } def
+        fn add 
+        stack
+    """
+    interpreter(testcase6)
+    print("---------------------------")
+    # should print 11
+    clear() #clear the stack for next test case
+    dictstack.clear()
+
 
 if __name__ == '__main__':
-    testing = True
+    testing = False
     if testing == True:
         print("\nRunning tests. Change testing @ line 435 to false to disable \n")
         print("Parsing testing",testParse(),"\n")
         print("interpreter testing/output :", testInterpreter(),"\n\ntests complete\n")
     else:
         print("running any code after line 441.")
+        main_part2()
 
         
 
