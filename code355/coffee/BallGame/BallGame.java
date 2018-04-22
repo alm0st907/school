@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 
+
 public class BallGame { 
 
     public static void main(String[] args) {
@@ -24,7 +25,8 @@ public class BallGame {
     	//ball types
     	String ballTypes[] = new String[numBalls];
     	//sizes of balls
-    	double ballSizes[] = new double[numBalls];
+        double ballSizes[] = new double[numBalls];
+        Player thisPlayer = new Player();
     	
     	//retrieve ball types
     	int index =1;
@@ -112,6 +114,8 @@ public class BallGame {
                         {
                             all_the_balls.add(new SplitBall(all_the_balls.get(i).radius, all_the_balls.get(i).color));
                         }
+                        thisPlayer.UpdateScore(all_the_balls.get(i).getScore());
+                        thisPlayer.hits++;
                         all_the_balls.get(i).reset();
                     }
                 }
@@ -159,6 +163,9 @@ public class BallGame {
             StdDraw.setFont(font);
             StdDraw.text(0, 0, "GAME OVER");
             //TO DO: print the rest of the player statistics
+            StdDraw.text(0,.5,"Score: "+String.valueOf(thisPlayer.score));
+            StdDraw.text(0,.25,"Hits: "+String.valueOf(thisPlayer.hits));
+            
             StdDraw.show();
             StdDraw.pause(10);           
         }
