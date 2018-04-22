@@ -58,7 +58,7 @@ public class BallGame {
         //BasicBall ball2 = new BasicBall(ballSizes[0], Color.CYAN);
         for(int i = 0; i<numBalls;i++)
         {
-            switch (ballTypes[i])
+            switch (ballTypes[i].toLowerCase())
             {
                 case "basic":
                     all_the_balls.add(new BasicBall(ballSizes[i], Color.red));
