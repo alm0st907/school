@@ -32,7 +32,7 @@ public class BasicBall {
    
    
     // move the ball one step
-    public void move() {
+     void move() {
         rx = rx + vx;
         ry = ry + vy;
         if ((Math.abs(rx) > 1.0) || (Math.abs(ry) > 1.0)) 

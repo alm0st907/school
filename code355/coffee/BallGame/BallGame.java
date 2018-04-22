@@ -50,7 +50,7 @@ public class BallGame {
 
         // create colored balls 
         //TO DO: Create "numBalls" balls (of types given in "ballTypes" with sizes given in "ballSizes") and store them in an Arraylist
-        BasicBall ball = new ShrinkBall(ballSizes[0],Color.RED);
+        BasicBall ball = new BounceBall(ballSizes[0],Color.RED);
         BasicBall ball2 = new BasicBall(ballSizes[0], Color.CYAN);
    		//TO DO: initialize the numBallsinGame
    		numBallsinGame++;
