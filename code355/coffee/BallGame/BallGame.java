@@ -13,11 +13,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
 
+import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
+
 public class BallGame { 
 
     public static void main(String[] args) {
   
-    	// number of bouncing balls
+        // number of bouncing balls
     	int numBalls = Integer.parseInt(args[0]);
     	//ball types
     	String ballTypes[] = new String[numBalls];
@@ -106,6 +108,10 @@ public class BallGame {
                 {
                     if(all_the_balls.get(i).isHit(x, y))
                     {
+                        if(all_the_balls.get(i) instanceof SplitBall)
+                        {
+                            all_the_balls.add(new SplitBall(all_the_balls.get(i).radius, all_the_balls.get(i).color));
+                        }
                         all_the_balls.get(i).reset();
                     }
                 }
