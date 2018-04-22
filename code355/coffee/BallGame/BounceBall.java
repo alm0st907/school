@@ -18,7 +18,7 @@ public class BounceBall extends BasicBall
 
     }
     public void draw() { 
-    	if ((Math.abs(rx) <= 1.0) && (Math.abs(ry) <= 1.0)&&bounces<3) {
+    	if ((Math.abs(rx) <= 1.0) && (Math.abs(ry) <= 1.0)) {
     		StdDraw.setPenColor(color);
     		StdDraw.filledCircle(rx, ry, radius);
     	} else
