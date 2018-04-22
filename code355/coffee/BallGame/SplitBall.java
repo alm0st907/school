@@ -7,4 +7,8 @@ public class SplitBall extends BasicBall
         super(r,c);
     }
     
+    public int getScore()
+    {
+        return 10;
+    }
 }

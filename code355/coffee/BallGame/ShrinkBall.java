@@ -13,7 +13,7 @@ public class ShrinkBall extends BasicBall
  
         if ((Math.abs(rx-x)<=radius) && (Math.abs(ry-y)<=radius))
         {
-            if(radius<(init_rad*.66))
+            if(radius<=(init_rad*.25))
             {
                 radius = init_rad;
                 return true;
