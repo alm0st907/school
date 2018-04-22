@@ -52,7 +52,9 @@ public class BasicBall {
     public int reset() {
         rx = 0.0;
         ry = 0.0;  	
-        // TO DO: assign a random speed 
+        // Done : assign a random speed 
+        vx = StdRandom.uniform(-0.01, 0.01);
+        vy = StdRandom.uniform(-0.01, 0.01);
         return 1;
     }
     
