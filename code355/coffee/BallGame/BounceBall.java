@@ -40,6 +40,10 @@ public class BounceBall extends BasicBall
                 isOut = true;
             }
         }
-    	
     }
+        
+    public int getScore() {
+    	return 15;
+    }
+    
 }
