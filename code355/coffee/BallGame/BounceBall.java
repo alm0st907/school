@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.lang.String;
+
 public class BounceBall extends BasicBall
 {
     private int bounces;
@@ -6,6 +8,7 @@ public class BounceBall extends BasicBall
     {
         super(r, c);
         bounces = 0;
+        balltype = "bounce";
     }
     public void move()
     {

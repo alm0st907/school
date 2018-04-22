@@ -10,6 +10,8 @@
  ******************************************************************************/
 
 import java.awt.Color;
+import java.lang.String;
+
 
 public class BasicBall { 
     protected double rx, ry;         // position
@@ -17,6 +19,7 @@ public class BasicBall {
     protected double radius;   // radius
     protected final Color color;     // color
     public boolean isOut;
+    public String balltype;
     
 
     // constructor
@@ -28,6 +31,7 @@ public class BasicBall {
         radius = r;
         color = c;
         isOut = false;
+        balltype = "basic";
     }
    
    

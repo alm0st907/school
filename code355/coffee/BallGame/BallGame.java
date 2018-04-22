@@ -12,6 +12,7 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.lang.String;
 
 import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
 
@@ -110,12 +111,14 @@ public class BallGame {
                 {
                     if(all_the_balls.get(i).isHit(x, y))
                     {
-                        if(all_the_balls.get(i) instanceof SplitBall)
+                        if(all_the_balls.get(i).balltype == "split")
                         {
                             all_the_balls.add(new SplitBall(all_the_balls.get(i).radius, all_the_balls.get(i).color));
                         }
                         thisPlayer.UpdateScore(all_the_balls.get(i).getScore());
                         thisPlayer.hits++;
+                        thisPlayer.updateHits(all_the_balls.get(i).balltype);
+    
                         all_the_balls.get(i).reset();
                     }
                 }
@@ -163,6 +166,7 @@ public class BallGame {
             StdDraw.setFont(font);
             StdDraw.text(0, 0, "GAME OVER");
             //TO DO: print the rest of the player statistics
+            StdDraw.text(0,.75,"Max Hits: "+String.valueOf(thisPlayer.getMax()));
             StdDraw.text(0,.5,"Score: "+String.valueOf(thisPlayer.score));
             StdDraw.text(0,.25,"Hits: "+String.valueOf(thisPlayer.hits));
             

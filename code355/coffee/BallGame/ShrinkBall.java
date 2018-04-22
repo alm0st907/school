@@ -1,4 +1,6 @@
 import java.awt.Color;
+import java.lang.String;
+
 public class ShrinkBall extends BasicBall
 {
     private double init_rad;
@@ -6,6 +8,7 @@ public class ShrinkBall extends BasicBall
     {
         super(r,c);//fixes inheritance error
         init_rad = r;
+        balltype = "shrink";
     }
 
     public boolean isHit(double x, double y) 
