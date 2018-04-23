@@ -18,9 +18,24 @@ import java.lang.String;
 public class BallGame { 
 
     public static void main(String[] args) {
-  
+        
+        if(args.length<3)
+        {
+            System.out.println("not enough arguments");
+            return;
+        }
+
+        int numBalls;
         // number of bouncing balls
-    	int numBalls = Integer.parseInt(args[0]);
+        try
+        {
+            numBalls = Integer.parseInt(args[0]);
+        }catch(NumberFormatException e)
+        {
+            System.out.println("first argument must be number");
+            return;
+        }
+
     	//ball types
     	String ballTypes[] = new String[numBalls];
     	//sizes of balls
@@ -33,12 +48,18 @@ public class BallGame {
     		ballTypes[i] = args[index];
     		index = index+2;
     	}
-    	//retrieve ball sizes
-    	index = 2;
-    	for (int i=0; i<numBalls; i++) {
-    		ballSizes[i] = Double.parseDouble(args[index]);
-    		index = index+2;
-    	}
+    	//retrieve ball sizes, has error catch for mismatched arguments
+        index = 2;
+        try{
+            for (int i=0; i<numBalls; i++) {
+                ballSizes[i] = Double.parseDouble(args[index]);
+                index = index+2;
+            }
+        }catch(ArrayIndexOutOfBoundsException e)
+        {
+            System.out.println("Arguments incomplete");
+            return;
+        }
      
     	//TO DO: create a Player object and initialize the player game stats.  
     	
