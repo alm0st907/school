@@ -43,11 +43,19 @@ public class BallGame {
         Player thisPlayer = new Player();
     	
     	//retrieve ball types
-    	int index =1;
-    	for (int i=0; i<numBalls; i++) {
-    		ballTypes[i] = args[index];
-    		index = index+2;
-    	}
+        int index =1;
+        try
+        {
+            for (int i=0; i<numBalls; i++) {
+                ballTypes[i] = args[index];
+                index = index+2;
+            }
+        }catch(ArrayIndexOutOfBoundsException e)
+        {
+            System.out.println("Arguments incomplete");
+            return;
+        }
+
     	//retrieve ball sizes, has error catch for mismatched arguments
         index = 2;
         try{
@@ -176,6 +184,9 @@ public class BallGame {
             Font font = new Font("Arial", Font.BOLD, 20);
             StdDraw.setFont(font);
             StdDraw.text(-0.55, 0.90, "Number of balls in game: "+ String.valueOf(numBallsinGame));
+            StdDraw.text(-0.82, 0.80, "Score: "+ String.valueOf(thisPlayer.score));
+            StdDraw.text(-0.84, 0.70, "Hits: "+ String.valueOf(thisPlayer.hits));
+            
             //TO DO: print the rest of the player statistics
 
             StdDraw.show();
@@ -184,6 +195,7 @@ public class BallGame {
     
         
         while (true) {
+            StdDraw.clear(Color.gray);
             StdDraw.setPenColor(StdDraw.BLUE);
             Font font = new Font("Arial", Font.BOLD, 60);
             StdDraw.setFont(font);
