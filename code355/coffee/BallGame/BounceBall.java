@@ -24,8 +24,8 @@ public class BounceBall extends BasicBall
     	if ((Math.abs(rx) <= 1.0) && (Math.abs(ry) <= 1.0)) {
     		StdDraw.setPenColor(color);
     		StdDraw.filledCircle(rx, ry, radius);
-    	} else
-        
+        } 
+        else
         {
             if(bounces<4)
             {

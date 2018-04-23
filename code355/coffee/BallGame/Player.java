@@ -1,4 +1,5 @@
 import java.util.*;
+
 public class Player
 {
     public int score;
@@ -45,5 +46,30 @@ public class Player
     {
         return Math.max(Math.max(shrinkHits, basicHits),Math.max(bounceHits, splitHits));
     }
+    public String typeMaxHit()
+    {
+        int max = getMax();
 
+            if(max == shrinkHits)
+            {
+                return "Shrink Balls hit most";
+            }
+            if(max == basicHits)
+            {
+                return "Basic Balls hit most";
+            }
+            if(max == bounceHits)
+            {
+                return "Bounce Balls hit most";
+            }
+            if(max == splitHits)
+            {
+                return "Split Balls hit most";                
+            }
+            else
+            {
+                return "Mutiple types";
+            }
+        
+    }
 }

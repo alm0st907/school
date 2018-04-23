@@ -14,8 +14,6 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.lang.String;
 
-import com.sun.org.apache.bcel.internal.generic.INSTANCEOF;
-
 
 public class BallGame { 
 
@@ -111,15 +109,19 @@ public class BallGame {
                 {
                     if(all_the_balls.get(i).isHit(x, y))
                     {
-                        if(all_the_balls.get(i).balltype == "split")
-                        {
-                            all_the_balls.add(new SplitBall(all_the_balls.get(i).radius, all_the_balls.get(i).color));
-                        }
+  
                         thisPlayer.UpdateScore(all_the_balls.get(i).getScore());
                         thisPlayer.hits++;
                         thisPlayer.updateHits(all_the_balls.get(i).balltype);
     
                         all_the_balls.get(i).reset();
+                        if(all_the_balls.get(i).balltype == "split")
+                        {
+                            all_the_balls.add(new SplitBall(all_the_balls.get(i).radius, all_the_balls.get(i).color));
+                            //prevent trigger loop
+                            x= -1.000000;
+                            y = 1.000000;
+                        }
                     }
                 }
             }
@@ -152,7 +154,7 @@ public class BallGame {
             StdDraw.setPenColor(StdDraw.YELLOW);
             Font font = new Font("Arial", Font.BOLD, 20);
             StdDraw.setFont(font);
-            StdDraw.text(-0.65, 0.90, "Number of balls in game: "+ String.valueOf(numBallsinGame));
+            StdDraw.text(-0.55, 0.90, "Number of balls in game: "+ String.valueOf(numBallsinGame));
             //TO DO: print the rest of the player statistics
 
             StdDraw.show();
@@ -166,9 +168,15 @@ public class BallGame {
             StdDraw.setFont(font);
             StdDraw.text(0, 0, "GAME OVER");
             //TO DO: print the rest of the player statistics
-            StdDraw.text(0,.75,"Max Hits: "+String.valueOf(thisPlayer.getMax()));
-            StdDraw.text(0,.5,"Score: "+String.valueOf(thisPlayer.score));
-            StdDraw.text(0,.25,"Hits: "+String.valueOf(thisPlayer.hits));
+            StdDraw.text(0,.75,"Score: "+String.valueOf(thisPlayer.score));
+            StdDraw.text(0,.5,"Hits: "+String.valueOf(thisPlayer.hits));
+            
+            Font font2 = new Font("Arial", Font.BOLD, 32);
+            StdDraw.setFont(font2);
+            
+            
+            StdDraw.text(0,.25,thisPlayer.typeMaxHit()+" with "+String.valueOf(thisPlayer.getMax())+" hits");
+            
             
             StdDraw.show();
             StdDraw.pause(10);           
