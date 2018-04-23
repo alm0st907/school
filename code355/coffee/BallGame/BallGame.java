@@ -1,14 +1,10 @@
-/******************************************************************************
- *  Compilation:  javac BallGame.java
- *  Execution:    java BallGame n
- *  Dependencies: BasicBall.java StdDraw.java
- *
- *  Creates a BasicBall and animates it
- *
- *  Part of the animation code is adapted from Computer Science:   An Interdisciplinary Approach Book
- *  
- *  Run the skeleton code with arguments : 1  basic  0.08
- *******************************************************************************/
+/*
+garrett rudisill
+wsu id 11461816
+the last homework
+ballgame for java
+
+*/
 import java.awt.Color;
 import java.awt.Font;
 import java.util.ArrayList;
