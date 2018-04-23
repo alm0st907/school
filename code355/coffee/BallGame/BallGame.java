@@ -84,8 +84,6 @@ public class BallGame {
         // create colored balls 
         //TO DO: Create "numBalls" balls (of types given in "ballTypes" with sizes given in "ballSizes") and store them in an Arraylist
         ArrayList<BasicBall> all_the_balls = new ArrayList<BasicBall>();
-        //BasicBall ball = new BounceBall(ballSizes[0],Color.RED);
-        //BasicBall ball2 = new BasicBall(ballSizes[0], Color.CYAN);
         for(int i = 0; i<numBalls;i++)
         {
             switch (ballTypes[i].toLowerCase())
@@ -107,16 +105,14 @@ public class BallGame {
         }
         
    		//TO DO: initialize the numBallsinGame
-   		//numBallsinGame++;
-   		//numBallsinGame++;
+
         numBallsinGame = all_the_balls.size();
         // do the animation loop
         StdDraw.enableDoubleBuffering();
         while (numBallsinGame > 0) {
 
         	// TODO: move all balls
-            //ball.move();
-            //ball2.move();
+
             for(int i = 0;i<all_the_balls.size();i++)
             {
                 all_the_balls.get(i).move();
@@ -127,13 +123,7 @@ public class BallGame {
                 double x = StdDraw.mouseX();
                 double y = StdDraw.mouseY();
                 //TODO: check whether a ball is hit. Check each ball.  
-                // if (ball.isHit(x,y)) {
-                //     	ball.reset();
-                //     	//TO DO: Update player statistics
-                // }
-                // if (ball2.isHit(x,y)) {
-                //     ball2.reset();
-                //     //TO DO: Update player statistics
+
                 for(int i = 0;i<all_the_balls.size();i++)
                 {
                     if(all_the_balls.get(i).isHit(x, y))
@@ -162,14 +152,6 @@ public class BallGame {
             StdDraw.setPenColor(StdDraw.BLACK);
             
             //TO DO: check each ball and see if they are still visible. numBallsinGame should hold the number of visible balls in the game.  
-            // if (ball.isOut == false) { 
-            //     ball.draw();
-            //     numBallsinGame++;
-            // }
-            // if (ball2.isOut == false) { 
-            //     ball2.draw();
-            //     numBallsinGame++;
-            // }
 
             for(int i = 0;i<all_the_balls.size();i++)
             {
